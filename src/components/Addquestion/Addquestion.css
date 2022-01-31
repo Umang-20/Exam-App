@@ -1,0 +1,35 @@
+#dropdown-menu-align-right{
+    background-color: transparent;
+    width: 100%;
+    color: #111;
+    border-color: #ced4da;
+  }
+  #dropdown-menu-align-right:focus{
+    outline-style: none; 
+      box-shadow: none;
+  }
+  #button{
+      font-size: 16px;
+      color: #fff;
+      height: 40px;
+      border-radius: 4px;
+      border: 1px solid #0dc181;
+      padding: 0 38px;
+      text-transform: capitalize;
+      letter-spacing: 0;
+      background: linear-gradient(
+  45deg,#0dc181,#1bdcae);
+      outline: none;
+    
+  }
+  #button:hover{
+    color: #1bdcae;
+    background: #fff;
+  }
+  #container2{
+    height: auto;
+    width: auto;
+    background-color: transparent;
+    padding:200px 50px 0px 50px ;
+  }
+  

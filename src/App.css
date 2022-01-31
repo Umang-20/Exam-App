@@ -1,0 +1,11 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+.App{
+  background: linear-gradient(180deg,#f9fbff 70%,#d2eaff);
+  width: 100vw;
+  height: 100vh;
+  }
+ 
+  

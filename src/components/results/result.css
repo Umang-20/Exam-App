@@ -1,0 +1,61 @@
+#card-1{
+border: none;
+background-color: transparent;
+}
+#card-1 .card-text{
+ text-align: left;
+}
+#card-2{
+    border: none;
+    background-color: transparent;
+}
+#card-2  .card-text{
+    text-align: right;
+}
+#card-3{
+    background: linear-gradient(#ff0537 30%,#c4042a 60%, #a30222 80%, #6e0117 90%,#2e010a 100%);
+   color: white;
+   border: none;
+}
+#card-4{
+    background: linear-gradient(#004af7 30%,#0240d1 60%, #012c8f 80%, #00216e 90%,#000f33 100%);
+    color: white;
+    border: none;
+}
+#card-5{
+    background: linear-gradient(#fce300 30%,#dec800 60%, #b3a102 80%, #857700 90%,#474001 100%);
+    color: white;
+    border: none;
+}
+#card-6{
+    background: linear-gradient(#26ff00 30%,#20c902 60%, #189902 80%, #106901 90%,#093801 100%);
+    color: white;
+    border: none;
+}
+#card-7{
+    background: linear-gradient(#f7f7f7 30%,#e0e0e0 60%, #cccccc 80%, #b8b8b8 90%,#a1a1a1 100%);
+    color: #cccccc;
+    border: none;
+}
+
+#result-row{
+    margin-top: 17px;
+    justify-content: center;
+}
+.card-title{
+    text-align: center;
+}
+.card-text{
+    text-align: center;
+}
+#result-card-text{
+    text-align: center;
+}
+#contained-modal-title-vcenter{
+    width: 100%;
+    text-align: center;
+}
+#result-modal .modal-content{
+    background-color: #fff;
+    color: #000;
+}
