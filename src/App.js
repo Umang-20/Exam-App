@@ -33,8 +33,6 @@ function App() {
     return (
       <div className="App">
       <Layout/>
-
-      
        {isloggedin ? ( isAdmin === true? (
                 //   <Switch>
                 //   <Route path={'/user-login'} component={Userlogin} exact />
