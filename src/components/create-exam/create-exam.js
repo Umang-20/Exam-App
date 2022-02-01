@@ -31,7 +31,7 @@ function CreateExam() {
   const [modalShow2, setModalShow2] = useState(false);
   const [form, setForm] = useState({
     time: "",
-    uniqueCode: "",
+    uniqueCode: Math.random().toString(36).substr(2, 7),
     selectedQues: [],
   });
   const [editForm, setEditForm] = useState({
@@ -44,8 +44,10 @@ function CreateExam() {
     weightage: "",
     type: "",
   })
-  
-console.log(`edit`, editForm.question)
+
+  const [isChecked, setIsChecked] = useState({});
+
+  console.log(`edit`, editForm.question)
   useEffect(() => {
     dispatch(fetchingIniate());
   }, [dispatch]);
@@ -61,6 +63,15 @@ console.log(`editForm`, editForm)
       updatedQues.splice(value, 1);
     }
     setForm({ ...form, selectedQues: updatedQues });
+
+    const {name,checked} =e.target;
+
+    setIsChecked((preValue)=>{
+      return{
+        ...preValue,
+        [name]:checked,
+      }
+    })
   };
 
   const onCreateHandler = async () => {
@@ -82,7 +93,12 @@ console.log(`editForm`, editForm)
       .catch((err) => {
         console.log(err);
       });
-    setForm({});
+    setForm({
+      time: "",
+      uniqueCode: Math.random().toString(36).substr(2, 7),
+      selectedQues: [],
+    });
+    setIsChecked({});
    
   };
   const saveClickHandler=()=>{
@@ -271,6 +287,7 @@ console.log(`editForm`, editForm)
         <Col>
           <input
             type="text"
+            readOnly
             className="form-control"
             placeholder="Unique Code"
             value={form.uniqueCode}
@@ -313,7 +330,7 @@ console.log(`editForm`, editForm)
           </thead>
           <tbody>
             {questions?.length ? (
-              questions.map((data) => {
+              questions.map((data,index) => {
                 return (
                   <tr key={data.id}>
                     <td>
@@ -322,6 +339,8 @@ console.log(`editForm`, editForm)
                         type="checkbox"
                         id="checkboxNoLabel"
                         value={data.id}
+                        name={index}
+                        checked={isChecked[index]}
                         onChange={onchangeHandler}
                       />
                     </td>

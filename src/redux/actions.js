@@ -46,9 +46,9 @@ export const registerInitiate=(email,password,isAdmin)=>{
     }
     return function (dispatch){
         dispatch(registerStart())
-       axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAh_KBa1xNr-AGIYJEt7RsK1S9M9HZZomk',data).then((user)=>{
+       axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD6RzUKe6scQirxQ_PQCV_3-NFlB5jNstY',data).then((user)=>{
            if(isAdmin){
-               axios.post('https://auth-test-f6dd6-default-rtdb.firebaseio.com/Admin/-MuUHBobgJLPWTKYl6c3.json',{
+               axios.post('https://admin-user-authentication-default-rtdb.firebaseio.com/Admin.json',{
                    uid:user.data.localId
                })
            }
@@ -71,8 +71,8 @@ export const loginInitiate=  (email,password)=>{
     return async function (dispatch){
         const admindata=[]
         dispatch(loginStart());
-        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAh_KBa1xNr-AGIYJEt7RsK1S9M9HZZomk',userdata).then((user)=>{
-        axios.get('https://auth-test-f6dd6-default-rtdb.firebaseio.com/Admin/-MuUHBobgJLPWTKYl6c3.json').then((user1=>{
+        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD6RzUKe6scQirxQ_PQCV_3-NFlB5jNstY',userdata).then((user)=>{
+        axios.get('https://admin-user-authentication-default-rtdb.firebaseio.com/Admin.json').then((user1=>{
             for(let key in user1.data){
               admindata.push(user1.data[key].uid)
             }
