@@ -37,6 +37,7 @@ function App() {
                 //   <Switch>
                 //   <Route path={'/user-login'} component={Userlogin} exact />
                 // </Switch>
+
           <Sidebar>
           <Switch>
              <Route path="/dashboard" exact component={HomePage} />
