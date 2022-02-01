@@ -30,10 +30,7 @@
      
 }
     .sidebarList .row a:hover {
-        
-      box-shadow: 3px 6px 8px 10px  #777;
-      
-       
+      box-shadow: 2px 2px 3px 4px  #777;
     }
     .sidebarList .row a:hover .icon,
     .sidebarList .row a:hover .title{

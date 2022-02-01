@@ -8,6 +8,7 @@ import { DeleteOutline } from "@material-ui/icons";
 import { RemoveRedEye } from "@material-ui/icons";
 import { deleteview } from "../../redux/view-examAction";
 import { fetchingIniate } from "../../redux/create-examAction";
+import Loader from "./Loader/Loader";
 
 function ViewExam() {
   
@@ -141,43 +142,65 @@ function ViewExam() {
           />
         )}
 
-        <Table striped id="table">
-          <thead id="header">
-            <tr>
-              <th>No.</th>
-              <th>Exam-Code</th>
-              <th>Exam-Duration</th>
-              <th>Exam-Date</th>
-              <th>View Details</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-         {!loading1 &&  <tbody>
-            {viewData?.map((data, key) => {
-              return (
+        {
+          viewData.length || loading1?
+              loading1? <div style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100wh",height:"30vh"}}><Loader/></div>:
+              <Table striped id="table">
+                <thead id="header">
                 <tr>
-                  <td>{key + 1}.</td>
-                  <td>{data.uniqueCode}</td>
-                  <td>{data.time}</td>
-                  <td>{`${data.day} / ${data.month} / ${data.year}`}</td>
-                  <td>
-                    <button>
-                      <RemoveRedEye
-                        id="redeye"
-                        onClick={() => viewHandle(data.id)}
-                      />
-                    </button>
-                  </td>
-                  <td>
-                    <button onClick={() => deleteHandle(data.id)}>
-                      <DeleteOutline id="deleteicon" />
-                    </button>
-                  </td>
+                  <th>No.</th>
+                  <th>Exam-Code</th>
+                  <th>Exam-Duration</th>
+                  <th>Exam-Date</th>
+                  <th>View Details</th>
+                  <th>Delete</th>
                 </tr>
-              );
-            })}
-          </tbody>}
-        </Table>
+                </thead>
+                <tbody>
+                {viewData?.map((data, key) => {
+                  return (
+                      <tr>
+                        <td>{key + 1}.</td>
+                        <td>{data.uniqueCode}</td>
+                        <td>{data.time}</td>
+                        <td>{`${data.day} / ${data.month} / ${data.year}`}</td>
+                        <td>
+                          <button>
+                            <RemoveRedEye
+                                id="redeye"
+                                onClick={() => viewHandle(data.id)}
+                            />
+                          </button>
+                        </td>
+                        <td>
+                          <button onClick={() => deleteHandle(data.id)}>
+                            <DeleteOutline id="deleteicon" />
+                          </button>
+                        </td>
+                      </tr>
+                  );
+                })}
+                </tbody>
+              </Table>
+              :
+              <Table striped id="table">
+                <thead id="header">
+                <tr>
+                  <th>No.</th>
+                  <th>Exam-Code</th>
+                  <th>Exam-Duration</th>
+                  <th>Exam-Date</th>
+                  <th>View Details</th>
+                  <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                 <td colSpan="6">No Data Found</td>
+                </tr>
+                </tbody>
+              </Table>
+        }
       </Container>
     </div>
   );

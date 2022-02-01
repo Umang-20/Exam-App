@@ -63,6 +63,7 @@ export const registerInitiate=(email,password,isAdmin)=>{
 } 
 
 export const loginInitiate=  (email,password)=>{
+
     const userdata={
         email:email,
         password:password,
@@ -95,7 +96,7 @@ export const loginInitiate=  (email,password)=>{
         
        }).catch((error)=>
        { 
-        dispatch(loginFail(error))
+        dispatch(loginFail(error.response.data.error.message))
     })
         
     }
@@ -104,9 +105,17 @@ export const loginInitiate=  (email,password)=>{
 export const logoutInitiate=()=>{
     return async function (dispatch){
         dispatch(logoutStart())
-      await auth.signOut().then((resp)=> {dispatch(logoutSuccess())
-           
+      await auth.signOut().then((resp)=> {
+          setTimeout(()=>{
+              dispatch(logoutSuccess())
+          },800)
         }
         ).catch((error)=>dispatch(logoutFail(error.message)))
     }
-} 
+}
+
+export const Reset_Error = () =>{
+    return{
+        type:types.RESET_ERROR,
+    }
+}

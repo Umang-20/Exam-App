@@ -4,9 +4,8 @@ const initialState = {
   loading: false,
   currentUser: [],
   error: "",
-  error1: "",
   isloggedin: "",
-  isredirect: "",
+  isredirect: null,
   isAdmin:'',
 };
 
@@ -48,17 +47,15 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error1: action.payload,
-        error: "",
+        error: action.payload,
       };
 
     case types.LOGIN_FAIL:
-      console.log("action.payload", action.payload);
+      // console.log("action.payload", action.payload);
       return {
         ...state,
         loading: false,
         error: action.payload,
-        error1: "",
       };
     case types.LOGOUT_SUCCESS:
       Cookies.remove("settoken");
@@ -74,6 +71,11 @@ const userReducer = (state = initialState, action) => {
         isredirect: "/login",
         loading: false,
       };
+    case types.RESET_ERROR:
+      return {
+        ...state,
+        error: "",
+      }
     default:
       return state;
   }

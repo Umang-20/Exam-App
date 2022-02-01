@@ -6,6 +6,7 @@ import { fetchingIniate } from "../../redux/create-examAction";
 import { RemoveRedEye } from "@material-ui/icons";
 import Circularbar from "../circularprogressbar/circularbar";
 import "./result.css";
+import Loader from "./Loader/Loader";
 
 function Results() {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ function Results() {
     dispatch(fetchingIniate());
   }, [dispatch]);
   if (loading) {
-    return "loading....";
+    return <div style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100wh",height:"50vh"}}><Loader/></div>;
   } else {
   }
   const showResultHandler = (id) => {
