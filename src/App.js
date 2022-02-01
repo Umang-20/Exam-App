@@ -23,8 +23,8 @@ import {useEffect, useState} from "react";
 
 
 function App() {
-    const [isLogin, setIsLogin] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [isLogin, setIsLogin] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(null);
 
     const user = useSelector(state => state.user)
 
@@ -51,34 +51,35 @@ function App() {
             <div className="App">
                 <Layout/>
                 {
-                    isLogin ?
-                        isAdmin ?
-                            <Sidebar>
+                    isLogin === null ? "" :
+                        isLogin ?
+                            isAdmin ?
+                                <Sidebar>
+                                    <Switch>
+                                        <Route path="/dashboard" exact component={HomePage}/>
+                                        <Route path="/profile" exact component={UserProfile}/>
+                                        <Route path={"/dashboard/home"} component={Addquestion} exact/>
+                                        <Route path={`/dashboard/create-exam`} component={CreateExam} exact/>
+                                        <Route path={`/dashboard/view-exam`} component={ViewExam} exact/>
+                                        <Route path={`/dashboard/results`} component={Results} exact/>
+                                        <Redirect from="*" to="/dashboard"/>
+                                    </Switch>
+                                </Sidebar>
+                                :
                                 <Switch>
-                                    <Route path="/dashboard" exact component={HomePage}/>
-                                    <Route path="/profile" exact component={UserProfile}/>
-                                    <Route path={"/dashboard/home"} component={Addquestion} exact/>
-                                    <Route path={`/dashboard/create-exam`} component={CreateExam} exact/>
-                                    <Route path={`/dashboard/view-exam`} component={ViewExam} exact/>
-                                    <Route path={`/dashboard/results`} component={Results} exact/>
-                                    <Redirect from="*" to="/dashboard"/>
+                                    <Route path={'/user-login'} component={Userlogin} exact/>
+                                    <Redirect from="*" to="/user-login"/>
                                 </Switch>
-                            </Sidebar>
+
+
                             :
                             <Switch>
-                                <Route path={'/user-login'} component={Userlogin} exact/>
-                                <Redirect from="*" to="/user-login"/>
+                                <Route path="/" exact component={HomePage}/>
+                                <Route path="/auth" exact component={AuthPage}/>
+                                <Route path="/login" exact component={Login}/>
+                                <Route path="/invalideurl" exact component={Sidebarprops}/>
+                                <Redirect from="*" to="/invalideurl"/>
                             </Switch>
-
-
-                        :
-                        <Switch>
-                            <Route path="/" exact component={HomePage}/>
-                            <Route path="/auth" exact component={AuthPage}/>
-                            <Route path="/login" exact component={Login}/>
-                            <Route path="/invalideurl" exact component={Sidebarprops}/>
-                            <Redirect from="*" to="/invalideurl"/>
-                        </Switch>
                 }
             </div>
         );

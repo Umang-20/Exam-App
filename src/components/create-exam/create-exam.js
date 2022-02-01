@@ -38,22 +38,42 @@ function CreateExam() {
     console.log(`editForm`, editForm)
     const onchangeHandler = (e) => {
         //let {selectedQues}=form
-        let updatedQues = [...form.selectedQues];
-        if (e.target.checked) {
-            updatedQues.push(e.target.value);
-        } else {
-            let value = updatedQues.indexOf(e.target.value);
-            updatedQues.splice(value, 1);
-        }
-        setForm({...form, selectedQues: updatedQues});
+        // let updatedQues = [...form.selectedQues];
+        // if (e.target.checked) {
+        //     updatedQues.push(e.target.value);
+        // } else {
+        //     let value = updatedQues.indexOf(e.target.value);
+        //     updatedQues.splice(value, 1);
+        // }
+        // setForm({...form, selectedQues: updatedQues});
 
-        const {name, checked} = e.target;
+        const {name, checked, value} = e.target;
 
         setIsChecked((preValue) => {
             return {
                 ...preValue, [name]: checked,
             }
         })
+
+       if(checked){
+           setForm((preValue)=>{
+               return{
+                   ...preValue,
+                   selectedQues: [...form.selectedQues,value]
+               }
+           })
+       }
+        else if(!checked){
+            const new1 = form.selectedQues.filter((element)=> element !== value)
+            setForm((preValue)=>{
+                return{
+                    ...preValue,
+                    selectedQues: [...new1]
+                }
+            })
+        }
+        // console.log("!@#",form.selectedQues);
+        // console.log(isChecked)
     };
 
     const onCreateHandler = async () => {
@@ -302,7 +322,7 @@ function CreateExam() {
                                 justifyContent: "center",
                                 alignItems: "center",
                                 width: "100wh",
-                                height: "50vh"
+                                height: "25vh"
                             }}><Loader/></div> :
                             <Table striped id="table">
                                 <thead id="header">
