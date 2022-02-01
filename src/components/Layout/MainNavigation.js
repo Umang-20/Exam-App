@@ -37,7 +37,7 @@ const MainNavigation = () => {
       <>
         <ul>
          {!isloggedin && <li>
-              <Link to="/login">Admin Login</Link>
+              <Link to="/login">Login</Link>
             </li>}
 
           {isloggedin &&  <>
