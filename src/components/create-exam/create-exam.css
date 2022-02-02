@@ -31,10 +31,11 @@
   #container1 {
 
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     height: 500px;
-    min-width: 1000px;
-    margin:0;
+    width: 95%;
+    /*min-width: 1000px;*/
+    margin: 0;
     padding: 0;
   }
   #table {

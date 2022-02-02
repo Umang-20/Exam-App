@@ -117,10 +117,10 @@ export const logoutInitiate=()=>{
     return async function (dispatch){
         dispatch(logoutStart())
       await auth.signOut().then((resp)=> {
-              dispatch(logoutSuccess())
-          // setTimeout(()=>{
-          //
-          // },800)
+              // dispatch(logoutSuccess())
+          setTimeout(()=>{
+                dispatch(logoutSuccess());
+          },600)
         }
         ).catch((error)=>dispatch(logoutFail(error.message)))
     }

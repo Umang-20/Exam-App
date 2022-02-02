@@ -11,7 +11,7 @@ const Sidebar = (props) => {
      
     
       <div className="row" style={{margin:'0px'}}>
-        <div className="col-3" style={{padding:'0px',width: "19%"}}>
+        <div className="d-none d-lg-flex" style={{padding:'0px',width: "15.5%"}}>
 
              <div className={style.sidebar}>
 

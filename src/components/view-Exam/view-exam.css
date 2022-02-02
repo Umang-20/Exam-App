@@ -1,16 +1,17 @@
 #container3 {
 
     overflow-y: auto;
-    overflow-x: hidden;
-    height: 300px;
-    min-width: 800px;
+    overflow-x: auto;
+    height: 375px;
+    width: 85%;
+    /*min-width: 800px;*/
     margin:0;
     padding: 0;
 
   }
   #modal{
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     height: 500px;
     min-width: 800px;
     top:8%;

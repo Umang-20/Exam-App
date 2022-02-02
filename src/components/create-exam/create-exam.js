@@ -1,5 +1,5 @@
 import {
-    Table, Container, DropdownButton, Dropdown, Col, Row, Button, Modal, Form, FormGroup, FormControl,Alert
+    Table, Container, DropdownButton, Dropdown, Col, Row, Button, Modal, Form, FormGroup, FormControl
 } from "react-bootstrap";
 import axios from "axios";
 import "./create-exam.css";
@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
+import {Clear} from "@material-ui/icons";
 import {useSelector, useDispatch} from "react-redux";
 import {fetchingIniate} from "../../redux/create-examAction";
 import {updatingIniate} from "../../redux/create-examAction";
@@ -348,7 +349,7 @@ function CreateExam() {
                 <Col>
                     <input
                         type="text"
-                        readOnly
+                        disabled
                         className="form-control"
                         placeholder="Unique Code"
                         value={form.uniqueCode}
@@ -370,6 +371,20 @@ function CreateExam() {
                         <Dropdown.Item eventKey="2hr">2hr</Dropdown.Item>
                         <Dropdown.Item eventKey="2hr30m">2hr30m</Dropdown.Item>
                     </DropdownButton>
+                </Col>
+                <Col>
+                    <Button id="all"
+                            onClick={()=>{
+                                setForm({
+                                    ...form,
+                                    time: "",
+                                    selectedQues: [],
+                                });
+                                setIsChecked({});
+                            }}>
+                        <Clear/>
+                        Clear
+                    </Button>
                 </Col>
                 <Col>
                     <Button id="all"
