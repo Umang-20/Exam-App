@@ -17,7 +17,7 @@ const MainNavigation = () => {
     const {isredirect} = useSelector(state => state.user)
     const logoutHandler = () => {
         dispatch(logoutInitiate());
-
+        history.push("/login");
     };
     useEffect(() => {
         if (Cookies.get("settoken")) {
@@ -25,16 +25,17 @@ const MainNavigation = () => {
         } else {
             setIsLogin(false);
         }
-    }, [user.isloggedin])
+    }, [user])
 
     useEffect(() => {
         // console.log("Login  ",isLogin);
         if (isredirect && isLogin) {
             history.push(isredirect)
-        } else if (!isLogin) {
-            history.push("/login")
         }
-    }, [isLogin]);
+        // else if (!isLogin) {
+        //     history.push("/")
+        // }
+    }, [isLogin,isredirect,history]);
 
     return (
         <header className={classes.header}>
@@ -46,19 +47,34 @@ const MainNavigation = () => {
             </Link>
             <>
                 <ul>
-                    {!isLogin && <li>
-                        <Link to="/login">Login</Link>
-                    </li>}
+                    {
+                            isLogin?
+                                <>
+                                    <li>
+                                        <Link to="/profile">Profile</Link>
+                                    </li>
+                                    <li>
+                                        <button onClick={logoutHandler}>Logout</button>
+                                    </li>
+                                </>:
+                                <li>
+                                    <Link to="/login">Login</Link>
+                                </li>
 
-                    {isLogin && <>
-                        <li>
-                            <Link to="/profile">Profile</Link>
-                        </li>
-                        <li>
-                            <button onClick={logoutHandler}>Logout</button>
-                        </li>
-                    </>
                     }
+                    {/*{!isLogin && <li>*/}
+                    {/*    <Link to="/login">Login</Link>*/}
+                    {/*</li>}*/}
+
+                    {/*{isLogin && <>*/}
+                    {/*    <li>*/}
+                    {/*        <Link to="/profile">Profile</Link>*/}
+                    {/*    </li>*/}
+                    {/*    <li>*/}
+                    {/*        <button onClick={logoutHandler}>Logout</button>*/}
+                    {/*    </li>*/}
+                    {/*</>*/}
+                    {/*}*/}
                 </ul>
             </>
         </header>

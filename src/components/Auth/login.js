@@ -22,7 +22,11 @@ function Login() {
 
     useEffect(() => {
         dispatch(Reset_Error());
-    }, [dispatch]);
+    }, []);
+
+    useEffect(()=>{
+        setErrorMsg(error);
+    },[error,loading]);
 
     const switchAuthModeHandler = () => {
         setErrorMsg('')
@@ -43,7 +47,7 @@ function Login() {
     //         console.log('isredirect', isredirect);
     //     }
     // }, [isredirect, history]);
-    console.log("loading",loading)
+    // console.log("loading",loading)
 
     return (
         <>
@@ -58,8 +62,10 @@ function Login() {
                                 id="email"
                                 value={userData.email}
                                 placeholder="Email"
-                                onChange={(e) =>
+                                onChange={(e) => {
                                     setUserData({...userData, email: e.target.value})
+                                    setErrorMsg("");
+                                }
                                 }
                             />
                         </div>
@@ -68,13 +74,15 @@ function Login() {
                                 type="password"
                                 id="password"
                                 placeholder="Password"
-                                onChange={(e) =>
+                                onChange={(e) => {
                                     setUserData({...userData, password: e.target.value})
+                                    setErrorMsg("");
+                                }
                                 }
                             />
                         </div>
                         <div className={classes.control}>
-                            <p style={{color: "red"}}>{error}</p>
+                            <p style={{color: "red"}}>{errorMsg}</p>
                         </div>
                         <div className={classes.actions}>
                             {/*{errorMsg}*/}
