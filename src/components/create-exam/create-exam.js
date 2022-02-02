@@ -1,5 +1,5 @@
 import {
-    Table, Container, DropdownButton, Dropdown, Col, Row, Button, Modal, Form, FormGroup, FormControl,
+    Table, Container, DropdownButton, Dropdown, Col, Row, Button, Modal, Form, FormGroup, FormControl,Alert
 } from "react-bootstrap";
 import axios from "axios";
 import "./create-exam.css";
@@ -21,6 +21,8 @@ function CreateExam() {
     const [id, setId] = useState("");
     const [modalShow, setModalShow] = useState(false);
     const [modalShow2, setModalShow2] = useState(false);
+    const [submitValidation, setSubmitValidation] = useState(false);
+    const [submitError, setSubmitError] = useState(false);
     const [form, setForm] = useState({
         time: "", uniqueCode: Math.random().toString(36).substr(2, 7), selectedQues: [],
     });
@@ -30,12 +32,12 @@ function CreateExam() {
 
     const [isChecked, setIsChecked] = useState({});
 
-    console.log(`edit`, editForm.question)
+    // console.log(`edit`, editForm.question)
     useEffect(() => {
         dispatch(fetchingIniate());
     }, [dispatch]);
 
-    console.log(`editForm`, editForm)
+    // console.log(`editForm`, editForm)
     const onchangeHandler = (e) => {
         //let {selectedQues}=form
         // let updatedQues = [...form.selectedQues];
@@ -75,28 +77,44 @@ function CreateExam() {
         // console.log("!@#",form.selectedQues);
         // console.log(isChecked)
     };
+    // console.log("!@#$",form)
+
+    const toSubmitValidation = () => {
+        if((form.selectedQues.length>=5) && (form.time!=="")){
+            setSubmitValidation(true);
+        }
+        else {
+            setSubmitError(true);
+        }
+    }
 
     const onCreateHandler = async () => {
-        const d = new Date();
-        const month = d.getMonth() + 1;
-        const day = d.getDate();
-        const year = d.getFullYear();
-        const {time, uniqueCode, selectedQues} = form;
-        const finalData = {time, uniqueCode, selectedQues, year, day, month};
-        console.log(finalData);
-        await axios
-            .post("https://auth-test-f6dd6-default-rtdb.firebaseio.com/viewexam.json", finalData)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
+        if((form.selectedQues.length>=5) && (form.time!=="")){
+            const d = new Date();
+            const month = d.getMonth() + 1;
+            const day = d.getDate();
+            const year = d.getFullYear();
+            const {time, uniqueCode, selectedQues} = form;
+            const finalData = {time, uniqueCode, selectedQues, year, day, month};
+            console.log(finalData);
+            await axios
+                .post("https://auth-test-f6dd6-default-rtdb.firebaseio.com/viewexam.json", finalData)
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            setForm({
+                time: "",
+                uniqueCode: Math.random().toString(36).substr(2, 7),
+                selectedQues: [],
             });
-        setForm({
-            time: "", uniqueCode: Math.random().toString(36).substr(2, 7), selectedQues: [],
-        });
-        setIsChecked({});
-
+            setIsChecked({});
+        }
+        else{
+            alert("Invalid Input");
+        }
     };
     const saveClickHandler = () => {
         dispatch(updatingIniate(id, editForm))
@@ -229,7 +247,7 @@ function CreateExam() {
                         <Row>
                             <Col>
                                 <DropdownButton
-                                    title={`${editForm.correctAnswer ? editForm.correctAnswer : "Corret Option"}`}
+                                    title={`${editForm.correctAnswer ? editForm.correctAnswer : "Correct Option"}`}
                                     id="dropdown-menu-align-right"
                                     onSelect={(e) => {
                                         setEditForm({...editForm, correctAnswer: e});
@@ -280,6 +298,52 @@ function CreateExam() {
                     <Button variant='success' onClick={saveClickHandler}>Save</Button>
                 </Modal.Footer>
             </Modal>
+
+            <Modal
+                show={submitValidation}
+                onHide={()=>setSubmitValidation(false)}
+                size="g"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Do You Want to Create an Exam?
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Footer>
+                    <Button onClick={()=> {
+                        onCreateHandler();
+                        setSubmitValidation(false);
+                    }}>Yes</Button>
+                    <Button onClick={()=>setSubmitValidation(false)}>No</Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+                show={submitError}
+                onHide={()=>setSubmitError(false)}
+                size="g"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Invalid Submission.
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>
+                       Select 5 or more Questions.
+                        or
+                        Set the Timer.
+                    </p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={()=>setSubmitError(false)}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+
             <Row id="row">
                 <Col>
                     <input
@@ -308,7 +372,8 @@ function CreateExam() {
                     </DropdownButton>
                 </Col>
                 <Col>
-                    <Button id="all" onClick={onCreateHandler}>
+                    <Button id="all"
+                            onClick={toSubmitValidation}>
                         <Add/>
                         Create
                     </Button>

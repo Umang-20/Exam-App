@@ -4,7 +4,7 @@ import Spinner from "../components/Spinner/Spinner";
 
 const HomePage = () => {
   const {loading} = useSelector((State=>State.user));
-  console.log("load",loading)
+  // console.log("load",loading)
   return(
       <>
         {

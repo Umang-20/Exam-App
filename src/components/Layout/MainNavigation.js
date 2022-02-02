@@ -10,6 +10,7 @@ const MainNavigation = () => {
     const [isLogin, setIsLogin] = useState(null);
     const dispatch = useDispatch();
     const history = useHistory();
+    const path = useLocation().pathname;
 
 
     // const isloggedin=Cookies.get('settoken')
@@ -29,7 +30,7 @@ const MainNavigation = () => {
 
     useEffect(() => {
         // console.log("Login  ",isLogin);
-        if (isredirect && isLogin) {
+        if ((isredirect && isLogin) || (isredirect && path==="/auth")) {
             history.push(isredirect)
         }
         // else if (!isLogin) {
