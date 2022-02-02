@@ -37,6 +37,17 @@ const logoutFail=(error)=>({
     type:types.LOGOUT_FAIL,
     payload:error
 })
+const resetPasswordStart=()=>({
+    type:types.RESET_PASSWORD_START,
+})
+const resetPasswordSuccess=(user)=>({
+    type:types.RESET_PASSWORD_SUCCESS,
+    payload:user,
+})
+const resetPasswordFail=(error)=>({
+    type:types.RESET_PASSWORD_FAIL,
+    payload:error
+})
 
 export const registerInitiate=(email,password,isAdmin)=>{
     const data={
@@ -48,7 +59,7 @@ export const registerInitiate=(email,password,isAdmin)=>{
         dispatch(registerStart())
        await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD6RzUKe6scQirxQ_PQCV_3-NFlB5jNstY',data).then(async (user)=>{
            if(isAdmin){
-               await axios.post('https://admin-user-authentication-default-rtdb.firebaseio.com/Admin.json',{
+               await axios.post('https://admin-user-authentication-default-rtdb.firebaseio.com/AdminList.json',{
                    uid:user.data.localId
                })
            }
@@ -73,7 +84,7 @@ export const loginInitiate=  (email,password)=>{
         const admindata=[]
         dispatch(loginStart());
         await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD6RzUKe6scQirxQ_PQCV_3-NFlB5jNstY',userdata).then(async (user)=>{
-        await axios.get('https://admin-user-authentication-default-rtdb.firebaseio.com/Admin.json').then((user1=>{
+        await axios.get('https://admin-user-authentication-default-rtdb.firebaseio.com/AdminList.json').then((user1=>{
             for(let key in user1.data){
               admindata.push(user1.data[key].uid)
             }
@@ -112,6 +123,22 @@ export const logoutInitiate=()=>{
           // },800)
         }
         ).catch((error)=>dispatch(logoutFail(error.message)))
+    }
+}
+
+export const Reset_Password_Initialize = (authid,password) => {
+    const userdata={
+        idToken:authid,
+        password:password,
+        returnSecureToken:true,
+    }
+    return async function (dispach){
+        dispach(resetPasswordStart());
+        await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyD6RzUKe6scQirxQ_PQCV_3-NFlB5jNstY",userdata).then((user)=>{
+            dispach(resetPasswordSuccess({
+                data:user.data,
+            }));
+        }).catch((error)=>dispach(resetPasswordFail(error.response.data.error.message)))
     }
 }
 

@@ -8,7 +8,7 @@ import { DeleteOutline } from "@material-ui/icons";
 import { RemoveRedEye } from "@material-ui/icons";
 import { deleteview } from "../../redux/view-examAction";
 import { fetchingIniate } from "../../redux/create-examAction";
-import Loader from "./Loader/Loader";
+import Loader from "../Loader/Loader";
 
 function ViewExam() {
   

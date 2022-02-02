@@ -12,7 +12,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {fetchingIniate} from "../../redux/create-examAction";
 import {updatingIniate} from "../../redux/create-examAction";
 import {deleteInitiate} from "../../redux/create-examAction";
-import Loader from "./Loader/Loader";
+import Loader from "../Loader/Loader";
 
 function CreateExam() {
     const questions = useSelector((state) => state.data.data);

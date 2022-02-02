@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 
 const MainNavigation = () => {
-    const [isLogin, setIsLogin] = useState(false);
+    const [isLogin, setIsLogin] = useState(null);
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -35,7 +35,7 @@ const MainNavigation = () => {
         // else if (!isLogin) {
         //     history.push("/")
         // }
-    }, [isLogin,isredirect,history]);
+    }, [isLogin, isredirect, history]);
 
     return (
         <header className={classes.header}>
@@ -48,7 +48,8 @@ const MainNavigation = () => {
             <>
                 <ul>
                     {
-                            isLogin?
+                        isLogin === null ? "" :
+                            isLogin ?
                                 <>
                                     <li>
                                         <Link to="/profile">Profile</Link>
@@ -56,7 +57,7 @@ const MainNavigation = () => {
                                     <li>
                                         <button onClick={logoutHandler}>Logout</button>
                                     </li>
-                                </>:
+                                </> :
                                 <li>
                                     <Link to="/login">Login</Link>
                                 </li>

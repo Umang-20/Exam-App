@@ -14,6 +14,7 @@ const userReducer = (state = initialState, action) => {
     case types.REGISTER_START:
     case types.LOGIN_START:
     case types.LOGOUT_START:
+    case types.RESET_PASSWORD_START:
       return {
         ...state,
         loading: true,
@@ -51,6 +52,7 @@ const userReducer = (state = initialState, action) => {
       };
 
     case types.LOGIN_FAIL:
+    case types.RESET_PASSWORD_FAIL:
       // console.log("action.payload", action.payload);
       return {
         ...state,
@@ -61,7 +63,7 @@ const userReducer = (state = initialState, action) => {
       Cookies.remove("settoken");
       Cookies.remove("setemail");
       Cookies.remove("isAdmin");
-      console.log("clear cookeis");
+      // console.log("clear cookeis");
       localStorage.removeItem("settoken");
       localStorage.removeItem("setemail");
       return {
@@ -76,6 +78,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         error: "",
       }
+    case types.RESET_PASSWORD_SUCCESS:
+      // console.log(action.payload.data)
+      Cookies.remove("settoken");
+      Cookies.set("settoken", action.payload.data.idToken);
+      return state;
     default:
       return state;
   }
