@@ -5,12 +5,27 @@ import {useHistory} from "react-router";
 import {logoutInitiate} from "../../redux/actions";
 import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
+import MenuIcon from "@material-ui/icons/Menu";
+import {Clear} from "@material-ui/icons";
+import button from "bootstrap/js/src/button";
+import UseWindowSize from "./UseWindowSize";
 
-const MainNavigation = () => {
+
+const MainNavigation = ({isMenuOpen,toggleMenu}) => {
     const [isLogin, setIsLogin] = useState(null);
     const dispatch = useDispatch();
     const history = useHistory();
     const path = useLocation().pathname;
+    const [showMenu, setShowMenu] = useState(false);
+    const size=UseWindowSize();
+    useEffect(()=>{
+        if(size>991){
+            setShowMenu(false);
+        }
+        else {
+            setShowMenu(true);
+        }
+    },[size])
 
 
     // const isloggedin=Cookies.get('settoken')
@@ -39,7 +54,15 @@ const MainNavigation = () => {
     }, [isLogin, isredirect, history]);
 
     return (
+        <>
+            <div style={{display:"flex", alignItems:"center", marginLeft:"15px"}}>
+                {
+                    showMenu?
+                    isMenuOpen?<MenuIcon onClick={toggleMenu}/>:<Clear onClick={toggleMenu}/>:""
+                }
         <header className={classes.header}>
+
+
             <Link to="/">
                 <img
                     alt="Logo"
@@ -80,6 +103,8 @@ const MainNavigation = () => {
                 </ul>
             </>
         </header>
+            </div>
+        </>
     );
 };
 

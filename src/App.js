@@ -51,12 +51,12 @@ function App() {
     // }
     return (
         <div className="App">
-            <Layout/>
+            <Layout>
             {
                 isLogin === null ? "" :
                     isLogin ?
                         isAdmin ?
-                            <Sidebar>
+                            // <Sidebar>
                                 <Switch>
                                     <Route path="/dashboard" exact component={HomePage}/>
                                     <Route path="/profile" exact component={UserProfile}/>
@@ -66,7 +66,7 @@ function App() {
                                     <Route path={`/dashboard/results`} component={Results} exact/>
                                     <Redirect from="*" to="/dashboard"/>
                                 </Switch>
-                            </Sidebar>
+                            // </Sidebar>
                             :
                             <Switch>
                                 <Route path={'/user-login'} component={Userlogin} exact/>
@@ -83,6 +83,7 @@ function App() {
                             <Redirect from="*" to="/invalideurl"/>
                         </Switch>
             }
+            </Layout>
         </div>
     );
 

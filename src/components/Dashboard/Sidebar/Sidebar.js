@@ -4,16 +4,16 @@ import style from "./Sidebar.module.css";
 import { SidebarData } from "./SidebarData";
 
 
-const Sidebar = (props) => {
+const Sidebar = ({isMenuOpen,children}) => {
 
   return (
     <>
      
     
       <div className="row" style={{margin:'0px'}}>
-        <div className="d-none d-lg-flex" style={{padding:'0px',width: "15.5%"}}>
+        <div className={`d-lg-flex ${isMenuOpen ? 'd-none': ""}`} style={{padding:'0px',width: "15.5%"}}>
 
-             <div className={style.sidebar}>
+             <div className={`${style.sidebar} ${isMenuOpen ? "": style.menuOpen}`}>
 
            
            <ul className={style.sidebarList}>
@@ -41,7 +41,7 @@ const Sidebar = (props) => {
             </div>
         </div>
         
-        <div className="col" id='restcolumn' style={{padding:'0px'}}>{props.children}</div>
+        <div className="col" id='restcolumn' style={{padding:'0px'}}>{children}</div>
       </div>
     
      

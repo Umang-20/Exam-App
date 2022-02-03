@@ -51,6 +51,12 @@
     .title{
       flex: 70%;
     }
- 
+ .menuOpen{
+     display: block !important;
+     position: absolute;
+     height: 91.7%;
+     width: 210px;
+     z-index: 10;
+ }
 
     
