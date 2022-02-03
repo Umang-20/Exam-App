@@ -1,0 +1,85 @@
+.background{
+    /* background: url('./software-developer-gf20b9ebf7_19202.jpg'); */
+    background-color:rgba(0,0,0,0.02) ;
+    height: 99vh;
+    width: 99vw;
+}
+
+.logincard{
+    position: absolute;
+    height: 500px;
+    width: 700px;
+    top:20%;
+    left:30%;
+    /* padding: 15px 0; */
+    box-sizing: border-box;
+    border-radius: 6px;
+    background-color: #fff;
+    /* border: 1px solid #000e38; */
+    box-shadow: 2px 2px 5px #777;
+    display: flex;
+    flex-wrap: wrap;
+}
+.logincard .container1{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container1 img{
+    height: 300px;
+    width: 300px;
+}
+.logincard .container2{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container2 .form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container2 .inputbox{
+    width: 200px;
+    height: 35px;
+    background-color: #dce7fa;
+    border-radius:20px ;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom:10px ;
+}
+.container2 button{
+    border: none;
+    border-radius: 20px;
+    width: 220px;
+    height: 35px;
+    background-color: #1bdcae;
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
+.container2 button:hover{
+    border: 1px solid #1bdcae;
+    color: #1bdcae;
+    background-color: transparent;
+}
+.inputbox input{
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 5px 10px;
+}
+::placeholder{
+    color: #a6a6a6;
+}
+.container2 input::-webkit-inner-spin-button {
+  appearance: none;
+ 
+}

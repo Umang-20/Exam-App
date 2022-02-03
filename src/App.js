@@ -3,23 +3,24 @@ import {
     Route,
     Redirect,
 } from "react-router-dom";
-import Layout from "./components/Layout/Layout";
-import UserProfile from "./components/Profile/UserProfile";
-import Sidebar from "./components/Dashboard/Sidebar/Sidebar";
-import AuthPage from "./pages/AuthPage";
-import HomePage from "./pages/HomePage";
-import Login from "./components/Auth/login";
+import Layout from "./Admin-Side/components/Layout/Layout";
+import UserProfile from "./Admin-Side/components/Profile/UserProfile";
+import Sidebar from "./Admin-Side/components/Dashboard/Sidebar/Sidebar";
+import AuthPage from "./Admin-Side/pages/AuthPage";
+import HomePage from "./Admin-Side/pages/HomePage";
+import Login from "./Admin-Side/components/Auth/login";
 import Cookies from "js-cookie";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebarprops from "./Sidebarprops";
 import {useSelector} from "react-redux";
-import Spinner from "./components/Spinner/Spinner";
-import Addquestion from "./components/Addquestion/Addquestion";
-import CreateExam from "./components/create-exam/create-exam";
-import ViewExam from "./components/view-Exam/view-exam";
-import Results from "./components/results/results";
-import Userlogin from "./components/Userlogin";
+import Spinner from "./Admin-Side/components/Spinner/Spinner";
+import Addquestion from "./Admin-Side/components/Addquestion/Addquestion";
+import CreateExam from "./Admin-Side/components/create-exam/create-exam";
+import ViewExam from "./Admin-Side/components/view-Exam/view-exam";
+import Results from "./Admin-Side/components/results/results";
 import {useEffect, useState} from "react";
+import userDashboard from "./User-Side/Dashboard"
+import userLogin from "./User-Side/Component/UserLogin/Userlogin"
 
 
 function App() {
@@ -69,11 +70,11 @@ function App() {
                             // </Sidebar>
                             :
                             <Switch>
-                                <Route path={'/user-login'} component={Userlogin} exact/>
+                                {/*<Route path="/" exact component={Userlogin} />*/}
+                                <Route path={'/user-login'} component={userLogin} exact/>
+                                <Route path="/exam" exact component={userDashboard} />
                                 <Redirect from="*" to="/user-login"/>
                             </Switch>
-
-
                         :
                         <Switch>
                             <Route path="/" exact component={HomePage}/>

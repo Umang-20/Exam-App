@@ -1,0 +1,120 @@
+@import '../../../../node_modules/font-awesome/css/font-awesome.min.css';
+.questionarea{
+    width: 100%;
+    height: 90%;
+}
+/* question */
+.questionarea .question{
+    width: 100%;
+    height: 20%;
+}
+.questionarea .question p{
+    text-align: justify;
+}
+
+/* option area */
+
+.questionarea .answer{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-wrap: wrap;
+   justify-content: flex-start;
+}
+.answer .optioncontainer{
+    height: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.optioncontainer .optionborder{
+    border: 1.5px solid #cccccc;
+    border-radius: 6px;
+    height: 50%;
+    width: 70%;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 7px 15px;
+}
+/* actionBar */
+.actionbar{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;    
+}
+.actionbar .customcheckbox{
+    display: flex;
+    width: 200px;
+    align-items: center;
+    justify-content: space-around;
+    color: #cccccc;
+
+}
+.customcheckbox input[type='checkbox']{
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1.5px solid #cccccc;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.customcheckbox label{
+    color: #d49d09;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.customcheckbox input[type='checkbox']:checked{
+    background-image: url('./icons8-check-circle-20.png');
+    width: 20px;
+	height: 20px;
+   border: none;
+}
+.actionbar .actions{
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+}
+.actionbar .actions button{
+    background: transparent;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+.actions .button1{
+    border: 1.5px solid  #f9bf01;
+    color: #f9bf01;   
+}
+.actions .button1:hover{
+    background-color: #f9bf01;
+    color: #fff;
+}
+ .actions .button2{
+    border: 1.5px solid  #1bdcae;
+    color: #1bdcae;
+}
+.actions .button2:hover{
+    background: #1bdcae;
+    color: #fff;
+}
+.actions .icon1{
+    margin-right: 5px;
+}
+.actions .icon2{
+    margin-left: 5px;
+}
+
