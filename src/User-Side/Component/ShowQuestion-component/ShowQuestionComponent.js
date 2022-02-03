@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from "react";
 import style from "./ShowQuestionComponent.module.css";
 import {useSelector, useDispatch} from "react-redux";
-import {questionFetchingInitiate} from "../../../Redux/User-Side//Action/questionFetch";
+// import {questionFetchingInitiate} from "../../../Redux/User-Side//Action/questionFetch";
 import {fetchingInitiate} from "../../../Redux/User-Side//Action/initialDataFetch";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleRight, faAngleLeft} from "@fortawesome/free-solid-svg-icons";
 
 function ShowQuestionComponent() {
     const dispatch = useDispatch()
-    const data1 = useSelector((state) => state.userQues.data)
-    const data2 = useSelector((state) => state.userData.data)
+    // const data1 = useSelector((state) => state.userQues.data)
+    // const data2 = useSelector((state) => state.userData.data)
+    const {questions} = useSelector((state)=>state.studentQuestion);
     const [quesId, setquesId] = useState([]);
     const code = localStorage.getItem('code')
 
@@ -18,14 +19,14 @@ function ShowQuestionComponent() {
         // dispatch(questionFetchingInitiate());
         console.log('first',);
     }, [])
-    console.log('data1', data1);
+    // console.log('data1', data1);
     // useEffect(()=>{
     //   dispatch(questionFetchingInitiate())
     // },[data2])
     return (
         <>
             <div className={style.questionarea}>
-                {data1.map((data) => {
+                {questions?.map((data) => {
 
                     return (
                         <>

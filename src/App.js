@@ -21,20 +21,17 @@ import Results from "./Admin-Side/components/results/results";
 import {useEffect, useState} from "react";
 import userDashboard from "./User-Side/Dashboard"
 import userLogin from "./User-Side/Component/UserLogin/Userlogin"
+import Userlogin from "./Admin-Side/components/Userlogin";
 
 
 function App() {
-    const [isLogin, setIsLogin] = useState(null);
+    const [studentLogin, setStudentLogin] = useState(null);
     const [isAdmin, setIsAdmin] = useState(null);
 
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.user);
+    const student = useSelector((state=>state.student));
 
     useEffect(() => {
-        if (Cookies.get("settoken")) {
-            setIsLogin(true);
-        } else {
-            setIsLogin(false);
-        }
         if (Cookies.get('isAdmin') === "true") {
             setIsAdmin(true);
         } else {
@@ -44,7 +41,16 @@ function App() {
     // console.log('isAdmin', isAdmin);
     // console.log('login', isLogin);
 
-    const {loading} = useSelector(state => state.user)
+    useEffect(()=>{
+        if(Cookies.get("setUnicode")){
+            setStudentLogin(true);
+        }
+        else{
+            setStudentLogin(false);
+        }
+    },[student])
+
+    // const {loading} = useSelector(state => state.user)
     // if (loading) {
     //     return <Spinner/>
     // } else {
@@ -54,8 +60,7 @@ function App() {
         <div className="App">
             <Layout>
             {
-                isLogin === null ? "" :
-                    isLogin ?
+                (isAdmin===null ||studentLogin === null) ? "" :
                         isAdmin ?
                             // <Sidebar>
                                 <Switch>
@@ -69,17 +74,18 @@ function App() {
                                 </Switch>
                             // </Sidebar>
                             :
+                            studentLogin ?
                             <Switch>
-                                {/*<Route path="/" exact component={Userlogin} />*/}
-                                <Route path={'/user-login'} component={userLogin} exact/>
                                 <Route path="/exam" exact component={userDashboard} />
-                                <Redirect from="*" to="/user-login"/>
+                                {/*<Route path="/user-login" exact component={Userlogin} />*/}
+                                <Redirect from="*" to="/exam"/>
                             </Switch>
                         :
                         <Switch>
                             <Route path="/" exact component={HomePage}/>
                             <Route path="/auth" exact component={AuthPage}/>
                             <Route path="/login" exact component={Login}/>
+                            <Route path="/student-login" exact component={userLogin} />
                             <Route path="/invalideurl" exact component={Sidebarprops}/>
                             <Redirect from="*" to="/invalideurl"/>
                         </Switch>

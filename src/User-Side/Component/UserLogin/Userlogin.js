@@ -10,15 +10,18 @@ import {
     faUniversity,
     faKey,
 } from "@fortawesome/free-solid-svg-icons";
-import {questionFetchingInitiate} from "../../../Redux/User-Side/Action/questionFetch";
+// import {questionFetchingInitiate} from "../../../Redux/User-Side/Action/questionFetch";
+import Student_Login_Initialize from "../../../Redux/User-Side/Action/StudentLoginActions";
 
 
 function Userlogin() {
 
-    const [error1, setError1] = useState('');
-    const [error2, setError2] = useState('');
-    const [error3, setError3] = useState('');
-    const [error4, setError4] = useState('');
+    // const [error1, setError1] = useState('');
+    // const [error2, setError2] = useState('');
+    // const [error3, setError3] = useState('');
+    // const [error4, setError4] = useState('');
+    const [error, setError] = useState("");
+    const [unicodeError, setUnicodeError] = useState("");
     const [quesId, setquesId] = useState([]);
     const [form, setForm] = useState({
         username: '',
@@ -34,6 +37,8 @@ function Userlogin() {
         dispatch(fetchingInitiate())
     }, [dispatch])
 
+
+
     useEffect(() => {
 
         if (data.length) {
@@ -47,107 +52,115 @@ function Userlogin() {
     }, [data])
 
 //Validating User
-    function handleValidation() {
-        let fields = form;
-        let formIsValid = true;
+//     function handleValidation() {
+//         let fields = form;
+//         let formIsValid = true;
+//
+//         setError1('')
+//         setError2('')
+//         setError3('')
+//         setError4('')
+//         //Name
+//         if (!fields.username) {
+//
+//             setError1('Name Cannot be empty')
+//             formIsValid = false;
+//
+//         }
+//
+//
+//         if (fields.username.length > 0) {
+//             if (!fields.username.match(/^[a-zA-Z]+$/)) {
+//                 console.log('data.selectedQues', data);
+//                 setError1('Name Should be Only letters')
+//                 formIsValid = false;
+//
+//             }
+//         }
+//
+//         //Email
+//         if (!fields.email) {
+//
+//             setError2('Email Cannot be empty')
+//             formIsValid = false;
+//
+//         }
+//
+//         if (fields.email.length > 0) {
+//             let lastAtPos = fields.email.lastIndexOf("@");
+//             let lastDotPos = fields.email.lastIndexOf(".");
+//
+//             if (
+//                 !(
+//                     lastAtPos < lastDotPos &&
+//                     lastAtPos > 0 &&
+//                     fields.email.indexOf("@@") === -1 &&
+//                     lastDotPos > 2 &&
+//                     fields.email.length - lastDotPos > 2
+//                 )
+//             ) {
+//
+//                 setError2('Email is not valid')
+//                 formIsValid = false;
+//
+//             }
+//         }
+//         //college
+//         if (!fields.clgname) {
+//
+//             setError3('College Cannot be empty')
+//             formIsValid = false;
+//
+//         }
+//
+//         if (!fields.code) {
+//
+//             setError4('Key Cannot be empty')
+//             formIsValid = false;
+//
+//         }
+//
+//         if (fields.code.length > 0) {
+//             const found = unicode.find(element => element === form.code)
+//             console.log('found', found);
+//             if (!found) {
+//                 setError4("Please Enter Valid Key!!")
+//                 formIsValid = false;
+//             }
+//         }
+//
+//         return formIsValid;
+//     }
 
-        setError1('')
-        setError2('')
-        setError3('')
-        setError4('')
-        //Name
-        if (!fields.username) {
-
-            setError1('Name Cannot be empty')
-            formIsValid = false;
-
-        }
-
-
-        if (fields.username.length > 0) {
-            if (!fields.username.match(/^[a-zA-Z]+$/)) {
-                console.log('data.selectedQues', data);
-                setError1('Name Should be Only letters')
-                formIsValid = false;
-
-            }
-        }
-
-        //Email
-        if (!fields.email) {
-
-            setError2('Email Cannot be empty')
-            formIsValid = false;
-
-        }
-
-        if (fields.email.length > 0) {
-            let lastAtPos = fields.email.lastIndexOf("@");
-            let lastDotPos = fields.email.lastIndexOf(".");
-
-            if (
-                !(
-                    lastAtPos < lastDotPos &&
-                    lastAtPos > 0 &&
-                    fields.email.indexOf("@@") === -1 &&
-                    lastDotPos > 2 &&
-                    fields.email.length - lastDotPos > 2
-                )
-            ) {
-
-                setError2('Email is not valid')
-                formIsValid = false;
-
-            }
-        }
-        //college
-        if (!fields.clgname) {
-
-            setError3('College Cannot be empty')
-            formIsValid = false;
-
-        }
-
-        if (!fields.code) {
-
-            setError4('Key Cannot be empty')
-            formIsValid = false;
-
-        }
-
-        if (fields.code.length > 0) {
-            const found = unicode.find(element => element === form.code)
-            console.log('found', found);
-            if (!found) {
-                setError4("Please Enter Valid Key!!")
-                formIsValid = false;
-            }
-        }
-
-        return formIsValid;
-    }
-
+    // console.log(unicode)
 //Login Handler
     const submitHandler = (e) => {
         e.preventDefault()
-
-
-        if (handleValidation()) {
-            let Qid = []
-            history.push('/exam')
-            localStorage.setItem('code', form.code)
-            for (let key in data) {
-                if (data[key].uniqueCode === form.code) {
-                    Qid = data[key].selectedQues
-                }
-            }
-            setquesId(Qid)
-            dispatch(questionFetchingInitiate(Qid))
-            console.log('form', form);
-            localStorage.setItem('setname', form.username)
-            localStorage.setItem('setclgname', form.clgname)
+        const isEmpty = !Object.values(form).every(x => (x !== ''));
+        const found = unicode.find(element => element === form.code)
+        // console.log(isEmpty);
+        if(isEmpty || !form.username.match(/^[a-zA-Z]+$/)){
+            setError("Enter Details Properly");
         }
-
+        else if(!found){
+            setError("Invalid Key");
+        }
+        else {
+            // let Qid = []
+            // history.push('/exam')
+            // localStorage.setItem('code', form.code)
+            // for (let key in data) {
+            //     if (data[key].uniqueCode === form.code) {
+            //         Qid = data[key].selectedQues
+            //     }
+            // }
+            // setquesId(Qid)
+            // dispatch(questionFetchingInitiate(Qid))
+            // console.log('form', form);
+            // localStorage.setItem('setname', form.username)
+            // localStorage.setItem('setclgname', form.clgname)
+            dispatch(Student_Login_Initialize(form))
+        }
     }
 
     return (
@@ -167,35 +180,36 @@ function Userlogin() {
                                 <FontAwesomeIcon icon={faUser}/>
                                 <input type="text" placeholder="Name"
                                        value={form.username}
-                                       onChange={(e) => setForm({...form, username: e.target.value})}
+                                       onChange={(e) => {setForm({...form, username: e.target.value});setError("")}}
                                 />
                             </div>
-                            <span style={{color: "red"}}>{error1}</span>
+                            {/*<span style={{color: "red"}}>{error1}</span>*/}
 
 
                             <div className={style.inputbox}>
                                 <FontAwesomeIcon icon={faEnvelope}/>
 
-                                <input type="text" placeholder="example@abc.com"
+                                <input type="email" placeholder="example@abc.com"
                                        value={form.email}
-                                       onChange={(e) => setForm({...form, email: e.target.value})}/>
+                                       onChange={(e) => {setForm({...form, email: e.target.value});setError("")}}/>
                             </div>
-                            <span style={{color: "red"}}>{error2}</span>
+                            {/*<span style={{color: "red"}}>{error2}</span>*/}
 
                             <div className={style.inputbox}>
                                 <FontAwesomeIcon icon={faUniversity}/>
                                 <input type="text" placeholder="Stanford University"
                                        value={form.clgname}
-                                       onChange={(e) => setForm({...form, clgname: e.target.value})}/>
+                                       onChange={(e) => {setForm({...form, clgname: e.target.value});setError("")}}/>
                             </div>
-                            <span style={{color: "red"}}>{error3}</span>
+                            {/*<span style={{color: "red"}}>{error3}</span>*/}
                             <div className={style.inputbox}>
                                 <FontAwesomeIcon icon={faKey}/>
                                 <input type="text" placeholder="8a9dw84ad"
                                        value={form.code}
-                                       onChange={(e) => setForm({...form, code: e.target.value})}/>
+                                       onChange={(e) => {setForm({...form, code: e.target.value}); setError("")}}/>
                             </div>
-                            <span style={{color: "red"}}>{error4}</span>
+                            {/*<span style={{color: "red"}}>{error4}</span>*/}
+                            <span style={{color: "red"}}>{error}</span>
                             <button type='submit'>Login</button>
                         </form>
                     </div>

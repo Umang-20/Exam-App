@@ -4,7 +4,8 @@ import dataReducer from './Admin-Side/Reducer/create-examreducer'
 import viewExamReducer from './Admin-Side/Reducer/view-examreducer'
 import resultReducer from './Admin-Side/Reducer/resultreducer'
 import dataReducer1 from "./User-Side/Reducer/initialFetching"
-import questionFetchreducer from "./User-Side/Reducer/Questionfetchreducer";
+import LoginReducer from "./User-Side/Reducer/LoginReducer";
+import FetchQuestionReducer from "./User-Side/Reducer/FetchQuestionReducer";
 
 const rootReducer=combineReducers({
     user:userReducer,
@@ -12,6 +13,7 @@ const rootReducer=combineReducers({
     view:viewExamReducer,
     result:resultReducer,
     userData:dataReducer1,
-    userQues:questionFetchreducer,
+    student:LoginReducer,
+    studentQuestion:FetchQuestionReducer,
 })
 export default rootReducer
