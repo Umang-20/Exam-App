@@ -5,7 +5,7 @@ import {loginInitiate, Reset_Error} from "../../../Redux/Admin-Side/Action/actio
 import {useSelector, useDispatch} from "react-redux";
 import {useLocation, useParams} from "react-router-dom";
 import Cookies from "js-cookie";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../../../Common-Component/Spinner/Spinner";
 
 function Login() {
     const [userData, setUserData] = useState({

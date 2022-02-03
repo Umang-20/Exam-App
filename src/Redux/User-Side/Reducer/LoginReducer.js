@@ -18,7 +18,9 @@ const LoginReducer = (state = defaultValue, action) => {
             }
         case types.STUDENT_LOGIN_SUCCESS:
             Cookies.set("setEmail", action.payload.details.email);
-            Cookies.set('setUnicode', action.payload.details.code)
+            Cookies.set('setUnicode', action.payload.details.code);
+            Cookies.set("setUsername", action.payload.details.username);
+            Cookies.set('setClgname', action.payload.details.clgname);
             return {
                 ...state, payload: {
                     ...state.payload,
@@ -30,6 +32,8 @@ const LoginReducer = (state = defaultValue, action) => {
         case types.STUDENT_LOGOUT_SUCCESS:
             Cookies.remove("setEmail");
             Cookies.remove("setUnicode");
+            Cookies.remove("setClgname");
+            Cookies.remove("setUsername");
             return{
                 ...state,
                 payload: {

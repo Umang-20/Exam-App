@@ -13,7 +13,7 @@ const dataReducer=(state=initialState,action)=>{
                 ...state,
                 loading:true
             }
-        case types.DATA_FEACHED:
+        case types.DATA_FETCHED:
             return{
                 ...state,
                 data:action.payload,

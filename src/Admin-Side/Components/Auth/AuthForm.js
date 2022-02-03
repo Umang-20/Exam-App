@@ -3,7 +3,7 @@ import classes from "./AuthForm.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import {registerInitiate, Reset_Error} from "../../../Redux/Admin-Side/Action/actions";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../../../Common-Component/Spinner/Spinner";
 
 const AuthForm = () => {
   const { currentUser } = useSelector((state) => state.user);

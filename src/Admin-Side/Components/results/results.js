@@ -6,7 +6,7 @@ import { fetchingIniate } from "../../../Redux/Admin-Side/Action/create-examActi
 import { RemoveRedEye } from "@material-ui/icons";
 import Circularbar from "../circularprogressbar/circularbar";
 import "./result.css";
-import Loader from "../Loader/Loader";
+import Loader from "../../../Common-Component/Loader/Loader";
 
 function Results() {
   const dispatch = useDispatch();

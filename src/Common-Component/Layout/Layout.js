@@ -1,7 +1,7 @@
 import {Fragment, useEffect, useState} from 'react';
 
 import MainNavigation from './MainNavigation';
-import Sidebar from "../Dashboard/Sidebar/Sidebar";
+import Sidebar from "../../Admin-Side/Components/Dashboard/Sidebar/Sidebar";
 import {useSelector} from "react-redux";
 import Cookies from "js-cookie";
 

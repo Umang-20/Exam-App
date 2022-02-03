@@ -3,7 +3,7 @@ import userReducer from './Admin-Side/Reducer/reducer'
 import dataReducer from './Admin-Side/Reducer/create-examreducer'
 import viewExamReducer from './Admin-Side/Reducer/view-examreducer'
 import resultReducer from './Admin-Side/Reducer/resultreducer'
-import dataReducer1 from "./User-Side/Reducer/initialFetching"
+import dataReducer1 from "./User-Side/Reducer/DataFetching"
 import LoginReducer from "./User-Side/Reducer/LoginReducer";
 import FetchQuestionReducer from "./User-Side/Reducer/FetchQuestionReducer";
 
@@ -12,7 +12,7 @@ const rootReducer=combineReducers({
     data:dataReducer,
     view:viewExamReducer,
     result:resultReducer,
-    userData:dataReducer1,
+    allExams:dataReducer1,
     student:LoginReducer,
     studentQuestion:FetchQuestionReducer,
 })

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import style from "./Userlogin.module.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchingInitiate} from "../../../Redux/User-Side/Action/initialDataFetch";
+import {fetchingInitiate} from "../../../Redux/User-Side/Action/DataFetchActions";
 import {useHistory} from "react-router";
 import {
     faUser,
@@ -21,7 +21,6 @@ function Userlogin() {
     // const [error3, setError3] = useState('');
     // const [error4, setError4] = useState('');
     const [error, setError] = useState("");
-    const [unicodeError, setUnicodeError] = useState("");
     const [quesId, setquesId] = useState([]);
     const [form, setForm] = useState({
         username: '',
@@ -30,13 +29,11 @@ function Userlogin() {
         code: '',
     });
     const [unicode, setUnicode] = useState([]);
-    const {data} = useSelector((state) => state.data)
-    const history = useHistory()
+    const {data} = useSelector((state) => state.allExams)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchingInitiate())
     }, [dispatch])
-
 
 
     useEffect(() => {

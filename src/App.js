@@ -3,25 +3,25 @@ import {
     Route,
     Redirect,
 } from "react-router-dom";
-import Layout from "./Admin-Side/components/Layout/Layout";
-import UserProfile from "./Admin-Side/components/Profile/UserProfile";
-import Sidebar from "./Admin-Side/components/Dashboard/Sidebar/Sidebar";
+import Layout from "./Common-Component/Layout/Layout";
+import UserProfile from "./Admin-Side/Components/Profile/UserProfile";
+import Sidebar from "./Admin-Side/Components/Dashboard/Sidebar/Sidebar";
 import AuthPage from "./Admin-Side/pages/AuthPage";
 import HomePage from "./Admin-Side/pages/HomePage";
-import Login from "./Admin-Side/components/Auth/login";
+import Login from "./Admin-Side/Components/Auth/login";
 import Cookies from "js-cookie";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebarprops from "./Sidebarprops";
 import {useSelector} from "react-redux";
-import Spinner from "./Admin-Side/components/Spinner/Spinner";
-import Addquestion from "./Admin-Side/components/Addquestion/Addquestion";
-import CreateExam from "./Admin-Side/components/create-exam/create-exam";
-import ViewExam from "./Admin-Side/components/view-Exam/view-exam";
-import Results from "./Admin-Side/components/results/results";
+import Spinner from "./Common-Component/Spinner/Spinner";
+import Addquestion from "./Admin-Side/Components/Addquestion/Addquestion";
+import CreateExam from "./Admin-Side/Components/create-exam/create-exam";
+import ViewExam from "./Admin-Side/Components/view-Exam/view-exam";
+import Results from "./Admin-Side/Components/results/results";
 import {useEffect, useState} from "react";
-import userDashboard from "./User-Side/Dashboard"
+import userDashboard from "./User-Side/Component/Exam-Page/Dashboard"
 import userLogin from "./User-Side/Component/UserLogin/Userlogin"
-import Userlogin from "./Admin-Side/components/Userlogin";
+import Userlogin from "./Admin-Side/Components/Userlogin";
 
 
 function App() {

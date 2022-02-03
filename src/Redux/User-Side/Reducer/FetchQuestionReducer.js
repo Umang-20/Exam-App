@@ -26,7 +26,7 @@ const FetchQuestionReducer = (state=defaultValue,action) => {
                 payload: {
                     ...state.payload,
                     time:action.payload.time,
-                    question: action.payload.questions,
+                    questions: action.payload.questions,
                     loading: action.payload.loading
                 }
             }

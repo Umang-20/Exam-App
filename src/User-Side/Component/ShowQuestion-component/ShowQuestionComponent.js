@@ -2,31 +2,30 @@ import React, {useEffect, useState} from "react";
 import style from "./ShowQuestionComponent.module.css";
 import {useSelector, useDispatch} from "react-redux";
 // import {questionFetchingInitiate} from "../../../Redux/User-Side//Action/questionFetch";
-import {fetchingInitiate} from "../../../Redux/User-Side//Action/initialDataFetch";
+import {fetchingInitiate} from "../../../Redux/User-Side/Action/DataFetchActions";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleRight, faAngleLeft} from "@fortawesome/free-solid-svg-icons";
+import Cookies from "js-cookie";
+import Fetch_Question_Initialization from "../../../Redux/User-Side/Action/FetchQuestion";
 
 function ShowQuestionComponent() {
     const dispatch = useDispatch()
-    // const data1 = useSelector((state) => state.userQues.data)
-    // const data2 = useSelector((state) => state.userData.data)
-    const {questions} = useSelector((state)=>state.studentQuestion);
+    const studentQuestion = useSelector((state)=>state.studentQuestion);
     const [quesId, setquesId] = useState([]);
-    const code = localStorage.getItem('code')
+    const unicode = Cookies.get("setUnicode");
 
     useEffect(() => {
-        dispatch(fetchingInitiate())
-        // dispatch(questionFetchingInitiate());
-        console.log('first',);
+        dispatch(Fetch_Question_Initialization(unicode));
     }, [])
     // console.log('data1', data1);
     // useEffect(()=>{
     //   dispatch(questionFetchingInitiate())
     // },[data2])
+    console.log("@@@",studentQuestion.payload.questions)
     return (
         <>
             <div className={style.questionarea}>
-                {questions?.map((data) => {
+                {studentQuestion.payload.questions?.map((data) => {
 
                     return (
                         <>

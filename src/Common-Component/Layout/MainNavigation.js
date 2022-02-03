@@ -2,14 +2,14 @@ import {Link, useLocation} from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
-import {logoutInitiate} from "../../../Redux/Admin-Side/Action/actions";
+import {logoutInitiate} from "../../Redux/Admin-Side/Action/actions";
 import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import MenuIcon from "@material-ui/icons/Menu";
 import {Clear} from "@material-ui/icons";
 import button from "bootstrap/js/src/button";
 import UseWindowSize from "./UseWindowSize";
-import Student_LogOut_Initialize from "../../../Redux/User-Side/Action/StudentLogOutActions";
+import Student_LogOut_Initialize from "../../Redux/User-Side/Action/StudentLogOutActions";
 
 
 const MainNavigation = ({isMenuOpen, toggleMenu}) => {
@@ -33,7 +33,7 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
     const user = useSelector(state => state.user)
     const {isredirect} = useSelector(state => state.user)
     const student = useSelector((state=>state.student));
-    console.log(student)
+    // console.log(student)
     const logoutHandler = () => {
         dispatch(logoutInitiate());
         history.push("/login");

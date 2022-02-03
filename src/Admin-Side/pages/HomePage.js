@@ -1,6 +1,6 @@
-import StartingPageContent from '../components/StartingPage/Welcomepage';
+import StartingPageContent from '../Components/StartingPage/Welcomepage';
 import {useSelector} from "react-redux";
-import Loader from "../components/Loader/Loader";
+import Loader from "../../Common-Component/Loader/Loader";
 
 const HomePage = () => {
   const {loading} = useSelector((State=>State.user));
