@@ -6,7 +6,7 @@ function ShowQuestion() {
   return (
     <div className={style.showquestion}>
       <div className={style.selectbox}>
-        <ShowQuestionComponent />
+        <ShowQuestionComponent/>
       </div>
     </div>
   );

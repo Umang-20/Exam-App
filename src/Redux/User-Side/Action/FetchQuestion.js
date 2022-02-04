@@ -47,7 +47,7 @@ const Fetch_Question_Initialization = (code) => {
                     for (let key in resp.data) {
                         questionsID.map((element) => {
                             if (element === key) {
-                                questions.push(resp.data[key])
+                                questions.push({data:resp.data[key],id:element})
                             }
                         })
                     }

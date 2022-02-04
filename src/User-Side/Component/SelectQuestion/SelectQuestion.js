@@ -5,7 +5,7 @@ import SelectQuestionComponent from '../SelectQuestiom-component/SelectQuestionC
 function SelectQuestion() {
   return <div className={style.SelectedQuestion}>
       <div className={style.selectbox}>
-          <SelectQuestionComponent />
+          <SelectQuestionComponent/>
       </div>
   </div>;
 }

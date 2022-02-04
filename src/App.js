@@ -76,9 +76,9 @@ function App() {
                             :
                             studentLogin ?
                             <Switch>
-                                <Route path="/exam" exact component={userDashboard} />
+                                <Route path="/exam/:id" exact component={userDashboard} />
                                 {/*<Route path="/user-login" exact component={Userlogin} />*/}
-                                <Redirect from="*" to="/exam"/>
+                                <Redirect from="*" to="/exam/1"/>
                             </Switch>
                         :
                         <Switch>

@@ -49,6 +49,15 @@
     cursor: pointer;
     border: none;
 }
+.selectButtons button{
+    background:lightskyblue;
+    color: #000;
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    border: none;
+}
 .buttons button:hover{
     background-color: #e6e6e6;
 }

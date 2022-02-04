@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from '../Header/Header';
 import Progressbar from '../Progressbar/progressbar';
 import Info from '../Info/Info';
 import SelectQuestion from '../SelectQuestion/SelectQuestion';
 import ShowQuestion from '../ShowQuestion/ShowQuestion';
 import "./Dashboard.css"
+import {useSelector} from "react-redux";
 
 function Dashboard() {
     return <>
