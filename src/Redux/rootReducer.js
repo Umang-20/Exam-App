@@ -6,6 +6,7 @@ import resultReducer from './Admin-Side/Reducer/resultreducer'
 import dataReducer1 from "./User-Side/Reducer/DataFetching"
 import LoginReducer from "./User-Side/Reducer/LoginReducer";
 import FetchQuestionReducer from "./User-Side/Reducer/FetchQuestionReducer";
+import AnswerSubmissionReducer from "./User-Side/Reducer/AnswerSubmissionReducer";
 
 const rootReducer=combineReducers({
     user:userReducer,
@@ -15,5 +16,6 @@ const rootReducer=combineReducers({
     allExams:dataReducer1,
     student:LoginReducer,
     studentQuestion:FetchQuestionReducer,
+    studentAnswer:AnswerSubmissionReducer,
 })
 export default rootReducer
