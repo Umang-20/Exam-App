@@ -34,16 +34,18 @@ function ShowQuestionComponent() {
 
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(Get_Student_Answer(quesNo));
-    },[quesNo])
+    }, [quesNo])
 
-    useEffect(()=>{
-        if(studentAnswer.payload.quesNo === quesNo){
+    useEffect(() => {
+        if ((studentAnswer.payload.quesNo === quesNo)) {
             setMor(studentAnswer.payload.mor);
-            setAnswers({[studentAnswer.payload.answer]:true});
-        }
-        else {
+            if(studentAnswer.payload.answer !== "undefined"){
+                console.log(studentAnswer.payload.answer)
+                setAnswers({[studentAnswer.payload.answer]: true});
+            }
+        } else {
             setMor(false);
             setAnswers({
                 1: false,
@@ -52,11 +54,11 @@ function ShowQuestionComponent() {
                 4: false,
             });
         }
-    },[studentAnswer])
+    }, [studentAnswer, quesNo])
 
     useEffect(() => {
         if (questions.length) {
-            if((quesNo.toString().match(/^[a-z]/i)) || (quesNo > questions.length - 1) || (quesNo < 0)){
+            if ((quesNo.toString().match(/^[a-z]/i)) || (quesNo > questions.length) || (quesNo < 0)) {
                 history.goBack();
             }
         }
@@ -74,10 +76,10 @@ function ShowQuestionComponent() {
         } else {
             selectedAnswer = Object.keys(answers)[0];
         }
-        console.log(selectedAnswer)
-        console.log(questions[quesNo].id)
-        console.log(mor)
-        console.log(quesNo)
+        // console.log(selectedAnswer)
+        // console.log(questions[quesNo].id)
+        // console.log(mor)
+        // console.log(quesNo)
         dispatch(Answer_Submission_Initialization(questions[quesNo].id, selectedAnswer, mor, quesNo))
         setAnswers({
                 1: false,
@@ -93,96 +95,120 @@ function ShowQuestionComponent() {
     return (
         <>
             <div className={style.questionarea}>
-                {(studentAnswer.payload.loading)?<Loader/>:
-                    ((!questions[quesNo])) ? <Loader/> :
-                    <>
-                        <div className={style.question}>
-                            <h2>{questions[quesNo].data.question}</h2>
-                        </div>
-                        <div className={style.answer}>
-                            <div className={style.optioncontainer}>
-                                <div className={style.optionborder}>
-                                    <input type="radio" id="1" name="fav_language" value="1" checked={answers["1"]}
-                                           onChange={eventListener}/> {" "}
-                                    <label
-                                        htmlFor="html">{questions[quesNo].data.option1}</label>
+                {
+                    ((studentAnswer.payload.loading) || (studentQuestion.payload.loading)) ?
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: "100wh",
+                            height: "40vh"
+                        }}><Loader/></div> :
+                        quesNo === studentQuestion.payload.questions.length ?
+                            <>
+                                <div className={style.questionOver}>
+                                    <div><h3>All Questions are Over</h3></div>
                                 </div>
-                            </div>
-                            <div className={style.optioncontainer}>
-                                <div className={style.optionborder}>
-                                    <input type="radio" id="2" name="fav_language" value="2" checked={answers["2"]}
-                                           onChange={eventListener}/> {" "}
-                                    <label
-                                        htmlFor="html">{questions[quesNo].data.option2}</label>
-                                </div>
-                            </div>
-                            <div className={style.optioncontainer}>
-                                <div className={style.optionborder}>
-                                    <input type="radio" id="3" name="fav_language" value="3" checked={answers["3"]}
-                                           onChange={eventListener}/> {" "}
-                                    <label
-                                        htmlFor="html">{questions[quesNo].data.option3}</label>
-                                </div>
-                            </div>
-                            <div className={style.optioncontainer}>
-                                <div className={style.optionborder}>
-                                    <input type="radio" id="4" name="fav_language" value="4" checked={answers["4"]}
-                                           onChange={eventListener}/> {" "}
-                                    <label
-                                        htmlFor="html">{questions[quesNo].data.option4}</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={style.actionbar}>
-                            <div className={style.customcheckbox}>
-                                <input type="checkbox" id="check" checked={mor} onChange={() => {
-                                    setMor(!mor)
-                                }
-                                }/>
-                                <label htmlFor="check">Mark for Review</label>
-                            </div>
-                            <div className={style.actions}>
-                                {
-                                    quesNo === 0 ?
-                                        <div style={{visibility: "hidden"}}>
+                                <div className={style.actionbar}>
+                                    <div className={style.actions}>
+                                        <Link to={`/exam/${quesNo}`}>
                                             <button className={style.button1}>
                                                 <FontAwesomeIcon className={style.icon1} icon={faAngleLeft}
                                                 />
                                                 Previous
                                             </button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </>
+                            :
+                            questions[quesNo] ?
+                                <>
+                                    <div className={style.question}>
+                                        <h2>{questions[quesNo].data.question}</h2>
+                                    </div>
+                                    <div className={style.answer}>
+                                        <div className={style.optioncontainer}>
+                                            <div className={style.optionborder}>
+                                                <input type="radio" id="1" name="fav_language" value="1"
+                                                       checked={answers["1"]}
+                                                       onChange={eventListener}/> {" "}
+                                                <label
+                                                    htmlFor="html">{questions[quesNo].data.option1}</label>
+                                            </div>
                                         </div>
-                                        :
-                                        <div>
-                                            <Link to={`/exam/${quesNo}`}>
-                                                <button className={style.button1}>
-                                                    <FontAwesomeIcon className={style.icon1} icon={faAngleLeft}
-                                                    />
-                                                    Previous
-                                                </button>
-                                            </Link>
+                                        <div className={style.optioncontainer}>
+                                            <div className={style.optionborder}>
+                                                <input type="radio" id="2" name="fav_language" value="2"
+                                                       checked={answers["2"]}
+                                                       onChange={eventListener}/> {" "}
+                                                <label
+                                                    htmlFor="html">{questions[quesNo].data.option2}</label>
+                                            </div>
                                         </div>
-                                }
-                                {
-                                    quesNo === questions.length - 1 ?
-                                        <div style={{visibility: "hidden"}}>
-                                            <button className={style.button2}>
-                                                Next
-                                                <FontAwesomeIcon className={style.icon2} icon={faAngleRight}/>
-                                            </button>
+                                        <div className={style.optioncontainer}>
+                                            <div className={style.optionborder}>
+                                                <input type="radio" id="3" name="fav_language" value="3"
+                                                       checked={answers["3"]}
+                                                       onChange={eventListener}/> {" "}
+                                                <label
+                                                    htmlFor="html">{questions[quesNo].data.option3}</label>
+                                            </div>
                                         </div>
-                                        :
-                                        <div>
-                                            <Link to={`/exam/${quesNo + 2}`}>
-                                                <button className={style.button2} onClick={answerSubmission}>
-                                                    Next
-                                                    <FontAwesomeIcon className={style.icon2} icon={faAngleRight}/>
-                                                </button>
-                                            </Link>
+                                        <div className={style.optioncontainer}>
+                                            <div className={style.optionborder}>
+                                                <input type="radio" id="4" name="fav_language" value="4"
+                                                       checked={answers["4"]}
+                                                       onChange={eventListener}/> {" "}
+                                                <label
+                                                    htmlFor="html">{questions[quesNo].data.option4}</label>
+                                            </div>
                                         </div>
-                                }
-                            </div>
-                        </div>
-                    </>
+                                    </div>
+                                    <div className={style.actionbar}>
+                                        <div className={style.customcheckbox}>
+                                            <input type="checkbox" id="check" checked={mor} onChange={() => {
+                                                setMor(!mor)
+                                            }
+                                            }/>
+                                            <label htmlFor="check">Mark for Review</label>
+                                        </div>
+                                        <div className={style.actions}>
+                                            {
+                                                quesNo === 0 ?
+                                                    <div style={{visibility: "hidden"}}>
+                                                        <button className={style.button1}>
+                                                            <FontAwesomeIcon className={style.icon1} icon={faAngleLeft}
+                                                            />
+                                                            Previous
+                                                        </button>
+                                                    </div>
+                                                    :
+                                                    <div>
+                                                        <Link to={`/exam/${quesNo}`}>
+                                                            <button className={style.button1}>
+                                                                <FontAwesomeIcon className={style.icon1}
+                                                                                 icon={faAngleLeft}
+                                                                />
+                                                                Previous
+                                                            </button>
+                                                        </Link>
+                                                    </div>
+                                            }
+
+                                            <div>
+                                                <Link to={`/exam/${quesNo + 2}`}>
+                                                    <button className={style.button2} onClick={answerSubmission}>
+                                                        Next
+                                                        <FontAwesomeIcon className={style.icon2}
+                                                                         icon={faAngleRight}/>
+                                                    </button>
+                                                </Link>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </> : ""
                 }
             </div>
         </>

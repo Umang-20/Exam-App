@@ -5,20 +5,49 @@ import Cookies from "js-cookie";
 const username = Cookies.get("setUsername")
 const UniqueCode = Cookies.get("setUnicode")
 
+const GetALlAnswer_Started = () =>{
+    return {
+        type: types.GETALLANSWER_START,
+        payload: {
+            loading: true,
+        }
+    }
+}
+
+const GetAllAnswer_Success = (data) => {
+    return {
+        type: types.GETALLANSWER_SUCCESS,
+        payload: {
+            allAnswer: data,
+            loading:false,
+        }
+    }
+}
+
+const GetAllAnswer_Fail = (error) =>{
+    return {
+        type: types.GETALLANSWER_FAIL,
+        payload: {
+            error,
+            loading:false,
+        }
+    }
+}
+
 const GetAllAnswerActions = () => {
     return async function (dispach) {
         let allData = [];
+        dispach(GetALlAnswer_Started())
         await axios.get(`https://admin-user-authentication-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
             for (let key in data) {
+                if(data[key].answer == "undefined"){
+                    data[key].answer="";
+                }
                 allData.push(data[key]);
             }
-            dispach({
-                type: types.GET_ALL_ANSWER,
-                payload: {
-                    allAnswer: allData,
-                }
-            })
-
+            dispach(GetAllAnswer_Success(allData));
+        }).catch((e)=>{
+            dispach(GetAllAnswer_Fail(e.message));
         })
     }
 }

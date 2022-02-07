@@ -21,6 +21,7 @@ const LoginReducer = (state = defaultValue, action) => {
             Cookies.set('setUnicode', action.payload.details.code);
             Cookies.set("setUsername", action.payload.details.username);
             Cookies.set('setClgname', action.payload.details.clgname);
+            localStorage.setItem("Student",JSON.stringify(action.payload.details));
             return {
                 ...state, payload: {
                     ...state.payload,
@@ -34,6 +35,7 @@ const LoginReducer = (state = defaultValue, action) => {
             Cookies.remove("setUnicode");
             Cookies.remove("setClgname");
             Cookies.remove("setUsername");
+            localStorage.removeItem("Student");
             return{
                 ...state,
                 payload: {

@@ -89,7 +89,7 @@
 }
 .actionbar .actions{
     display: flex;
-    width: 200px;
+    /*width: 200px;*/
     justify-content: space-between;
 }
 .actionbar .actions button{
@@ -118,5 +118,11 @@
 }
 .actions .icon2{
     margin-left: 5px;
+}
+.questionOver{
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 

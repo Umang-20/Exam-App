@@ -14,7 +14,7 @@ function Dashboard() {
 
     useEffect(() => {
         dispach(GetAllAnswerActions());
-    }, []);
+    }, [dispach]);
 
     return <>
         <Progressbar/>

@@ -12,7 +12,7 @@ function Info() {
     // console.log(totalQuestion)
 
     const countMor = allAnswer.filter((element) => element.mor === true);
-    const countAnswered = allAnswer.filter((element)=>element.answer && element.mor === false)
+    const countAnswered = allAnswer.filter((element)=>(element.answer) && element.mor === false)
     // console.log(countAnswered)
 
     const countSkipped = allAnswer.length - countAnswered.length - countMor.length
@@ -44,7 +44,7 @@ function Info() {
 
                 </div>
             </div>
-            <button>Submit</button>
+            <button style={{visibility:"hidden"}}>Submit</button>
         </div>
     </div>;
 }

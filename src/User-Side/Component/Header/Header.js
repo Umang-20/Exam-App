@@ -51,9 +51,9 @@ function Header() {
 
       {hour>9? hour : '0'+hour}:{minute>9? minute : '0'+minute}:{second>9? second : '0'+second}
       </div>
-    </div>
-    <div className={style.logo}>
-      {name}
+      <div className={style.logo}>
+        {name}
+      </div>
     </div>
   </div>
 }

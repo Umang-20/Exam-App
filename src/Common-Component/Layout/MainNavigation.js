@@ -108,7 +108,7 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
                                         studentLogin ?
                                             <>
                                                 <li>
-                                                    <button onClick={studentLogout}>Logout</button>
+                                                    <button onClick={studentLogout}>Submit</button>
                                                 </li>
                                             </>
                                             :

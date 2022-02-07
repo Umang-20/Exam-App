@@ -7,6 +7,7 @@ const defaultValue = {
         mor: false,
         error: null,
         loading: false,
+        quesNo:null,
         allAnswer:[],
     }
 }
@@ -14,6 +15,8 @@ const defaultValue = {
 const AnswerSubmissionReducer = (state = defaultValue, action) => {
     switch (action.type) {
         case types.ANSWER_SUBMISSION_STARTED:
+        case types.GET_ANSWER_STARTED:
+        case types.GETALLANSWER_START:
             return {
                 ...state,
                 payload: {
@@ -31,10 +34,11 @@ const AnswerSubmissionReducer = (state = defaultValue, action) => {
                     answer: action.payload.answer,
                     mor: action.payload.mor,
                     quesNo: action.payload.quesNo,
-                    // allAnswer: action.payload.allAnswer,
                 }
             }
         case types.ANSWER_SUBMISSION_FAIL:
+        case types.GET_ANSWER_FAIL:
+        case types.GETALLANSWER_FAIL:
             return {
                 ...state,
                 payload: {
@@ -64,12 +68,13 @@ const AnswerSubmissionReducer = (state = defaultValue, action) => {
                     allAnswer: action.payload.allAnswer,
                 }
             }
-        case types.GET_ALL_ANSWER:
+        case types.GETALLANSWER_SUCCESS:
             return {
                 ...state,
                 payload: {
                     ...state.payload,
                     allAnswer: action.payload.allAnswer,
+                    loading: action.payload.loading,
                 }
             }
         default:
