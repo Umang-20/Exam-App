@@ -14,7 +14,7 @@ const Fetch_Question_Success = (questions,time) => {
     return{
         type:types.FETCH_QUESTION_SUCCESS,
         payload: {
-            loading: true,
+            loading: false,
             questions,
             time,
         }
@@ -25,6 +25,7 @@ const Fetch_Question_Fail = (error) => {
     return{
         type: types.FETCH_QUESTION_FAIL,
         payload:{
+            loading:false,
             error,
         }
     }

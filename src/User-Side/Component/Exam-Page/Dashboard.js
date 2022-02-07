@@ -1,13 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from '../Header/Header';
 import Progressbar from '../Progressbar/progressbar';
 import Info from '../Info/Info';
 import SelectQuestion from '../SelectQuestion/SelectQuestion';
 import ShowQuestion from '../ShowQuestion/ShowQuestion';
 import "./Dashboard.css"
-import {useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
+import GetAllAnswerActions from "../../../Redux/User-Side/Action/GetAllAnswerActions";
 
 function Dashboard() {
+
+    const dispach = useDispatch()
+
+    useEffect(() => {
+        dispach(GetAllAnswerActions());
+    }, []);
+
     return <>
         <Progressbar/>
         <Header/>

@@ -6,13 +6,17 @@ import {faAngleRight, faAngleLeft} from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
 import Fetch_Question_Initialization from "../../../Redux/User-Side/Action/FetchQuestion";
 import {Link, useParams} from "react-router-dom";
-import Answer_Submission_Initialization from "../../../Redux/User-Side/Action/AnswerSubmissionAction";
+import {
+    Answer_Submission_Initialization,
+    Get_Student_Answer
+} from "../../../Redux/User-Side/Action/AnswerSubmissionAction";
 import {useHistory} from "react-router";
 import Loader from "../../../Common-Component/Loader/Loader";
 
 function ShowQuestionComponent() {
     const dispatch = useDispatch()
     const studentQuestion = useSelector((state) => state.studentQuestion);
+    const studentAnswer = useSelector((state) => state.studentAnswer);
     const unicode = Cookies.get("setUnicode");
     const quesNo = parseInt(useParams().id) - 1;
     const [answers, setAnswers] = useState({
@@ -22,27 +26,41 @@ function ShowQuestionComponent() {
         4: false,
     });
     const [mor, setMor] = useState(false);
+    const questions = studentQuestion.payload.questions;
     const history = useHistory();
 
     useEffect(() => {
         dispatch(Fetch_Question_Initialization(unicode));
+
     }, [])
 
-    useEffect(() => {
-        if (studentQuestion.payload.questions.length) {
-            if ((quesNo > studentQuestion.payload.questions.length - 1) || (quesNo < 0)) {
-                history.push("/exam");
-                // console.log(quesNo)
-                // console.log(studentQuestion.payload.questions.length)
-            }
-            // else {
-            //     console.log("Proper")
-            //     console.log(quesNo)
-            //     console.log(studentQuestion.payload.questions.length)
-            // }
-        }
+    useEffect(()=>{
+        dispatch(Get_Student_Answer(quesNo));
+    },[quesNo])
 
-    }, [studentQuestion.payload.questions.length])
+    useEffect(()=>{
+        if(studentAnswer.payload.quesNo === quesNo){
+            setMor(studentAnswer.payload.mor);
+            setAnswers({[studentAnswer.payload.answer]:true});
+        }
+        else {
+            setMor(false);
+            setAnswers({
+                1: false,
+                2: false,
+                3: false,
+                4: false,
+            });
+        }
+    },[studentAnswer])
+
+    useEffect(() => {
+        if (questions.length) {
+            if((quesNo.toString().match(/^[a-z]/i)) || (quesNo > questions.length - 1) || (quesNo < 0)){
+                history.goBack();
+            }
+        }
+    }, [questions.length])
 
     const eventListener = (event) => {
         const {value, checked} = event.target;
@@ -57,9 +75,10 @@ function ShowQuestionComponent() {
             selectedAnswer = Object.keys(answers)[0];
         }
         console.log(selectedAnswer)
-        console.log(studentQuestion.payload.questions[quesNo].id)
+        console.log(questions[quesNo].id)
         console.log(mor)
-        dispatch(Answer_Submission_Initialization(studentQuestion.payload.questions[quesNo].id, selectedAnswer, mor))
+        console.log(quesNo)
+        dispatch(Answer_Submission_Initialization(questions[quesNo].id, selectedAnswer, mor, quesNo))
         setAnswers({
                 1: false,
                 2: false,
@@ -74,10 +93,11 @@ function ShowQuestionComponent() {
     return (
         <>
             <div className={style.questionarea}>
-                {!studentQuestion.payload.questions[quesNo] ? <Loader/> :
+                {(studentAnswer.payload.loading)?<Loader/>:
+                    ((!questions[quesNo])) ? <Loader/> :
                     <>
                         <div className={style.question}>
-                            <h2>{studentQuestion.payload.questions[quesNo].data.question}</h2>
+                            <h2>{questions[quesNo].data.question}</h2>
                         </div>
                         <div className={style.answer}>
                             <div className={style.optioncontainer}>
@@ -85,7 +105,7 @@ function ShowQuestionComponent() {
                                     <input type="radio" id="1" name="fav_language" value="1" checked={answers["1"]}
                                            onChange={eventListener}/> {" "}
                                     <label
-                                        htmlFor="html">{studentQuestion.payload.questions[quesNo].data.option1}</label>
+                                        htmlFor="html">{questions[quesNo].data.option1}</label>
                                 </div>
                             </div>
                             <div className={style.optioncontainer}>
@@ -93,7 +113,7 @@ function ShowQuestionComponent() {
                                     <input type="radio" id="2" name="fav_language" value="2" checked={answers["2"]}
                                            onChange={eventListener}/> {" "}
                                     <label
-                                        htmlFor="html">{studentQuestion.payload.questions[quesNo].data.option2}</label>
+                                        htmlFor="html">{questions[quesNo].data.option2}</label>
                                 </div>
                             </div>
                             <div className={style.optioncontainer}>
@@ -101,7 +121,7 @@ function ShowQuestionComponent() {
                                     <input type="radio" id="3" name="fav_language" value="3" checked={answers["3"]}
                                            onChange={eventListener}/> {" "}
                                     <label
-                                        htmlFor="html">{studentQuestion.payload.questions[quesNo].data.option3}</label>
+                                        htmlFor="html">{questions[quesNo].data.option3}</label>
                                 </div>
                             </div>
                             <div className={style.optioncontainer}>
@@ -109,7 +129,7 @@ function ShowQuestionComponent() {
                                     <input type="radio" id="4" name="fav_language" value="4" checked={answers["4"]}
                                            onChange={eventListener}/> {" "}
                                     <label
-                                        htmlFor="html">{studentQuestion.payload.questions[quesNo].data.option4}</label>
+                                        htmlFor="html">{questions[quesNo].data.option4}</label>
                                 </div>
                             </div>
                         </div>
@@ -143,7 +163,7 @@ function ShowQuestionComponent() {
                                         </div>
                                 }
                                 {
-                                    quesNo === studentQuestion.payload.questions.length - 1 ?
+                                    quesNo === questions.length - 1 ?
                                         <div style={{visibility: "hidden"}}>
                                             <button className={style.button2}>
                                                 Next
