@@ -32,6 +32,7 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
     // const isloggedin=Cookies.get('settoken')
     const user = useSelector(state => state.user)
     const {isredirect} = useSelector(state => state.user)
+    const studentAnswer= useSelector(state =>state.studentAnswer)
     const student = useSelector((state=>state.student));
     // console.log(student)
     const logoutHandler = () => {
@@ -75,6 +76,14 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
             history.push(student.payload.studentRedirect);
         }
     },[student.payload.studentRedirect,studentLogin,history])
+
+    //ExamPage Redirect
+    useEffect(()=>{
+        // console.log(studentLogin,studentRedirect)
+        if(studentAnswer.payload.isredirect){
+            history.push(studentAnswer.payload.isredirect);
+        }
+    },[studentAnswer.payload.isredirect,history])
 
     return (
         <>

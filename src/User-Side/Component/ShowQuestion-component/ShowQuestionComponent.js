@@ -31,18 +31,18 @@ function ShowQuestionComponent() {
 
     useEffect(() => {
         dispatch(Fetch_Question_Initialization(unicode));
-
     }, [])
 
     useEffect(() => {
-        dispatch(Get_Student_Answer(quesNo));
-    }, [quesNo])
+        if (questions[quesNo]) {
+            dispatch(Get_Student_Answer(quesNo, questions[quesNo].time));
+        }
+    }, [quesNo, questions])
 
     useEffect(() => {
         if ((studentAnswer.payload.quesNo === quesNo)) {
             setMor(studentAnswer.payload.mor);
-            if(studentAnswer.payload.answer !== "undefined"){
-                console.log(studentAnswer.payload.answer)
+            if (studentAnswer.payload.answer !== "undefined") {
                 setAnswers({[studentAnswer.payload.answer]: true});
             }
         } else {
@@ -80,7 +80,8 @@ function ShowQuestionComponent() {
         // console.log(questions[quesNo].id)
         // console.log(mor)
         // console.log(quesNo)
-        dispatch(Answer_Submission_Initialization(questions[quesNo].id, selectedAnswer, mor, quesNo))
+        // console.log(questions[quesNo].time)
+        dispatch(Answer_Submission_Initialization(questions[quesNo].id, selectedAnswer, mor, quesNo));
         setAnswers({
                 1: false,
                 2: false,
@@ -197,13 +198,13 @@ function ShowQuestionComponent() {
                                             }
 
                                             <div>
-                                                <Link to={`/exam/${quesNo + 2}`}>
+                                                {/*<Link to={`/exam/${quesNo + 2}`}>*/}
                                                     <button className={style.button2} onClick={answerSubmission}>
                                                         Next
                                                         <FontAwesomeIcon className={style.icon2}
                                                                          icon={faAngleRight}/>
                                                     </button>
-                                                </Link>
+                                                {/*</Link>*/}
                                             </div>
 
                                         </div>

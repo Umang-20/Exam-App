@@ -9,6 +9,7 @@ const defaultValue = {
         loading: false,
         quesNo:null,
         allAnswer:[],
+        isredirect: null,
     }
 }
 
@@ -34,6 +35,7 @@ const AnswerSubmissionReducer = (state = defaultValue, action) => {
                     answer: action.payload.answer,
                     mor: action.payload.mor,
                     quesNo: action.payload.quesNo,
+                    quesTime: action.payload.quesTime,
                 }
             }
         case types.ANSWER_SUBMISSION_FAIL:
@@ -48,6 +50,7 @@ const AnswerSubmissionReducer = (state = defaultValue, action) => {
                 }
             }
         case types.GET_ANSWER_SUBMISSION:
+            localStorage.setItem("QuesTime",JSON.stringify(action.payload.quesTime))
             return {
                 ...state,
                 payload: {
@@ -57,15 +60,18 @@ const AnswerSubmissionReducer = (state = defaultValue, action) => {
                     mor: action.payload.mor,
                     quesNo: action.payload.quesNo,
                     loading: action.payload.loading,
+                    quesTime: action.payload.quesTime,
                 }
             }
         case types.ANSWER_NOT_FOUND:
+            localStorage.setItem("QuesTime",JSON.stringify(action.payload.quesTime))
             return {
                 ...state,
                 payload: {
                     ...state.payload,
                     loading: action.payload.loading,
                     allAnswer: action.payload.allAnswer,
+                    quesTime: action.payload.quesTime,
                 }
             }
         case types.GETALLANSWER_SUCCESS:
@@ -75,6 +81,15 @@ const AnswerSubmissionReducer = (state = defaultValue, action) => {
                     ...state.payload,
                     allAnswer: action.payload.allAnswer,
                     loading: action.payload.loading,
+                }
+            }
+        case types.REDIRECT:
+            return {
+                ...state,
+                payload: {
+                    ...state.payload,
+                    loading: action.payload.loading,
+                    isredirect: action.payload.path,
                 }
             }
         default:

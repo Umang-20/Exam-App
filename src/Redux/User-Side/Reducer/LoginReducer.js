@@ -36,6 +36,7 @@ const LoginReducer = (state = defaultValue, action) => {
             Cookies.remove("setClgname");
             Cookies.remove("setUsername");
             localStorage.removeItem("Student");
+            localStorage.removeItem("QuesTime")
             return{
                 ...state,
                 payload: {
