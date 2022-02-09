@@ -1,15 +1,21 @@
 import React from 'react';
 import style from './SelectQuestionComponent.module.css'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link, useParams} from "react-router-dom";
+import {Answer_Submission_Initialization, Redirect} from "../../../Redux/User-Side/Action/AnswerSubmissionAction";
 
 function SelectQuestionComponent() {
 
     const studentQuestion = useSelector((state) => state.studentQuestion);
     const studentAnswer = useSelector((state) => state.studentAnswer);
     const allAnswer = studentAnswer.payload.allAnswer;
+    const questions = studentQuestion.payload.questions;
+    const answer = localStorage.getItem("QuesAnswer");
+    const QuestionTime = JSON.parse(localStorage.getItem('QuesTime'));
+
     // console.log(studentQuestion.payload.questions)
-    const quesNo = parseInt(useParams().id);
+    const dispach = useDispatch();
+    const quesNo = parseInt(useParams().id) - 1;
     let showMor = [];
     let showAnswered = [];
     let showSkipped = [];
@@ -26,6 +32,7 @@ function SelectQuestionComponent() {
     // console.log(showMor)
     // console.log(showAnswered)
     // console.log(showSkipped)
+    // console.log(questions)
 
 
     return <>
@@ -36,48 +43,79 @@ function SelectQuestionComponent() {
         <div className={style.buttoncontainer}>
             <div className={style.allbuttons}>
 
-                {
-                    studentQuestion.payload.questions?.map((element, index) => {
-                        return (
-                            <>
-                                <div className={style.buttons}>
-                                    {
-                                        (quesNo !== index + 1) ?
-                                            showMor.includes(index) ?
-                                                <Link to={`${index + 1}`}>
-                                                    <button style={{color: "#f1b101"}}
-                                                    >{index + 1}</button>
-                                                </Link>
-                                                :
-                                                showAnswered.includes(index) ?
-                                                    <Link to={`${index + 1}`}>
-                                                        <button style={{color: "green"}}
-                                                        >{index + 1}</button>
-                                                    </Link>
-                                                    :
-                                                    showSkipped.includes(index) ?
-                                                        <Link to={`${index + 1}`}>
-                                                            <button style={{color: "red"}}
-                                                            >{index + 1}</button>
-                                                        </Link>
-                                                        :
-                                                        <Link to={`${index + 1}`}>
-                                                            <button
-                                                            >{index + 1}</button>
-                                                        </Link>
-                                            :
-
-                                            <Link to={`${index + 1}`}>
-                                                <button style={{backgroundColor: "lightskyblue"}}
+                {questions?.map((element, index) => {
+                    return (<>
+                        <div className={style.buttons}>
+                            {(quesNo === questions.length) ? "" : QuestionTime !== 0 ?
+                                (quesNo !== index) ? showMor.includes(index) ? // <Link to={`${index + 1}`}>
+                                        <button style={{color: "#f1b101"}} onClick={() => {
+                                            dispach(Answer_Submission_Initialization(questions[quesNo].id, answer, false, quesNo, index + 1));
+                                        }}
+                                        >{index + 1}</button>
+                                        // </Link>
+                                        : showAnswered.includes(index) ? // <Link to={`${index + 1}`}>
+                                            <button style={{color: "green"}} onClick={() => {
+                                                dispach(Answer_Submission_Initialization(questions[quesNo].id, answer, false, quesNo, index + 1));
+                                            }}
+                                            >{index + 1}</button>
+                                            // </Link>
+                                            : showSkipped.includes(index) ? // <Link to={`${index + 1}`}>
+                                                <button style={{color: "red"}} onClick={() => {
+                                                    dispach(Answer_Submission_Initialization(questions[quesNo].id, answer, false, quesNo, index + 1));
+                                                }}
                                                 >{index + 1}</button>
-                                            </Link>
+                                                // </Link>
+                                                : // <Link to={`${index + 1}`}>
+                                                <button onClick={() => {
+                                                    dispach(Answer_Submission_Initialization(questions[quesNo].id, answer, false, quesNo, index + 1));
+                                                }}
+                                                >{index + 1}</button>
+                                    // </Link>
+                                    :
 
-                                    }
-                                </div>
-                            </>
-                        )
-                    })
-                }
+                                    // <Link to={`${index + 1}`}>
+                                    <button style={{backgroundColor: "lightskyblue"}} onClick={() => {
+                                        dispach(Answer_Submission_Initialization(questions[quesNo].id, answer, false, quesNo, index + 1));
+                                    }}
+                                    >{index + 1}</button>
+                                // </Link>
+                                : (quesNo !== index) ? showMor.includes(index) ? // <Link to={`${index + 1}`}>
+                                        <button style={{color: "#f1b101"}} onClick={() => {
+                                            dispach(Redirect(`/exam/${index + 1}`));
+                                        }}
+                                        >{index + 1}</button>
+                                        // </Link>
+                                        : showAnswered.includes(index) ? // <Link to={`${index + 1}`}>
+                                            <button style={{color: "green"}} onClick={() => {
+                                                dispach(Redirect(`/exam/${index + 1}`));
+                                            }}
+                                            >{index + 1}</button>
+                                            // </Link>
+                                            : showSkipped.includes(index) ? // <Link to={`${index + 1}`}>
+                                                <button style={{color: "red"}} onClick={() => {
+                                                    dispach(Redirect(`/exam/${index + 1}`));
+                                                }}
+                                                >{index + 1}</button>
+                                                // </Link>
+                                                : // <Link to={`${index + 1}`}>
+                                                <button onClick={() => {
+                                                    dispach(Redirect(`/exam/${index + 1}`));
+                                                }}
+                                                >{index + 1}</button>
+                                    // </Link>
+                                    :
+
+                                    // <Link to={`${index + 1}`}>
+                                    <button style={{backgroundColor: "lightskyblue"}} onClick={() => {
+                                        dispach(Redirect(`/exam/${index + 1}`));
+                                    }}
+                                    >{index + 1}</button>
+                                // </Link>
+
+                            }
+                        </div>
+                    </>)
+                })}
 
             </div>
         </div>

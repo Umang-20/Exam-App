@@ -31,7 +31,7 @@
     align-items: center;
 }
 .optioncontainer .optionborder{
-    border: 1.5px solid #cccccc;
+    /*border: 1.5px solid #cccccc;*/
     border-radius: 6px;
     height: 50%;
     width: 70%;
@@ -42,6 +42,9 @@
     display: flex;
     align-items: center;
     padding: 7px 15px;
+}
+.optionborder label{
+    margin-left: 10px;
 }
 /* actionBar */
 .actionbar{

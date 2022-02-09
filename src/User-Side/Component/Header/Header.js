@@ -2,18 +2,22 @@ import React, {useState, useEffect, useRef} from 'react';
 import style from './Header.module.css'
 import Cookies from "js-cookie";
 import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 function Header() {
     const [hour, sethours] = useState(0);
     const [minute, setminutes] = useState(0);
     let [second, setseconds] = useState(0);
-    const [time, setTime] = useState(0);
+    const [time, setTime] = useState(-1);
     const name = Cookies.get("setUsername")
     const quesNo = parseInt(useParams().id) - 1;
+    const StudentAnswer = useSelector((state) => state.studentAnswer)
+    const StudentQuestion = useSelector((state) => state.studentQuestion)
+    const QuesTime = JSON.parse(localStorage.getItem('QuesTime'));
 
     useEffect(() => {
         setTime(JSON.parse(localStorage.getItem('QuesTime')));
-    }, [localStorage.getItem('QuesTime'),quesNo]);
+    }, [localStorage.getItem('QuesTime'), quesNo]);
 
 
     // const time = JSON.parse(localStorage.getItem("QuesTime"));
@@ -37,7 +41,7 @@ function Header() {
                 setseconds(seconds)
                 setTime((hours * 60 * 60) + (minutes * 60) + seconds)
             }
-            localStorage.setItem("RemainingQuesTime",JSON.stringify(time))
+            localStorage.setItem("RemainingQuesTime", JSON.stringify(time))
         }, 1000);
     }
 
@@ -46,7 +50,6 @@ function Header() {
         startTimer(time);
         return () => {
             clearInterval(interval)
-            // localStorage.setItem("QuesTime",JSON.stringify(time))
         }
     }, [time])
 
@@ -57,8 +60,25 @@ function Header() {
         {/*</div>*/}
         <div className={style.logo}>
             <div className={style.timer}>
+                { StudentAnswer.payload.loading || QuesTime === 0 || quesNo === StudentQuestion.payload.questions.length? "00:00:00" :
+                    <>
+                        {hour > 9 ?
+                            hour :
+                            '0' + hour}
+                        :
+                        {minute > 9 ?
+                            minute
+                            :
+                            '0' + minute}
+                        :
+                        {second > 9 ?
+                            second
+                            :
+                            '0' + second}
+                    </>
 
-                {hour > 9 ? hour : '0' + hour}:{minute > 9 ? minute : '0' + minute}:{second > 9 ? second : '0' + second}
+                }
+
             </div>
             <div className={style.logo}>
                 {name}
