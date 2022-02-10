@@ -13,6 +13,7 @@ import {
 import {useHistory} from "react-router";
 import Loader from "../../../Common-Component/Loader/Loader";
 import {useBeforeunload} from 'react-beforeunload';
+import GetAllAnswerActions from "../../../Redux/User-Side/Action/GetAllAnswerActions";
 
 function ShowQuestionComponent() {
     const dispatch = useDispatch()
@@ -42,12 +43,13 @@ function ShowQuestionComponent() {
             localStorage.setItem("QuesNo", JSON.stringify(quesNo));
             localStorage.setItem("QuesAnswer", "");
         }
+        // dispatch(GetAllAnswerActions());
     }, [quesNo, questions])
 
     useEffect(() => {
         setInterval(() => {
             if (JSON.parse(localStorage.getItem('QuesTime')) !== 0) {
-                if (JSON.parse(localStorage.getItem('RemainingQuesTime')) === 0) {
+                if ((JSON.parse(localStorage.getItem('RemainingQuesTime')) === 0) || (JSON.parse(localStorage.getItem('RemainingQuesTime')) === 1)) {
                     const QuesId = JSON.parse(localStorage.getItem("QuesId"));
                     const answer = localStorage.getItem("QuesAnswer");
                     const QuestionNumber = JSON.parse(localStorage.getItem("QuesNo"));

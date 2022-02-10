@@ -46,7 +46,7 @@ const Fetch_Question_Initialization = (code) => {
             }
             await axios.get("https://auth-test-f6dd6-default-rtdb.firebaseio.com/questions.json").then((resp) => {
                     for (let key in resp.data) {
-                        let questionTime = parseInt(resp.data[key].weightage)*30;
+                        let questionTime = parseInt(resp.data[key].weightage)*10;
                         questionsID.map((element) => {
                             if (element === key) {
                                 questions.push({data:resp.data[key],id:element,time:questionTime})

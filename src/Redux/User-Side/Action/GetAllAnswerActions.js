@@ -2,8 +2,6 @@ import * as types from "../Types/actionType";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const username = Cookies.get("setUsername")
-const UniqueCode = Cookies.get("setUnicode")
 
 const GetALlAnswer_Started = () =>{
     return {
@@ -35,12 +33,14 @@ const GetAllAnswer_Fail = (error) =>{
 }
 
 const GetAllAnswerActions = () => {
+    const username = Cookies.get("setUsername")
+    const UniqueCode = Cookies.get("setUnicode")
     return async function (dispach) {
         let allData = [];
         dispach(GetALlAnswer_Started())
         await axios.get(`https://admin-user-authentication-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
             for (let key in data) {
-                if(data[key].answer == "undefined"){
+                if(data[key].answer === "undefined"){
                     data[key].answer="";
                 }
                 allData.push(data[key]);

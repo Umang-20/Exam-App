@@ -10,6 +10,7 @@ import {Clear} from "@material-ui/icons";
 import button from "bootstrap/js/src/button";
 import UseWindowSize from "./UseWindowSize";
 import Student_LogOut_Initialize from "../../Redux/User-Side/Action/StudentLogOutActions";
+import Result_Submission_Initialization from "../../Redux/User-Side/Action/SubmitResultAction";
 
 
 const MainNavigation = ({isMenuOpen, toggleMenu}) => {
@@ -43,6 +44,7 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
     const studentLogout = () => {
         dispatch(Student_LogOut_Initialize());
         history.push("/student-login");
+        // dispatch(Result_Submission_Initialization());
     }
 
     useEffect(() => {

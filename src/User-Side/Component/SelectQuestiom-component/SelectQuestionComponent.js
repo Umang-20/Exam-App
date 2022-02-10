@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './SelectQuestionComponent.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useParams} from "react-router-dom";
@@ -8,9 +8,10 @@ function SelectQuestionComponent() {
 
     const studentQuestion = useSelector((state) => state.studentQuestion);
     const studentAnswer = useSelector((state) => state.studentAnswer);
+    const [answer, setAnswer] = useState("");
     const allAnswer = studentAnswer.payload.allAnswer;
     const questions = studentQuestion.payload.questions;
-    const answer = localStorage.getItem("QuesAnswer");
+    // const answer = localStorage.getItem("QuesAnswer");
     const QuestionTime = JSON.parse(localStorage.getItem('QuesTime'));
 
     // console.log(studentQuestion.payload.questions)
@@ -19,6 +20,10 @@ function SelectQuestionComponent() {
     let showMor = [];
     let showAnswered = [];
     let showSkipped = [];
+
+    useEffect(()=>{
+        setAnswer(localStorage.getItem("QuesAnswer"));
+    },[localStorage.getItem("QuesAnswer")])
 
     allAnswer.filter((element) => {
         if (element.mor === true) {

@@ -5,10 +5,10 @@ import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 function Header() {
-    const [hour, sethours] = useState(0);
-    const [minute, setminutes] = useState(0);
-    let [second, setseconds] = useState(0);
-    const [time, setTime] = useState(-1);
+    const [hour, sethours] = useState(-1);
+    const [minute, setminutes] = useState(-1);
+    let [second, setseconds] = useState(-1);
+    const [time, setTime] = useState(3000);
     const name = Cookies.get("setUsername")
     const quesNo = parseInt(useParams().id) - 1;
     const StudentAnswer = useSelector((state) => state.studentAnswer)
@@ -18,6 +18,10 @@ function Header() {
     useEffect(() => {
         setTime(JSON.parse(localStorage.getItem('QuesTime')));
     }, [localStorage.getItem('QuesTime'), quesNo]);
+
+    useEffect(()=>{
+        localStorage.setItem("RemainingQuesTime",JSON.stringify(-1))
+    },[quesNo])
 
 
     // const time = JSON.parse(localStorage.getItem("QuesTime"));
@@ -60,7 +64,7 @@ function Header() {
         {/*</div>*/}
         <div className={style.logo}>
             <div className={style.timer}>
-                { StudentAnswer.payload.loading || QuesTime === 0 || quesNo === StudentQuestion.payload.questions.length? "00:00:00" :
+                { StudentAnswer.payload.loading || QuesTime === 0 || QuesTime === -1 || hour === -1 || quesNo === StudentQuestion.payload.questions.length? "00:00:00" :
                     <>
                         {hour > 9 ?
                             hour :

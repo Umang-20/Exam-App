@@ -3,9 +3,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import GetAllAnswerActions from "./GetAllAnswerActions";
 
-const username = Cookies.get("setUsername")
-const UniqueCode = Cookies.get("setUnicode")
-
 
 const Answer_Submission_Started = () => {
     return {
@@ -67,7 +64,7 @@ const Answer_Not_Found = (quesTime) => {
     return {
         type: types.ANSWER_NOT_FOUND,
         payload: {
-            loading: true,
+            loading: false,
             quesTime: quesTime,
             allAnswer: [],
         }
@@ -85,18 +82,20 @@ const Get_Answer_Fail = (error) => {
 }
 
 export const Redirect = (path) => {
-    return{
-        type:types.REDIRECT,
-        payload:{
-            loading:false,
+    return {
+        type: types.REDIRECT,
+        payload: {
+            loading: false,
             path,
         }
     }
 }
 
 export const Answer_Submission_Initialization = (questionId, answer, mor, quesNo, redirect) => {
-    const questionTime = JSON.parse(localStorage.getItem("RemainingQuesTime"));
-    // console.log(questionTime)
+    const username = Cookies.get("setUsername")
+    const UniqueCode = Cookies.get("setUnicode")
+    let questionTime = JSON.parse(localStorage.getItem("RemainingQuesTime"));
+    if (questionTime === 1) questionTime = 0;
     let answerData = {
         questionId: questionId,
         answer: answer,
@@ -117,7 +116,7 @@ export const Answer_Submission_Initialization = (questionId, answer, mor, quesNo
         if (updateKey === 0) {
             await axios.post(`https://admin-user-authentication-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`, answerData).then(() => {
                 dispach(Answer_Submission_Success(questionId, answer, mor, quesNo, questionTime))
-                localStorage.setItem("RemainingQuesTime", JSON.stringify(30))
+                // localStorage.setItem("RemainingQuesTime", JSON.stringify(-1))
                 // dispach(Get_Student_Answer(quesNo + 1,questionTime));
                 dispach(Redirect(`/exam/${redirect}`));
             }).catch((e) => {
@@ -126,7 +125,7 @@ export const Answer_Submission_Initialization = (questionId, answer, mor, quesNo
         } else {
             await axios.put(`https://admin-user-authentication-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}/${updateKey}.json`, answerData).then(() => {
                 dispach(Answer_Submission_Success(questionId, answer, mor, quesNo, questionTime))
-                localStorage.setItem("RemainingQuesTime", JSON.stringify(30))
+                // localStorage.setItem("RemainingQuesTime", JSON.stringify(-1))
                 // dispach(Get_Student_Answer(quesNo + 1,questionTime));
                 dispach(Redirect(`/exam/${redirect}`));
 
@@ -138,9 +137,11 @@ export const Answer_Submission_Initialization = (questionId, answer, mor, quesNo
 }
 
 export const Get_Student_Answer = (quesNo, quesTime) => {
+    const username = Cookies.get("setUsername")
+    const UniqueCode = Cookies.get("setUnicode")
     let found = 0;
     return async function (dispach) {
-        let updatedArray = [];
+        // let updatedArray = [];
         dispach(Get_Answer_Started());
         await axios.get(`https://admin-user-authentication-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
             // for (let key in data) {
@@ -150,10 +151,9 @@ export const Get_Student_Answer = (quesNo, quesTime) => {
             // console.log(updatedArray)
             for (let key in data) {
                 if (data[key].quesNo === quesNo) {
-                    if(data[key].quesTime || data[key].quesTime === 0){
+                    if (data[key].quesTime || data[key].quesTime === 0) {
                         dispach(Get_Answer_Submission(data[key].questionId, data[key].answer, data[key].mor, quesNo, data[key].quesTime));
-                    }
-                    else {
+                    } else {
                         dispach(Get_Answer_Submission(data[key].questionId, data[key].answer, data[key].mor, quesNo, quesTime));
                     }
                     found = key;

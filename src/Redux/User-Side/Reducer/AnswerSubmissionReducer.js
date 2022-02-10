@@ -84,6 +84,8 @@ const AnswerSubmissionReducer = (state = defaultValue, action) => {
                 }
             }
         case types.REDIRECT:
+            // localStorage.setItem("RemainingQuesTime", JSON.stringify(-1))
+            localStorage.setItem("QuesTime", JSON.stringify(-1))
             return {
                 ...state,
                 payload: {
