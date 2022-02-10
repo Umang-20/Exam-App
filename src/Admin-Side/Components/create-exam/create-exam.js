@@ -30,10 +30,8 @@ function CreateExam() {
     const [editForm, setEditForm] = useState({
         question: "", option1: "", option2: "", option3: "", option4: "", correctAnswer: "", weightage: "", type: "",
     })
-
     const [isChecked, setIsChecked] = useState({});
 
-    // console.log(`edit`, editForm.question)
     useEffect(() => {
         dispatch(fetchingIniate());
     }, [dispatch]);
@@ -58,39 +56,34 @@ function CreateExam() {
             }
         })
 
-       if(checked){
-           setForm((preValue)=>{
-               return{
-                   ...preValue,
-                   selectedQues: [...form.selectedQues,value]
-               }
-           })
-       }
-        else if(!checked){
-            const new1 = form.selectedQues.filter((element)=> element !== value)
-            setForm((preValue)=>{
-                return{
+        if (checked) {
+            setForm((preValue) => {
+                return {
+                    ...preValue,
+                    selectedQues: [...form.selectedQues, value]
+                }
+            })
+        } else if (!checked) {
+            const new1 = form.selectedQues.filter((element) => element !== value)
+            setForm((preValue) => {
+                return {
                     ...preValue,
                     selectedQues: [...new1]
                 }
             })
         }
-        // console.log("!@#",form.selectedQues);
-        // console.log(isChecked)
     };
-    // console.log("!@#$",form)
 
     const toSubmitValidation = () => {
-        if((form.selectedQues.length>=5) && (form.time!=="")){
+        if ((form.selectedQues.length >= 5) && (form.time !== "")) {
             setSubmitValidation(true);
-        }
-        else {
+        } else {
             setSubmitError(true);
         }
     }
 
     const onCreateHandler = async () => {
-        if((form.selectedQues.length>=5) && (form.time!=="")){
+        if ((form.selectedQues.length >= 5) && (form.time !== "")) {
             const d = new Date();
             const month = d.getMonth() + 1;
             const day = d.getDate();
@@ -100,20 +93,13 @@ function CreateExam() {
             console.log(finalData);
             await axios
                 .post("https://auth-test-f6dd6-default-rtdb.firebaseio.com/viewexam.json", finalData)
-                .then((res) => {
-                    console.log(res);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
             setForm({
                 time: "",
                 uniqueCode: Math.random().toString(36).substr(2, 7),
                 selectedQues: [],
             });
             setIsChecked({});
-        }
-        else{
+        } else {
             alert("Invalid Input");
         }
     };
@@ -302,7 +288,7 @@ function CreateExam() {
 
             <Modal
                 show={submitValidation}
-                onHide={()=>setSubmitValidation(false)}
+                onHide={() => setSubmitValidation(false)}
                 size="g"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -313,17 +299,17 @@ function CreateExam() {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Footer>
-                    <Button onClick={()=> {
+                    <Button onClick={() => {
                         onCreateHandler();
                         setSubmitValidation(false);
                     }}>Yes</Button>
-                    <Button onClick={()=>setSubmitValidation(false)}>No</Button>
+                    <Button onClick={() => setSubmitValidation(false)}>No</Button>
                 </Modal.Footer>
             </Modal>
 
             <Modal
                 show={submitError}
-                onHide={()=>setSubmitError(false)}
+                onHide={() => setSubmitError(false)}
                 size="g"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -335,13 +321,13 @@ function CreateExam() {
                 </Modal.Header>
                 <Modal.Body>
                     <p>
-                       Select 5 or more Questions.
+                        Select 5 or more Questions.
                         or
                         Set the Timer.
                     </p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={()=>setSubmitError(false)}>Close</Button>
+                    <Button onClick={() => setSubmitError(false)}>Close</Button>
                 </Modal.Footer>
             </Modal>
 
@@ -374,7 +360,7 @@ function CreateExam() {
                 </Col>
                 <Col>
                     <Button id="all"
-                            onClick={()=>{
+                            onClick={() => {
                                 setForm({
                                     ...form,
                                     time: "",

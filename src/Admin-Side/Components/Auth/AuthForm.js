@@ -18,13 +18,7 @@ const AuthForm = () => {
     isAdmin:false
   });
   const { email, password ,isAdmin} = userData;
-  // useEffect(() => {
-  //
-  //   if (error1?.length !== 0) {
-  //     console.log(error1);
-  //     setErrorMsg(error1)
-  //   }
-  // }, [error1]);
+
   useEffect(() => {
     dispatch(Reset_Error());
   }, []);
@@ -37,7 +31,6 @@ const AuthForm = () => {
     e.preventDefault();
       dispatch(registerInitiate(email, password,isAdmin));
   };
- 
 
   return (
       loading?<Spinner/>:

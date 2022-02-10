@@ -22,22 +22,21 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
     const path = useLocation().pathname;
     const [showMenu, setShowMenu] = useState(false);
     const size = UseWindowSize();
+
     useEffect(() => {
-        if (size > 991) {
+        if (size > 1200) {
             setShowMenu(false);
         } else {
             setShowMenu(true);
         }
     }, [size])
 
-
-    // const isloggedin=Cookies.get('settoken')
     const user = useSelector(state => state.user)
     const {isredirect} = useSelector(state => state.user)
     const studentAnswer = useSelector(state => state.studentAnswer)
     const student = useSelector((state => state.student));
     const studentResult = useSelector((state) => state.studentResult);
-    // console.log(student)
+
     const logoutHandler = () => {
         dispatch(logoutInitiate());
         history.push("/login");
@@ -86,7 +85,6 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
 
     //Student Redirect
     useEffect(() => {
-        // console.log(studentLogin,studentRedirect)
         if (student.payload.studentRedirect && studentLogin) {
             history.push(student.payload.studentRedirect);
         }
@@ -94,7 +92,6 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
 
     //ExamPage Redirect
     useEffect(() => {
-        // console.log(studentLogin,studentRedirect)
         if (studentAnswer.payload.isredirect) {
             history.push(studentAnswer.payload.isredirect);
         }
@@ -104,11 +101,10 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
         <>
             <div style={{display: "flex", alignItems: "center", marginLeft: "15px"}}>
                 {
-                    showMenu ?
+                    showMenu && isLogin ?
                         isMenuOpen ? <MenuIcon onClick={toggleMenu}/> : <Clear onClick={toggleMenu}/> : ""
                 }
                 <header className={classes.header}>
-
 
                     <Link to="/">
                         <img
@@ -153,19 +149,6 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
                                             </>
 
                             }
-                            {/*{!isLogin && <li>*/}
-                            {/*    <Link to="/login">Login</Link>*/}
-                            {/*</li>}*/}
-
-                            {/*{isLogin && <>*/}
-                            {/*    <li>*/}
-                            {/*        <Link to="/profile">Profile</Link>*/}
-                            {/*    </li>*/}
-                            {/*    <li>*/}
-                            {/*        <button onClick={logoutHandler}>Logout</button>*/}
-                            {/*    </li>*/}
-                            {/*</>*/}
-                            {/*}*/}
                         </ul>
                     </>
                 </header>

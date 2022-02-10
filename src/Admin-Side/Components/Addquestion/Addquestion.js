@@ -29,7 +29,6 @@ function Addquestion() {
     const [submitValidation, setSubmitValidation] = useState(false);
     const submitHandler = async (e) => {
         e.preventDefault();
-        console.log(values);
 
         await fetch(
             "https://auth-test-f6dd6-default-rtdb.firebaseio.com/questions.json",
@@ -52,16 +51,12 @@ function Addquestion() {
             type: "",
         })
     };
-// console.log('hello')
+
     const checkSubmission = (e) => {
         e.preventDefault();
         const isEmpty = !Object.values(values).every(x => (x !== ''));
-        console.log(isEmpty)
-        if(isEmpty){
+        if (isEmpty) {
             setShowError(true);
-        }
-        else {
-
         }
     }
 

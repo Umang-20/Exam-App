@@ -39,10 +39,8 @@ const Result_Submission_Initialization = () => {
     const email = Cookies.get("setEmail")
     return async function (dispach) {
         let resultArray = [];
-        let totalMarks = 0;
-        let scoredMarks = 0;
         dispach(Result_Submission_Started());
-        await axios.get(`https://admin-user-authentication-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
+        await axios.get(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
             console.log(data)
             for (let key in data) {
                 resultArray.push({ques_id: data[key].questionId, selected_op: parseInt(data[key].answer)})
@@ -56,7 +54,7 @@ const Result_Submission_Initialization = () => {
             exam_ques: resultArray,
             email: email,
         }
-        // await axios.post('https://auth-test-f6dd6-default-rtdb.firebaseio.com/results.json',resultData);
+        await axios.post('https://auth-test-f6dd6-default-rtdb.firebaseio.com/results.json',resultData);
     }
 }
 

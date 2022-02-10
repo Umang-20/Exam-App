@@ -38,7 +38,7 @@ const GetAllAnswerActions = () => {
     return async function (dispach) {
         let allData = [];
         dispach(GetALlAnswer_Started())
-        await axios.get(`https://admin-user-authentication-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
+        await axios.get(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
             for (let key in data) {
                 if(data[key].answer === "undefined"){
                     data[key].answer="";

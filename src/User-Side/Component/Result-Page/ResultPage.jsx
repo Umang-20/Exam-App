@@ -7,8 +7,8 @@ import Loader from "../../../Common-Component/Loader/Loader";
 import "./ResultPage.css";
 
 const ResultPage = () => {
-    const [totalMarks, setTotalMarks] = useState(0);
-    const [scoredMarks, setScoredMarks] = useState(0);
+    const [totalMarks, setTotalMarks] = useState(-1);
+    const [scoredMarks, setScoredMarks] = useState(-1);
     const studentQuestion = useSelector((state) => state.studentQuestion);
     const studentResult = useSelector((state) => state.studentResult);
     const unicode = Cookies.get("setUnicode");
@@ -24,19 +24,19 @@ const ResultPage = () => {
         dispach(Result_Submission_Initialization());
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         getResult();
-    },[studentQuestion,studentResult])
+    }, [studentQuestion, studentResult])
 
 
-    const getResult = () =>{
+    const getResult = () => {
         let tMarks = 0;
         let sMarks = 0;
         resultQuestion.forEach((element) => {
             questions.find((element2) => {
                 if (element2.id === element.ques_id) {
                     tMarks = tMarks + parseInt(element2.data.weightage);
-                    if(parseInt(element2.data.correctAnswer) === element.selected_op){
+                    if (parseInt(element2.data.correctAnswer) === element.selected_op) {
                         sMarks = sMarks + parseInt(element2.data.weightage);
                     }
                 }
@@ -46,25 +46,26 @@ const ResultPage = () => {
         setScoredMarks(sMarks);
     }
 
-
-    // console.log(totalMarks)
-    // console.log(scoredMarks)
-    //
-    // console.log(questions, resultQuestion);
     return (
         <>
             {
-                (totalMarks===0 && scoredMarks ===0)? <div style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100wh",height:"80vh"}}><Loader/></div>:
+                (totalMarks === -1 && scoredMarks === -1) ? <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100wh",
+                        height: "80vh"
+                    }}><Loader/></div> :
                     <>
                         <div className="resultTable">
                             <table>
                                 <thead>
                                 <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>University</th>
-                                <th>Total Marks</th>
-                                <th>Scored Marks</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>University</th>
+                                    <th>Total Marks</th>
+                                    <th>Scored Marks</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -79,9 +80,7 @@ const ResultPage = () => {
                             </table>
                         </div>
                     </>
-
             }
-
         </>
     );
 };

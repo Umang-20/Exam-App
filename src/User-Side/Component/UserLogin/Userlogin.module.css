@@ -1,12 +1,15 @@
 .background{
     /* background: url('./software-developer-gf20b9ebf7_19202.jpg'); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color:rgba(0,0,0,0.02) ;
     height: 91vh;
     width: 99vw;
 }
 
 .logincard{
-    position: absolute;
+    /*position: absolute;*/
     height: 500px;
     width: 700px;
     top:20%;

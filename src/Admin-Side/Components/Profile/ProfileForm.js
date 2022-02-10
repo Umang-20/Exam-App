@@ -34,8 +34,6 @@ const ProfileForm = () => {
 
     const submitHandler=(e)=>{
         e.preventDefault();
-        // console.log(details.password)
-        // console.log(authID)
         if(details.password === details.confirmPassword){
             dispach(Reset_Password_Initialize(authID,details.password));
         }

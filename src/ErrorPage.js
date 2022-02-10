@@ -1,9 +1,9 @@
 import React from 'react'
 import { Modal,Button } from 'react-bootstrap'
-import './Sidebarprops.css'
+import './ErrorPage.css'
 
 
-function Sidebarprops() {
+function ErrorPage() {
     return (
         <Modal.Dialog>
         <Modal.Header >
@@ -24,4 +24,4 @@ function Sidebarprops() {
     )
 }
 
-export default Sidebarprops
+export default ErrorPage

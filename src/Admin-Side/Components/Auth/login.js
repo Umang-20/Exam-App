@@ -41,14 +41,6 @@ function Login() {
         dispatch(loginInitiate(email, password));
     };
 
-    // useEffect(() => {
-    //     if (isredirect) {
-    //         history.push(isredirect);
-    //         console.log('isredirect', isredirect);
-    //     }
-    // }, [isredirect, history]);
-    // console.log("loading",loading)
-
     return (
         <>
             {

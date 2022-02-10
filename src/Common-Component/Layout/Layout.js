@@ -1,5 +1,4 @@
 import {Fragment, useEffect, useState} from 'react';
-
 import MainNavigation from './MainNavigation';
 import Sidebar from "../../Admin-Side/Components/Dashboard/Sidebar/Sidebar";
 import {useSelector} from "react-redux";
@@ -12,7 +11,7 @@ const Layout = (props) => {
 
     const user = useSelector(state => state.user)
 
-    const toggleMenu = () =>{
+    const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
     }
 
@@ -28,26 +27,20 @@ const Layout = (props) => {
             setIsAdmin(false);
         }
     }, [user])
-    // console.log(isAdmin,isLogin);
 
-  return (
-    <Fragment>
-      <MainNavigation toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}/>
-      {/*<div style={{width:"300px"}}>*/}
-
-      {/*</div>*/}
-        {
-            (isAdmin === null && isLogin === null)?"":
-                isAdmin?
-                    <Sidebar isMenuOpen={isMenuOpen}>
-                        <main>{props.children}</main>
-                    </Sidebar>
+    return (
+        <>
+            <MainNavigation toggleMenu={toggleMenu} isMenuOpen={isMenuOpen}/>
+            {
+                (isAdmin === null && isLogin === null) ? ""
                     :
-                    <main>{props.children}</main>
-        }
-
-    </Fragment>
-  );
+                    isAdmin ?
+                        <Sidebar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu}>
+                            <main>{props.children}</main>
+                        </Sidebar> : <main>{props.children}</main>
+            }
+        </>
+    );
 };
 
 export default Layout;

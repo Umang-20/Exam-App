@@ -4,7 +4,7 @@ import Loader from "../../Common-Component/Loader/Loader";
 
 const HomePage = () => {
   const {loading} = useSelector((State=>State.user));
-  // console.log("load",loading)
+
   return(
       <>
         {

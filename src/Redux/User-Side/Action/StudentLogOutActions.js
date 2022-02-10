@@ -32,7 +32,9 @@ const Student_LogOut_Initialize = () => {
     return async function (dispach) {
         dispach(Student_LogOut_Started());
         try{
-            dispach(Student_LogOut_Success())
+            setTimeout(()=>{
+                dispach(Student_LogOut_Success())
+            },600)
         }catch (error) {
             dispach(Student_LogOut_Fail(error.message))
         }

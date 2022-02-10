@@ -106,7 +106,7 @@ export const Answer_Submission_Initialization = (questionId, answer, mor, quesNo
     return async function (dispach) {
         dispach(Answer_Submission_Started());
         let updateKey = 0;
-        await axios.get(`https://admin-user-authentication-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
+        await axios.get(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
             for (let key in data) {
                 if (data[key].questionId === questionId) {
                     updateKey = key;
@@ -114,7 +114,7 @@ export const Answer_Submission_Initialization = (questionId, answer, mor, quesNo
             }
         })
         if (updateKey === 0) {
-            await axios.post(`https://admin-user-authentication-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`, answerData).then(() => {
+            await axios.post(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`, answerData).then(() => {
                 dispach(Answer_Submission_Success(questionId, answer, mor, quesNo, questionTime))
                 // localStorage.setItem("RemainingQuesTime", JSON.stringify(-1))
                 // dispach(Get_Student_Answer(quesNo + 1,questionTime));
@@ -123,7 +123,7 @@ export const Answer_Submission_Initialization = (questionId, answer, mor, quesNo
                 dispach(Answer_Submission_Fail(e.message))
             })
         } else {
-            await axios.put(`https://admin-user-authentication-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}/${updateKey}.json`, answerData).then(() => {
+            await axios.put(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}/${updateKey}.json`, answerData).then(() => {
                 dispach(Answer_Submission_Success(questionId, answer, mor, quesNo, questionTime))
                 // localStorage.setItem("RemainingQuesTime", JSON.stringify(-1))
                 // dispach(Get_Student_Answer(quesNo + 1,questionTime));
@@ -141,14 +141,8 @@ export const Get_Student_Answer = (quesNo, quesTime) => {
     const UniqueCode = Cookies.get("setUnicode")
     let found = 0;
     return async function (dispach) {
-        // let updatedArray = [];
         dispach(Get_Answer_Started());
-        await axios.get(`https://admin-user-authentication-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
-            // for (let key in data) {
-            //     updatedArray.push(data[key]);
-            // }
-            // console.log(updatedArray.filter((element,index)=>updatedArray.indexOf(element)===index))
-            // console.log(updatedArray)
+        await axios.get(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
             for (let key in data) {
                 if (data[key].quesNo === quesNo) {
                     if (data[key].quesTime || data[key].quesTime === 0) {
@@ -159,17 +153,6 @@ export const Get_Student_Answer = (quesNo, quesTime) => {
                     found = key;
                 }
             }
-            // for (let key in updatedArray) {
-            //     if (updatedArray[key].quesNo === quesNo) {
-            //         if(updatedArray[key].quesTime || updatedArray[key].quesTime === 0){
-            //             dispach(Get_Answer_Submission(updatedArray[key].questionId, updatedArray[key].answer, updatedArray[key].mor, quesNo, updatedArray[key].quesTime));
-            //         }
-            //         else {
-            //             dispach(Get_Answer_Submission(updatedArray[key].questionId, updatedArray[key].answer, updatedArray  [key].mor, quesNo, quesTime));
-            //         }
-            //         found = key;
-            //     }
-            // }
             if (found === 0) {
                 dispach(Answer_Not_Found(quesTime));
             }
