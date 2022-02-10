@@ -41,6 +41,7 @@ const LoginReducer = (state = defaultValue, action) => {
             localStorage.removeItem("QuesAnswer");
             localStorage.removeItem("QuesId");
             localStorage.removeItem("QuesNo");
+            localStorage.removeItem("Result");
             return{
                 ...state,
                 payload: {

@@ -22,14 +22,17 @@ import {useEffect, useState} from "react";
 import userDashboard from "./User-Side/Component/Exam-Page/Dashboard"
 import userLogin from "./User-Side/Component/UserLogin/Userlogin"
 import Userlogin from "./Admin-Side/Components/Userlogin";
+import ResultPage from "./User-Side/Component/Result-Page/ResultPage";
 
 
 function App() {
     const [studentLogin, setStudentLogin] = useState(null);
     const [isAdmin, setIsAdmin] = useState(null);
+    const [viewResult, setViewResult] = useState(false);
 
     const user = useSelector(state => state.user);
     const student = useSelector((state=>state.student));
+    const studentResult = useSelector((state)=>state.studentResult);
 
     useEffect(() => {
         if (Cookies.get('isAdmin') === "true") {
@@ -49,6 +52,14 @@ function App() {
             setStudentLogin(false);
         }
     },[student])
+
+    useEffect(() => {
+        if (localStorage.getItem("Result")) {
+            setViewResult(true);
+        } else {
+            setViewResult(false);
+        }
+    }, [studentResult])
 
     // const {loading} = useSelector(state => state.user)
     // if (loading) {
@@ -75,11 +86,17 @@ function App() {
                             // </Sidebar>
                             :
                             studentLogin ?
+                                !viewResult?
                             <Switch>
                                 <Route path="/exam/:id" exact component={userDashboard} />
                                 {/*<Route path="/user-login" exact component={Userlogin} />*/}
                                 <Redirect from="*" to="/exam/1"/>
                             </Switch>
+                                    :
+                                    <Switch>
+                                    <Route path="/studentresult" exact component={ResultPage} />
+                                        <Redirect from="*" to="/studentresult"/>
+                                    </Switch>
                         :
                         <Switch>
                             <Route path="/" exact component={HomePage}/>

@@ -16,6 +16,7 @@ import Result_Submission_Initialization from "../../Redux/User-Side/Action/Submi
 const MainNavigation = ({isMenuOpen, toggleMenu}) => {
     const [isLogin, setIsLogin] = useState(null);
     const [studentLogin, setStudentLogin] = useState(null);
+    const [viewResult, setViewResult] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
     const path = useLocation().pathname;
@@ -33,8 +34,9 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
     // const isloggedin=Cookies.get('settoken')
     const user = useSelector(state => state.user)
     const {isredirect} = useSelector(state => state.user)
-    const studentAnswer= useSelector(state =>state.studentAnswer)
-    const student = useSelector((state=>state.student));
+    const studentAnswer = useSelector(state => state.studentAnswer)
+    const student = useSelector((state => state.student));
+    const studentResult = useSelector((state) => state.studentResult);
     // console.log(student)
     const logoutHandler = () => {
         dispatch(logoutInitiate());
@@ -44,7 +46,11 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
     const studentLogout = () => {
         dispatch(Student_LogOut_Initialize());
         history.push("/student-login");
-        // dispatch(Result_Submission_Initialization());
+    }
+
+    const studentSubmit = () => {
+        dispatch(Result_Submission_Initialization());
+        history.push("/studentresult");
     }
 
     useEffect(() => {
@@ -55,14 +61,21 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
         }
     }, [user])
 
-    useEffect(()=>{
-        if(Cookies.get("setUnicode")){
+    useEffect(() => {
+        if (Cookies.get("setUnicode")) {
             setStudentLogin(true);
-        }
-        else{
+        } else {
             setStudentLogin(false);
         }
-    },[student])
+    }, [student])
+
+    useEffect(() => {
+        if (localStorage.getItem("Result")) {
+            setViewResult(true);
+        } else {
+            setViewResult(false);
+        }
+    }, [studentResult])
 
 //Admin Redirect
     useEffect(() => {
@@ -72,20 +85,20 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
     }, [isLogin, isredirect, history]);
 
     //Student Redirect
-    useEffect(()=>{
+    useEffect(() => {
         // console.log(studentLogin,studentRedirect)
-        if(student.payload.studentRedirect && studentLogin){
+        if (student.payload.studentRedirect && studentLogin) {
             history.push(student.payload.studentRedirect);
         }
-    },[student.payload.studentRedirect,studentLogin,history])
+    }, [student.payload.studentRedirect, studentLogin, history])
 
     //ExamPage Redirect
-    useEffect(()=>{
+    useEffect(() => {
         // console.log(studentLogin,studentRedirect)
-        if(studentAnswer.payload.isredirect){
+        if (studentAnswer.payload.isredirect) {
             history.push(studentAnswer.payload.isredirect);
         }
-    },[studentAnswer.payload.isredirect,history])
+    }, [studentAnswer.payload.isredirect, history])
 
     return (
         <>
@@ -106,7 +119,7 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
                     <>
                         <ul>
                             {
-                                (isLogin === null || studentLogin === null)? "" :
+                                (isLogin === null || studentLogin === null) ? "" :
                                     isLogin ?
                                         <>
                                             <li>
@@ -117,20 +130,27 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
                                             </li>
                                         </> :
                                         studentLogin ?
+                                            !viewResult ?
+                                                <>
+                                                    <li>
+                                                        <button onClick={studentSubmit}>Submit</button>
+                                                    </li>
+                                                </>
+                                                :
+                                                <>
+                                                    <li>
+                                                        <button onClick={studentLogout}>Logout</button>
+                                                    </li>
+                                                </>
+                                            :
                                             <>
                                                 <li>
-                                                    <button onClick={studentLogout}>Submit</button>
+                                                    <Link to="/student-login">Student Portal</Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/login">Admin Portal</Link>
                                                 </li>
                                             </>
-                                            :
-                                        <>
-                                            <li>
-                                                <Link to="/student-login">Student Portal</Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/login">Admin Portal</Link>
-                                            </li>
-                                        </>
 
                             }
                             {/*{!isLogin && <li>*/}
