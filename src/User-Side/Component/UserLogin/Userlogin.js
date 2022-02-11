@@ -26,15 +26,18 @@ function Userlogin() {
         code: '',
     });
     const [unicode, setUnicode] = useState([]);
+    // const [remainTime, setRemainTime] = useState({
+    //     remainTime: 0,
+    //
+    // });
     const {data} = useSelector((state) => state.allExams)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchingInitiate())
-    }, [dispatch])
+    }, [])
 
 
     useEffect(() => {
-
         if (data.length) {
             const ucode = []
             for (let key in data) {
@@ -42,118 +45,35 @@ function Userlogin() {
             }
             setUnicode(ucode)
         }
-
     }, [data])
 
-//Validating User
-//     function handleValidation() {
-//         let fields = form;
-//         let formIsValid = true;
-//
-//         setError1('')
-//         setError2('')
-//         setError3('')
-//         setError4('')
-//         //Name
-//         if (!fields.username) {
-//
-//             setError1('Name Cannot be empty')
-//             formIsValid = false;
-//
-//         }
-//
-//
-//         if (fields.username.length > 0) {
-//             if (!fields.username.match(/^[a-zA-Z]+$/)) {
-//                 console.log('data.selectedQues', data);
-//                 setError1('Name Should be Only letters')
-//                 formIsValid = false;
-//
-//             }
-//         }
-//
-//         //Email
-//         if (!fields.email) {
-//
-//             setError2('Email Cannot be empty')
-//             formIsValid = false;
-//
-//         }
-//
-//         if (fields.email.length > 0) {
-//             let lastAtPos = fields.email.lastIndexOf("@");
-//             let lastDotPos = fields.email.lastIndexOf(".");
-//
-//             if (
-//                 !(
-//                     lastAtPos < lastDotPos &&
-//                     lastAtPos > 0 &&
-//                     fields.email.indexOf("@@") === -1 &&
-//                     lastDotPos > 2 &&
-//                     fields.email.length - lastDotPos > 2
-//                 )
-//             ) {
-//
-//                 setError2('Email is not valid')
-//                 formIsValid = false;
-//
-//             }
-//         }
-//         //college
-//         if (!fields.clgname) {
-//
-//             setError3('College Cannot be empty')
-//             formIsValid = false;
-//
-//         }
-//
-//         if (!fields.code) {
-//
-//             setError4('Key Cannot be empty')
-//             formIsValid = false;
-//
-//         }
-//
-//         if (fields.code.length > 0) {
-//             const found = unicode.find(element => element === form.code)
-//             console.log('found', found);
-//             if (!found) {
-//                 setError4("Please Enter Valid Key!!")
-//                 formIsValid = false;
-//             }
-//         }
-//
-//         return formIsValid;
-//     }
-
-    // console.log(unicode)
 //Login Handler
     const submitHandler = (e) => {
         e.preventDefault()
         const isEmpty = !Object.values(form).every(x => (x !== ''));
         const found = unicode.find(element => element === form.code)
-        // console.log(isEmpty);
-        if(isEmpty || !form.username.match(/^[a-zA-Z]+$/)){
+        if (isEmpty || !form.username.match(/^[a-zA-Z]+$/)) {
             setError("Enter Details Properly");
         }
-        else if(!found){
+        else if (!found) {
             setError("Invalid Key");
         }
         else {
-            // let Qid = []
-            // history.push('/exam')
-            // localStorage.setItem('code', form.code)
-            // for (let key in data) {
-            //     if (data[key].uniqueCode === form.code) {
-            //         Qid = data[key].selectedQues
-            //     }
-            // }
-            // setquesId(Qid)
-            // dispatch(questionFetchingInitiate(Qid))
-            // console.log('form', form);
-            // localStorage.setItem('setname', form.username)
-            // localStorage.setItem('setclgname', form.clgname)
-            dispatch(Student_Login_Initialize(form))
+            const examTime = new Date().getTime();
+            let remainTime = 0;
+            let givenTime = 0;
+            data.forEach((element) => {
+                if (form.code === element.uniqueCode) {
+                    remainTime = examTime - element.currentTime;
+                    givenTime = parseInt(element.time) * 1000 * 60 * 60;
+                }
+            })
+            if (remainTime > givenTime) {
+                setError("Exam Expired");
+            }
+            else {
+                dispatch(Student_Login_Initialize(form))
+            }
         }
     }
 
@@ -174,35 +94,44 @@ function Userlogin() {
                                 <FontAwesomeIcon icon={faUser}/>
                                 <input type="text" placeholder="Name"
                                        value={form.username}
-                                       onChange={(e) => {setForm({...form, username: e.target.value});setError("")}}
+                                       onChange={(e) => {
+                                           setForm({...form, username: e.target.value});
+                                           setError("")
+                                       }}
                                 />
                             </div>
-                            {/*<span style={{color: "red"}}>{error1}</span>*/}
-
 
                             <div className={style.inputbox}>
                                 <FontAwesomeIcon icon={faEnvelope}/>
 
                                 <input type="email" placeholder="example@abc.com"
                                        value={form.email}
-                                       onChange={(e) => {setForm({...form, email: e.target.value});setError("")}}/>
+                                       onChange={(e) => {
+                                           setForm({...form, email: e.target.value});
+                                           setError("")
+                                       }}/>
                             </div>
-                            {/*<span style={{color: "red"}}>{error2}</span>*/}
 
                             <div className={style.inputbox}>
                                 <FontAwesomeIcon icon={faUniversity}/>
                                 <input type="text" placeholder="Stanford University"
                                        value={form.clgname}
-                                       onChange={(e) => {setForm({...form, clgname: e.target.value});setError("")}}/>
+                                       onChange={(e) => {
+                                           setForm({...form, clgname: e.target.value});
+                                           setError("")
+                                       }}/>
                             </div>
-                            {/*<span style={{color: "red"}}>{error3}</span>*/}
+
                             <div className={style.inputbox}>
                                 <FontAwesomeIcon icon={faKey}/>
-                                <input type="text" placeholder="8a9dw84ad"
+                                <input type="text" placeholder="8a9ds84"
                                        value={form.code}
-                                       onChange={(e) => {setForm({...form, code: e.target.value}); setError("")}}/>
+                                       onChange={(e) => {
+                                           setForm({...form, code: e.target.value});
+                                           setError("")
+                                       }}/>
                             </div>
-                            {/*<span style={{color: "red"}}>{error4}</span>*/}
+
                             <span style={{color: "red"}}>{error}</span>
                             <button type='submit'>Login</button>
                         </form>

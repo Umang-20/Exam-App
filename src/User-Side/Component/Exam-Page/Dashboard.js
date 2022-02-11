@@ -14,18 +14,18 @@ function Dashboard() {
 
     useEffect(() => {
         dispach(GetAllAnswerActions());
-    }, [dispach]);
+    }, []);
 
     return <>
-        <Progressbar/>
-        <Header/>
-        <div className="restBody">
-            <Info/>
-            <div className="bodyPart">
-                <SelectQuestion/>
-                <ShowQuestion/>
+            <Progressbar/>
+            <Header/>
+            <div className="restBody">
+                <Info/>
+                <div className="bodyPart">
+                    <SelectQuestion/>
+                    <ShowQuestion/>
+                </div>
             </div>
-        </div>
     </>
 }
 

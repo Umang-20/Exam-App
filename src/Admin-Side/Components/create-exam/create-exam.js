@@ -4,7 +4,7 @@ import {
 import axios from "axios";
 import "./create-exam.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
@@ -36,13 +36,20 @@ function CreateExam() {
         option3: "",
         option4: "", correctAnswer: "",
         weightage: "",
-        time:"",
+        time: "",
         type: "",
     })
     const [isChecked, setIsChecked] = useState({});
+    const [creator, setCreator] = useState({
+        name: "",
+        email: "",
+    });
+    const [isCreator, setIsCreator] = useState(true);
+
 
     useEffect(() => {
         dispatch(fetchingIniate());
+
     }, [dispatch]);
 
     const onchangeHandler = (e) => {
@@ -73,7 +80,9 @@ function CreateExam() {
     };
 
     const toSubmitValidation = () => {
-        if ((form.selectedQues.length >= 5) && (form.time !== "")) {
+        if ((creator.name === "") || (creator.email === "")) {
+            setIsCreator(true);
+        } else if ((form.selectedQues.length >= 5) && (form.time !== "")) {
             setSubmitValidation(true);
         } else {
             setSubmitError(true);
@@ -86,8 +95,9 @@ function CreateExam() {
             const month = d.getMonth() + 1;
             const day = d.getDate();
             const year = d.getFullYear();
+            const currentTime = d.getTime();
             const {time, uniqueCode, selectedQues} = form;
-            const finalData = {time, uniqueCode, selectedQues, year, day, month};
+            const finalData = {time, uniqueCode, selectedQues, year, day, month, currentTime, creator};
             console.log(finalData);
             await axios
                 .post("https://auth-test-f6dd6-default-rtdb.firebaseio.com/viewexam.json", finalData)
@@ -337,9 +347,64 @@ function CreateExam() {
                         or
                         Set the Timer.
                     </p>
+                    <p>
+                        or
+                        Enter Creator Details.
+                    </p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button style={{background: "#0dc181"}} onClick={() => setSubmitError(false)}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+                show={isCreator}
+                onHide={() => setIsCreator(false)}
+                backdrop="static"
+                size="g"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Exam Creator Details
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Row>
+                            <Col>
+                                <FormGroup className="mb-3">
+                                    <FormControl
+                                        value={creator.name}
+                                        type="text"
+                                        onChange={(e) => {
+                                            setCreator({...creator, name: e.target.value});
+                                        }}
+                                        placeholder="Name"/>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <FormGroup className="mb-3">
+                                    <FormControl
+                                        value={creator.email}
+                                        type="email"
+                                        onChange={(e) => {
+                                            setCreator({...creator, email: e.target.value});
+                                        }}
+                                        placeholder="Email ID"/>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button style={{background: "#0dc181"}} onClick={() => {
+                        setIsCreator(false);
+                    }}>Save</Button>
+                    {/*<Button style={{background: "red"}} onClick={() => setIsCreator(false)}>No</Button>*/}
                 </Modal.Footer>
             </Modal>
 
@@ -364,10 +429,11 @@ function CreateExam() {
                             setForm({...form, time: e});
                         }}
                     >
-                        <Dropdown.Item eventKey="1hr">1hr</Dropdown.Item>
-                        <Dropdown.Item eventKey="1hr30m">1hr30m</Dropdown.Item>
-                        <Dropdown.Item eventKey="2hr">2hr</Dropdown.Item>
-                        <Dropdown.Item eventKey="2hr30m">2hr30m</Dropdown.Item>
+                        <Dropdown.Item eventKey="1">1hr</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">2hr</Dropdown.Item>
+                        <Dropdown.Item eventKey="3">3hr</Dropdown.Item>
+                        <Dropdown.Item eventKey="4">4hr</Dropdown.Item>
+                        <Dropdown.Item eventKey="5">5hr</Dropdown.Item>
                     </DropdownButton>
                 </Col>
                 <Col>

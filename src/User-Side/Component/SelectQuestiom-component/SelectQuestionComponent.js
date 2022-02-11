@@ -51,7 +51,7 @@ function SelectQuestionComponent() {
                 {questions?.map((element, index) => {
                     return (<>
                         <div className={style.buttons}>
-                            {(quesNo === questions.length) ? "" : QuestionTime !== 0 ?
+                            {(quesNo === questions.length || quesNo === -1) ? "" : QuestionTime !== 0 ?
                                 (quesNo !== index) ? showMor.includes(index) ? // <Link to={`${index + 1}`}>
                                         <button style={{color: "#f1b101"}} onClick={() => {
                                             dispach(Answer_Submission_Initialization(questions[quesNo].id, answer, false, quesNo, index + 1));

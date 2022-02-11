@@ -59,7 +59,7 @@ const Result_Submission_Initialization = (flag) => {
                 date: date,
                 clgname: clgname,
             }
-            await axios.post('https://auth-test-f6dd6-default-rtdb.firebaseio.com/results.json', resultData);
+            await axios.post('https://auth-test-f6dd6-default-rtdb.firebaseio.com/results1.json', resultData);
         }
     }
 }

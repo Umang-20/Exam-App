@@ -1,34 +1,42 @@
-.fulltable{
-  margin-top: 50px;
-  text-align: center;
-  background-color: transparent;
-  color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.fulltable {
+    margin-top: 50px;
+    text-align: center;
+    background-color: transparent;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
 #header {
     position: sticky;
     top: -1px;
     z-index: 5;
     background: linear-gradient(45deg, #0dc181, #1bdcae);
     color: white;
-  }
-  #row {
-    margin-bottom: 50px;
-  }
-  #dropdown-menu-align-right {
+}
+
+/*#creatorDetails {*/
+/*  margin-bottom: 20px;*/
+/*}*/
+#row {
+    margin-bottom: 15px;
+}
+
+#dropdown-menu-align-right {
     background: linear-gradient(45deg, #0dc181, #1bdcae);
     color: white;
     min-width: 167px;
     border-color: #ced4da;
-  }
-  #dropdown-menu-align-right:focus {
+}
+
+#dropdown-menu-align-right:focus {
     outline-style: none;
     box-shadow: none;
-  }
-  #container1 {
+}
+
+#container1 {
 
     overflow-y: auto;
     overflow-x: auto;
@@ -37,15 +45,18 @@
     /*min-width: 1000px;*/
     margin: 0;
     padding: 0;
-  }
-  #table {
+}
+
+#table {
     margin-bottom: 0;
-  }
-  #border {
+}
+
+#border {
     border: solid 2px #000;
     position: relative;
-  }
-  button #hover-text {
+}
+
+button #hover-text {
     visibility: hidden;
     width: 200px;
     background-color: black;
@@ -53,37 +64,44 @@
     text-align: center;
     border-radius: 6px;
     padding: 2px 0;
-  
+
     /* Position the tooltip */
     position: absolute;
     top: -10px;
     right: 50px;
     z-index: 6;
-  }
-  
-  button:hover #hover-text {
+}
+
+button:hover #hover-text {
     visibility: visible;
-  }
-  #table td {
+}
+
+#table td {
     padding: 20px;
     position: relative;
-  }
-  #deleteicon {
+}
+
+#deleteicon {
     color: red;
-  }
-  #editicon {
-  color: blue;
-  }
-  .table > :not(:first-child) {
-    border-top: none !important ;
-  }
-  #question {
+}
+
+#editicon {
+    color: blue;
+}
+
+.table > :not(:first-child) {
+    border-top: none !important;
+}
+
+#question {
     text-align: left;
-  }
-  #failed {
+}
+
+#failed {
     color: red;
-  }
-  #all {
+}
+
+#all {
     background: linear-gradient(45deg, #0dc181, #1bdcae);
     color: white;
     width: 100%;
@@ -91,8 +109,9 @@
     outline-style: none;
     box-shadow: none;
     border-radius: 6px;
-  }
-  #all:hover {
+}
+
+#all:hover {
     background: white;
     color: #0dc181;
-  }
+}

@@ -72,6 +72,7 @@ function ViewExam() {
                         <th>Question</th>
                         <th>Type</th>
                         <th>Weightage</th>
+                        <th>Time</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -83,6 +84,7 @@ function ViewExam() {
                                     <td>{data.question}</td>
                                     <td>{data.type}</td>
                                     <td>{data.weightage}</td>
+                                    <td>{data.time}</td>
                                 </tr>
                             );
                         })
@@ -151,8 +153,9 @@ function ViewExam() {
                                 <thead id="header">
                                 <tr>
                                     <th>No.</th>
+                                    <th>Exam-Creator</th>
                                     <th>Exam-Code</th>
-                                    <th>Exam-Duration</th>
+                                    <th>Expiry-Time</th>
                                     <th>Exam-Date</th>
                                     <th>View Details</th>
                                     <th>Delete</th>
@@ -163,8 +166,9 @@ function ViewExam() {
                                     return (
                                         <tr key={key}>
                                             <td>{key + 1}.</td>
+                                            <td>{data.creator.name}</td>
                                             <td>{data.uniqueCode}</td>
-                                            <td>{data.time}</td>
+                                            <td>{data.time} hr</td>
                                             <td>{`${data.day} / ${data.month} / ${data.year}`}</td>
                                             <td>
                                                 <button>

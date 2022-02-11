@@ -1,4 +1,5 @@
 import * as types from "../Types/actionType";
+import axios from "axios";
 
 const Student_LogOut_Started = () => {
     return {
@@ -32,6 +33,7 @@ const Student_LogOut_Initialize = () => {
     return async function (dispach) {
         dispach(Student_LogOut_Started());
         try{
+            await axios.delete("https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer.json");
             setTimeout(()=>{
                 dispach(Student_LogOut_Success())
             },600)

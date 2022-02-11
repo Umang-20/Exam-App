@@ -11,6 +11,7 @@ const ResultPage = () => {
     const [scoredMarks, setScoredMarks] = useState(-1);
     const studentQuestion = useSelector((state) => state.studentQuestion);
     const studentResult = useSelector((state) => state.studentResult);
+    const student = useSelector((state) => state.student);
     const unicode = Cookies.get("setUnicode");
     const email = Cookies.get("setEmail");
     const clgname = Cookies.get("setClgname");
@@ -22,7 +23,7 @@ const ResultPage = () => {
     useEffect(() => {
         dispach(Fetch_Question_Initialization(unicode));
         dispach(Result_Submission_Initialization(0));
-    }, [dispach,unicode]);
+    }, []);
 
     useEffect(() => {
         getResult();
@@ -49,7 +50,7 @@ const ResultPage = () => {
     return (
         <>
             {
-                (totalMarks === -1 && scoredMarks === -1) ? <div style={{
+                ((totalMarks === -1 && scoredMarks === -1) || (student.payload.loading)) ? <div style={{
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",

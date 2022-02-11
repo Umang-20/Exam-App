@@ -27,7 +27,7 @@ const LoginReducer = (state = defaultValue, action) => {
                     ...state.payload,
                     details: action.payload.details,
                     loading: action.payload.loading,
-                    studentRedirect: "/exam/1",
+                    studentRedirect: "/exam/0",
                 }
             }
         case types.STUDENT_LOGOUT_SUCCESS:

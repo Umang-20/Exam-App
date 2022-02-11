@@ -25,7 +25,7 @@ import ResultPage from "./User-Side/Component/Result-Page/ResultPage";
 function App() {
     const [studentLogin, setStudentLogin] = useState(null);
     const [isAdmin, setIsAdmin] = useState(null);
-    const [viewResult, setViewResult] = useState(false);
+    const [viewResult, setViewResult] = useState(null);
 
     const user = useSelector(state => state.user);
     const student = useSelector((state => state.student));
@@ -72,16 +72,17 @@ function App() {
                             </Switch>
                             :
                             studentLogin ?
-                                !viewResult ?
-                                    <Switch>
-                                        <Route path="/exam/:id" exact component={userDashboard}/>
-                                        <Redirect from="*" to="/exam/1"/>
-                                    </Switch>
-                                    :
-                                    <Switch>
-                                        <Route path="/studentresult" exact component={ResultPage}/>
-                                        <Redirect from="*" to="/studentresult"/>
-                                    </Switch>
+                                (viewResult === null) ? "" :
+                                    !viewResult ?
+                                        <Switch>
+                                            <Route path="/exam/:id" exact component={userDashboard}/>
+                                            <Redirect from="*" to="/exam/1"/>
+                                        </Switch>
+                                        :
+                                        <Switch>
+                                            <Route path="/studentresult" exact component={ResultPage}/>
+                                            <Redirect from="*" to="/studentresult"/>
+                                        </Switch>
                                 :
                                 <Switch>
                                     <Route path="/" exact component={HomePage}/>

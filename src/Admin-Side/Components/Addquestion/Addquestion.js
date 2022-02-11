@@ -107,7 +107,7 @@ function Addquestion() {
                     </p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => setShowError(false)}>Close</Button>
+                    <Button style={{background: "red"}} onClick={() => setShowError(false)}>Close</Button>
                 </Modal.Footer>
             </Modal>
             <Container id="container2">
