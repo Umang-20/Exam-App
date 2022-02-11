@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
 import classes from "./AuthForm.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router";
 import {registerInitiate, Reset_Error} from "../../../Redux/Admin-Side/Action/actions";
 import Spinner from "../../../Common-Component/Spinner/Spinner";
 
 const AuthForm = () => {
-  const { currentUser } = useSelector((state) => state.user);
   const { error } = useSelector((state) => state.user);
   const { loading } = useSelector((state) => state.user);
   const [errorMsg,setErrorMsg]=useState('')
   const dispatch = useDispatch();
-  const history = useHistory();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -21,7 +18,7 @@ const AuthForm = () => {
 
   useEffect(() => {
     dispatch(Reset_Error());
-  }, []);
+  }, [dispatch]);
 
   useEffect(()=>{
     setErrorMsg(error);

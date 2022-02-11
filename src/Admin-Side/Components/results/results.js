@@ -28,7 +28,10 @@ function Results() {
         report_total_mediumright: "",
         report_total_easyright: "",
         name: "",
+        date: "",
+        clgname: "",
     });
+    const [eligible, setEligible] = useState("Not Eligible");
     useEffect(() => {
         dispatch(resultFetchingIniate());
         dispatch(fetchingIniate());
@@ -40,6 +43,7 @@ function Results() {
     } else {
     }
     const showResultHandler = (id) => {
+        setEligible("Not Eligible");
         let totalmarks = 0;
         let score = 0;
         let rightquestion = 0;
@@ -90,6 +94,10 @@ function Results() {
             }
         }
 
+        if (rightquestion >= totalquestion * 0.6) {
+            setEligible("Eligible")
+        }
+
         setReport({
             report_totalmarks: totalmarks,
             report_score: score,
@@ -104,12 +112,14 @@ function Results() {
             report_total_mediumright: totalmediumright,
             report_total_easyright: totaleasyright,
             name: getQues.name,
+            date: getQues.date,
+            clgname: getQues.clgname,
         });
 
         setModalShow(true);
     };
 
-    return (<div class="wrapper">
+    return (<div className="wrapper">
         <Container id='container3'>
             <Modal id="result-modal" show={modalShow} size="lg" centered>
                 <Modal.Header onHide={() => setModalShow(false)} closeButton>
@@ -122,9 +132,9 @@ function Results() {
                         <Col>
                             <Card id="card-1">
                                 <Card.Body>
-                                    <Card.Text>Exam-Date : 02/23/2021</Card.Text>
-                                    <Card.Text>College : ABC</Card.Text>
-                                    <Card.Text>Status : Not Eligible</Card.Text>
+                                    <Card.Text>Exam-Date : {report.date}</Card.Text>
+                                    <Card.Text>College : {report.clgname}</Card.Text>
+                                    <Card.Text>Status : {eligible}</Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -237,7 +247,7 @@ function Results() {
                     </Row>
                     <Row id='result-row'>
                         <Col id="col-7" xs={6}>
-                            <div class="result-col">
+                            <div className="result-col">
                                 <Card id="card-7">
                                     <Card.Body>
                                         <Card.Title>Total score</Card.Title>
@@ -275,16 +285,17 @@ function Results() {
                 </thead>
                 {!loading && (<tbody>
                 {result?.map((data, key) => {
-                    return (<tr>
-                        <td>{key + 1}</td>
-                        <td>{data.name}</td>
-                        <td>{data.email}</td>
-                        <td>
-                            <button onClick={() => showResultHandler(data.id)}>
-                                <RemoveRedEye id="redeye"/>
-                            </button>
-                        </td>
-                    </tr>);
+                    return (
+                        <tr key={key}>
+                            <td>{key + 1}</td>
+                            <td>{data.name}</td>
+                            <td>{data.email}</td>
+                            <td>
+                                <button onClick={() => showResultHandler(data.id)}>
+                                    <RemoveRedEye id="redeye"/>
+                                </button>
+                            </td>
+                        </tr>);
                 })}
                 </tbody>)}
             </Table>

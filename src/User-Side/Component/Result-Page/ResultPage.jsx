@@ -21,8 +21,8 @@ const ResultPage = () => {
 
     useEffect(() => {
         dispach(Fetch_Question_Initialization(unicode));
-        dispach(Result_Submission_Initialization());
-    }, []);
+        dispach(Result_Submission_Initialization(0));
+    }, [dispach,unicode]);
 
     useEffect(() => {
         getResult();

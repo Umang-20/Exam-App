@@ -124,7 +124,7 @@ function ViewExam() {
     }
 
     return (
-        <div class="wrapper">
+        <div className="wrapper">
             <Container id='container3'>
                 <MyVerticallyCenteredModal
                     show={modalShow}
@@ -161,7 +161,7 @@ function ViewExam() {
                                 <tbody>
                                 {viewData?.map((data, key) => {
                                     return (
-                                        <tr>
+                                        <tr key={key}>
                                             <td>{key + 1}.</td>
                                             <td>{data.uniqueCode}</td>
                                             <td>{data.time}</td>

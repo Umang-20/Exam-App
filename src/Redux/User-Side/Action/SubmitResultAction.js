@@ -33,10 +33,12 @@ const Result_Submission_Fail = (error) => {
     }
 }
 
-const Result_Submission_Initialization = () => {
+const Result_Submission_Initialization = (flag) => {
     const username = Cookies.get("setUsername")
     const UniqueCode = Cookies.get("setUnicode")
     const email = Cookies.get("setEmail")
+    const clgname = Cookies.get("setClgname")
+    const date = new Date().toLocaleDateString();
     return async function (dispach) {
         let resultArray = [];
         dispach(Result_Submission_Started());
@@ -49,12 +51,16 @@ const Result_Submission_Initialization = () => {
         }).catch((e) => {
             dispach(Result_Submission_Fail(e.message))
         })
-        const resultData = {
-            name: username,
-            exam_ques: resultArray,
-            email: email,
+        if (flag === 1) {
+            const resultData = {
+                name: username,
+                exam_ques: resultArray,
+                email: email,
+                date: date,
+                clgname: clgname,
+            }
+            await axios.post('https://auth-test-f6dd6-default-rtdb.firebaseio.com/results.json', resultData);
         }
-        await axios.post('https://auth-test-f6dd6-default-rtdb.firebaseio.com/results.json',resultData);
     }
 }
 

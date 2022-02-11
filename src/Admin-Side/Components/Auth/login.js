@@ -3,8 +3,6 @@ import classes from "./AuthForm.module.css";
 import {useHistory} from "react-router";
 import {loginInitiate, Reset_Error} from "../../../Redux/Admin-Side/Action/actions";
 import {useSelector, useDispatch} from "react-redux";
-import {useLocation, useParams} from "react-router-dom";
-import Cookies from "js-cookie";
 import Spinner from "../../../Common-Component/Spinner/Spinner";
 
 function Login() {
@@ -12,7 +10,6 @@ function Login() {
         email: "",
         password: "",
     });
-    const {isloggedin} = useSelector((state) => state.user);
     const {error} = useSelector((state) => state.user);
     const [errorMsg, setErrorMsg] = useState('')
     const dispatch = useDispatch();
@@ -22,7 +19,7 @@ function Login() {
 
     useEffect(() => {
         dispatch(Reset_Error());
-    }, []);
+    }, [dispatch]);
 
     useEffect(()=>{
         setErrorMsg(error);
@@ -32,9 +29,6 @@ function Login() {
         setErrorMsg('')
         history.push("/auth");
     };
-
-    const {isredirect} = useSelector((state) => state.user);
-    const user = useSelector((state) => state.user);
 
     const submitHandler = (event) => {
         event.preventDefault();

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Header from '../Header/Header';
 import Progressbar from '../Progressbar/progressbar';
 import Info from '../Info/Info';

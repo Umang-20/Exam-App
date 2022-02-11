@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import style from './SelectQuestionComponent.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {Answer_Submission_Initialization, Redirect} from "../../../Redux/User-Side/Action/AnswerSubmissionAction";
 
 function SelectQuestionComponent() {

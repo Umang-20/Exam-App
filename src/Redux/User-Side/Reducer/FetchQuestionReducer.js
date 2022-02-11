@@ -1,5 +1,4 @@
 import * as types from "../Types/actionType";
-import Cookies from "js-cookie";
 
 const defaultValue = {
     payload:{

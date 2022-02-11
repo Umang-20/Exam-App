@@ -23,10 +23,6 @@ function Header() {
         localStorage.setItem("RemainingQuesTime",JSON.stringify(-1))
     },[quesNo])
 
-
-    // const time = JSON.parse(localStorage.getItem("QuesTime"));
-    // console.log(time)
-
     let interval = useRef()
     const startTimer = (time) => {
         const countdown = new Date().getTime() + (time * 1000)

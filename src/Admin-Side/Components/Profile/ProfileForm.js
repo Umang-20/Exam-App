@@ -20,7 +20,7 @@ const ProfileForm = () => {
 
     useEffect(() => {
         dispach(Reset_Error());
-    }, []);
+    }, [dispach]);
 
     useEffect(()=>{
         setErrorMsg(error);

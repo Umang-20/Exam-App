@@ -1,5 +1,4 @@
 import * as types from "../Types/actionType";
-import axios from "axios";
 import Fetch_Question_Initialization from "./FetchQuestion";
 
 const Student_Login_Started = () => {

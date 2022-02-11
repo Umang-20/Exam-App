@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleRight, faAngleLeft} from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
 import Fetch_Question_Initialization from "../../../Redux/User-Side/Action/FetchQuestion";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {
     Answer_Submission_Initialization,
     Get_Student_Answer, Redirect
@@ -13,7 +13,6 @@ import {
 import {useHistory} from "react-router";
 import Loader from "../../../Common-Component/Loader/Loader";
 import {useBeforeunload} from 'react-beforeunload';
-import GetAllAnswerActions from "../../../Redux/User-Side/Action/GetAllAnswerActions";
 
 function ShowQuestionComponent() {
     const dispatch = useDispatch()
@@ -34,7 +33,7 @@ function ShowQuestionComponent() {
 
     useEffect(() => {
         dispatch(Fetch_Question_Initialization(unicode));
-    }, [])
+    }, [dispatch,unicode])
 
     useEffect(() => {
         if (questions[quesNo]) {
@@ -43,8 +42,7 @@ function ShowQuestionComponent() {
             localStorage.setItem("QuesNo", JSON.stringify(quesNo));
             localStorage.setItem("QuesAnswer", "");
         }
-        // dispatch(GetAllAnswerActions());
-    }, [quesNo, questions])
+    }, [quesNo, questions,dispatch])
 
     useEffect(() => {
         setInterval(() => {
@@ -68,7 +66,7 @@ function ShowQuestionComponent() {
                 // console.log(JSON.parse(localStorage.getItem('RemainingQuesTime')))
             }
         }, 1000)
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if ((studentAnswer.payload.quesNo === quesNo)) {
@@ -99,7 +97,7 @@ function ShowQuestionComponent() {
                 history.goBack();
             }
         }
-    }, [questions.length])
+    }, [questions.length,history,quesNo])
 
 
     // useBeforeunload( () => {

@@ -15,12 +15,20 @@ const Sidebar = ({isMenuOpen, toggleMenu, children}) => {
                         <ul className={style.sidebarList}>
                             {SidebarData.map((val, key) => {
                                 return (
-                                    <li key={key} className={style.row}>
-                                        <Link to={`/dashboard${val.link}`} onClick={toggleMenu}>
-                                            <div className={style.icon}>{val.icon}</div>
-                                            <div className={style.title}>{val.title}</div>
-                                        </Link>
-                                    </li>
+                                    !isMenuOpen ?
+                                        <li key={key} className={style.row}>
+                                            <Link to={`/dashboard${val.link}`} onClick={toggleMenu}>
+                                                <div className={style.icon}>{val.icon}</div>
+                                                <div className={style.title}>{val.title}</div>
+                                            </Link>
+                                        </li>
+                                        :
+                                        <li key={key} className={style.row}>
+                                            <Link to={`/dashboard${val.link}`}>
+                                                <div className={style.icon}>{val.icon}</div>
+                                                <div className={style.title}>{val.title}</div>
+                                            </Link>
+                                        </li>
                                 )
                             })}
                         </ul>

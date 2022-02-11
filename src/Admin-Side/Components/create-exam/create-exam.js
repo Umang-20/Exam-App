@@ -25,10 +25,19 @@ function CreateExam() {
     const [submitValidation, setSubmitValidation] = useState(false);
     const [submitError, setSubmitError] = useState(false);
     const [form, setForm] = useState({
-        time: "", uniqueCode: Math.random().toString(36).substr(2, 7), selectedQues: [],
+        time: "",
+        uniqueCode: Math.random().toString(36).substr(2, 7),
+        selectedQues: [],
     });
     const [editForm, setEditForm] = useState({
-        question: "", option1: "", option2: "", option3: "", option4: "", correctAnswer: "", weightage: "", type: "",
+        question: "",
+        option1: "",
+        option2: "",
+        option3: "",
+        option4: "", correctAnswer: "",
+        weightage: "",
+        time:"",
+        type: "",
     })
     const [isChecked, setIsChecked] = useState({});
 
@@ -36,18 +45,7 @@ function CreateExam() {
         dispatch(fetchingIniate());
     }, [dispatch]);
 
-    // console.log(`editForm`, editForm)
     const onchangeHandler = (e) => {
-        //let {selectedQues}=form
-        // let updatedQues = [...form.selectedQues];
-        // if (e.target.checked) {
-        //     updatedQues.push(e.target.value);
-        // } else {
-        //     let value = updatedQues.indexOf(e.target.value);
-        //     updatedQues.splice(value, 1);
-        // }
-        // setForm({...form, selectedQues: updatedQues});
-
         const {name, checked, value} = e.target;
 
         setIsChecked((preValue) => {
@@ -151,6 +149,7 @@ function CreateExam() {
                 option4: result.option4,
                 correctAnswer: result.correctAnswer,
                 weightage: result.weightage,
+                time: result.time,
                 type: result.type,
             })
         }
@@ -261,6 +260,19 @@ function CreateExam() {
                             </Col>
 
                             <Col>
+                                <FormGroup className="mb-3">
+                                    <FormControl
+                                        value={editForm.time}
+                                        onChange={(e) => {
+                                            setEditForm({...editForm, time: e.target.value});
+                                        }}
+                                        type="number"
+                                        placeholder="Question time"
+                                    />
+                                </FormGroup>
+                            </Col>
+
+                            <Col>
                                 <DropdownButton
                                     title={`${editForm.type ? editForm.type : "Select Type"}`}
                                     id="dropdown-menu-align-right"
@@ -299,11 +311,11 @@ function CreateExam() {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Footer>
-                    <Button onClick={() => {
+                    <Button style={{background: "#0dc181"}} onClick={() => {
                         onCreateHandler();
                         setSubmitValidation(false);
                     }}>Yes</Button>
-                    <Button onClick={() => setSubmitValidation(false)}>No</Button>
+                    <Button style={{background: "red"}} onClick={() => setSubmitValidation(false)}>No</Button>
                 </Modal.Footer>
             </Modal>
 
@@ -327,7 +339,7 @@ function CreateExam() {
                     </p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => setSubmitError(false)}>Close</Button>
+                    <Button style={{background: "#0dc181"}} onClick={() => setSubmitError(false)}>Close</Button>
                 </Modal.Footer>
             </Modal>
 
@@ -346,7 +358,7 @@ function CreateExam() {
                 </Col>
                 <Col>
                     <DropdownButton
-                        title={`${form.time ? form.time : "Timer"}`}
+                        title={`${form.time ? form.time : "Expiry Time"}`}
                         id="dropdown-menu-align-right"
                         onSelect={(e) => {
                             setForm({...form, time: e});
@@ -397,6 +409,7 @@ function CreateExam() {
                                     <th>Questions</th>
                                     <th>Type</th>
                                     <th>Weightage</th>
+                                    <th>Time</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -419,6 +432,7 @@ function CreateExam() {
                                                 <td id="question">{data.question}</td>
                                                 <td>{data.type}</td>
                                                 <td>{data.weightage}</td>
+                                                <td>{data.time}</td>
                                                 <td>
                                                     <button onClick={() => edithandler(data.id)}>
                                                         <span id="hover-text">Edit Question</span>

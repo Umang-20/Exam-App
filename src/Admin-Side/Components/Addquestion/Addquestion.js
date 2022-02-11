@@ -23,13 +23,13 @@ function Addquestion() {
         option4: "",
         correctAnswer: "",
         weightage: "",
+        time: "",
         type: "",
     });
     const [showError, setShowError] = useState(false);
     const [submitValidation, setSubmitValidation] = useState(false);
-    const submitHandler = async (e) => {
-        e.preventDefault();
-
+    const submitHandler = async () => {
+        // e.preventDefault();
         await fetch(
             "https://auth-test-f6dd6-default-rtdb.firebaseio.com/questions.json",
             {
@@ -48,6 +48,7 @@ function Addquestion() {
             option4: "",
             correctAnswer: "",
             weightage: "",
+            time: "",
             type: "",
         })
     };
@@ -57,6 +58,8 @@ function Addquestion() {
         const isEmpty = !Object.values(values).every(x => (x !== ''));
         if (isEmpty) {
             setShowError(true);
+        } else {
+            submitHandler();
         }
     }
 
@@ -192,6 +195,19 @@ function Addquestion() {
                                     value={values.weightage}
                                     onChange={(e) => {
                                         setValue({...values, weightage: e.target.value});
+                                    }}
+                                />
+                            </FormGroup>
+                        </Col>
+
+                        <Col>
+                            <FormGroup className="mb-3">
+                                <FormControl
+                                    type="number"
+                                    placeholder="Question Time"
+                                    value={values.time}
+                                    onChange={(e) => {
+                                        setValue({...values, time: e.target.value});
                                     }}
                                 />
                             </FormGroup>
