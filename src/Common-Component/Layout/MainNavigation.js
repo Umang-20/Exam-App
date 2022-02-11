@@ -7,7 +7,6 @@ import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import MenuIcon from "@material-ui/icons/Menu";
 import {Clear} from "@material-ui/icons";
-import button from "bootstrap/js/src/button";
 import UseWindowSize from "./UseWindowSize";
 import Student_LogOut_Initialize from "../../Redux/User-Side/Action/StudentLogOutActions";
 import Result_Submission_Initialization from "../../Redux/User-Side/Action/SubmitResultAction";
@@ -48,7 +47,7 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
     }
 
     const studentSubmit = () => {
-        dispatch(Result_Submission_Initialization());
+        dispatch(Result_Submission_Initialization(1));
         history.push("/studentresult");
     }
 
