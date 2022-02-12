@@ -85,7 +85,6 @@ export const Redirect = (path) => {
     return {
         type: types.REDIRECT,
         payload: {
-            loading: false,
             path,
         }
     }
@@ -116,8 +115,6 @@ export const Answer_Submission_Initialization = (questionId, answer, mor, quesNo
         if (updateKey === 0) {
             await axios.post(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`, answerData).then(() => {
                 dispach(Answer_Submission_Success(questionId, answer, mor, quesNo, questionTime))
-                // localStorage.setItem("RemainingQuesTime", JSON.stringify(-1))
-                // dispach(Get_Student_Answer(quesNo + 1,questionTime));
                 dispach(Redirect(`/exam/${redirect}`));
             }).catch((e) => {
                 dispach(Answer_Submission_Fail(e.message))
@@ -125,8 +122,6 @@ export const Answer_Submission_Initialization = (questionId, answer, mor, quesNo
         } else {
             await axios.put(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}/${updateKey}.json`, answerData).then(() => {
                 dispach(Answer_Submission_Success(questionId, answer, mor, quesNo, questionTime))
-                // localStorage.setItem("RemainingQuesTime", JSON.stringify(-1))
-                // dispach(Get_Student_Answer(quesNo + 1,questionTime));
                 dispach(Redirect(`/exam/${redirect}`));
 
             }).catch((e) => {

@@ -12,13 +12,9 @@ import {
 } from "../../../Redux/User-Side/Action/AnswerSubmissionAction";
 import {useHistory} from "react-router";
 import Loader from "../../../Common-Component/Loader/Loader";
-import {useBeforeunload} from 'react-beforeunload';
 import {Button, Modal} from "react-bootstrap";
-import logger from "redux-logger";
 import SubmitResultAction from "../../../Redux/User-Side/Action/SubmitResultAction";
-import * as fs from "fs";
 
-// import {useBeforeUnload} from "react-use";
 
 function ShowQuestionComponent() {
     const dispatch = useDispatch()
@@ -137,13 +133,7 @@ function ShowQuestionComponent() {
     }
 
     const answerSubmission = () => {
-        let selectedAnswer;
-        if (Object.keys(answers).length > 1) {
-            selectedAnswer = null;
-        } else {
-            selectedAnswer = Object.keys(answers)[0];
-        }
-        dispatch(Answer_Submission_Initialization(questions[quesNo].id, selectedAnswer, mor, quesNo, quesNo + 2));
+        dispatch(Answer_Submission_Initialization(questions[quesNo].id, localStorage.getItem("QuesAnswer"), mor, quesNo, quesNo + 2));
         setAnswers({
                 1: false,
                 2: false,
@@ -153,7 +143,6 @@ function ShowQuestionComponent() {
         )
         setMor(false);
     }
-
 
     return (
         <>
@@ -336,7 +325,7 @@ function ShowQuestionComponent() {
                                                         <div className={style.optioncontainer}>
                                                             <div className={style.optionborder}>
                                                                 <input type="radio" id="1" name="fav_language" value="1"
-                                                                       checked={answers[1]}
+                                                                       checked={answers["1"]}
                                                                        onChange={(e) => {
                                                                            setAnswers({
                                                                                1: true,
@@ -354,7 +343,7 @@ function ShowQuestionComponent() {
                                                         <div className={style.optioncontainer}>
                                                             <div className={style.optionborder}>
                                                                 <input type="radio" id="2" name="fav_language" value="2"
-                                                                       checked={answers[2]}
+                                                                       checked={answers["2"]}
                                                                        onChange={(e) => {
                                                                            setAnswers({
                                                                                1: false,
@@ -371,7 +360,7 @@ function ShowQuestionComponent() {
                                                         <div className={style.optioncontainer}>
                                                             <div className={style.optionborder}>
                                                                 <input type="radio" id="3" name="fav_language" value="3"
-                                                                       checked={answers[3]}
+                                                                       checked={answers["3"]}
                                                                        onChange={(e) => {
                                                                            setAnswers({
                                                                                1: false,
@@ -388,7 +377,7 @@ function ShowQuestionComponent() {
                                                         <div className={style.optioncontainer}>
                                                             <div className={style.optionborder}>
                                                                 <input type="radio" id="4" name="fav_language" value="4"
-                                                                       checked={answers[4]}
+                                                                       checked={answers["4"]}
                                                                        onChange={(e) => {
                                                                            setAnswers({
                                                                                1: false,
@@ -428,7 +417,7 @@ function ShowQuestionComponent() {
                                                                         {/*<Link to={`/exam/${quesNo}`}>*/}
                                                                         <button className={style.button1}
                                                                                 onClick={() => {
-                                                                                    dispatch(Answer_Submission_Initialization(questions[quesNo].id, null, mor, quesNo, quesNo));
+                                                                                    dispatch(Answer_Submission_Initialization(questions[quesNo].id, localStorage.getItem("QuesAnswer"), mor, quesNo, quesNo));
                                                                                 }
                                                                                 }>
                                                                             <FontAwesomeIcon className={style.icon1}

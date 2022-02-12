@@ -14,14 +14,15 @@ function Header() {
     const StudentAnswer = useSelector((state) => state.studentAnswer)
     const StudentQuestion = useSelector((state) => state.studentQuestion)
     const QuesTime = JSON.parse(localStorage.getItem('QuesTime'));
+    const RemainingQuesTime = JSON.parse(localStorage.getItem('RemainingQuesTime'));
 
     useEffect(() => {
         setTime(JSON.parse(localStorage.getItem('QuesTime')));
     }, [localStorage.getItem('QuesTime'), quesNo]);
 
-    useEffect(()=>{
-        localStorage.setItem("RemainingQuesTime",JSON.stringify(-1))
-    },[quesNo])
+    useEffect(() => {
+        localStorage.setItem("RemainingQuesTime", JSON.stringify(-1))
+    }, [quesNo])
 
     let interval = useRef()
     const startTimer = (time) => {
@@ -59,7 +60,7 @@ function Header() {
                 {name}
             </div>
             <div className={style.timer}>
-                { StudentAnswer.payload.loading || QuesTime === 0 || QuesTime === -1 || hour === -1 || quesNo === -1 || quesNo === StudentQuestion.payload.questions.length? "00:00:00" :
+                {StudentAnswer.payload.loading || QuesTime === 0 || QuesTime === -1 || RemainingQuesTime === -1 || hour === -1 || quesNo === -1 || quesNo === StudentQuestion.payload.questions.length ? "00:00:00" :
                     <>
                         {hour > 9 ?
                             hour :

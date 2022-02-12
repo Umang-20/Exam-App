@@ -90,7 +90,6 @@ const AnswerSubmissionReducer = (state = defaultValue, action) => {
                 ...state,
                 payload: {
                     ...state.payload,
-                    loading: action.payload.loading,
                     isredirect: action.payload.path,
                 }
             }

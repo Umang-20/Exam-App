@@ -4,7 +4,7 @@ import {
 import axios from "axios";
 import "./create-exam.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
@@ -53,6 +53,7 @@ function CreateExam() {
 
     const onchangeHandler = (e) => {
         const {name, checked, value} = e.target;
+        console.log(isChecked)
 
         setIsChecked((preValue) => {
             return {
@@ -490,7 +491,7 @@ function CreateExam() {
                                                         id="checkboxNoLabel"
                                                         value={data.id}
                                                         name={index}
-                                                        checked={isChecked.index}
+                                                        checked={isChecked[index]}
                                                         onChange={onchangeHandler}
                                                     />
                                                 </td>
