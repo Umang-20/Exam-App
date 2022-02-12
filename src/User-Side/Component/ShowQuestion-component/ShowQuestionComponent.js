@@ -15,6 +15,9 @@ import Loader from "../../../Common-Component/Loader/Loader";
 import {useBeforeunload} from 'react-beforeunload';
 import {Button, Modal} from "react-bootstrap";
 import logger from "redux-logger";
+import SubmitResultAction from "../../../Redux/User-Side/Action/SubmitResultAction";
+import * as fs from "fs";
+
 // import {useBeforeUnload} from "react-use";
 
 function ShowQuestionComponent() {
@@ -102,18 +105,29 @@ function ShowQuestionComponent() {
     }, [questions.length, history, quesNo])
 
 
-    // useEffect(() => {
-    //     window.addEventListener('beforeunload', setIsReload(true));
-    //     return () => {
-    //         window.removeEventListener('beforeunload', setIsReload(true));
-    //     };
-    // }, []);
+    useEffect(() => {
+        window.onbeforeunload = function () {
+            return "you can not refresh the  page";
+        }
+        window.onload = function () {
+            setIsReload(false);
+            // dispatch(SubmitResultAction());
+        }
+    }, []);
 
-    // useBeforeunload((e) => {
-    //     e.preventDefault();
-    //     setIsReload(true);
-    //     console.log('e', e)
-    // });
+    useEffect(() => {
+        const showJoinNow = (event) => {
+            const {clientY, clientX} = event;
+            if (!isReload && (clientX <= 0 || clientY <= 0)) {
+                setIsReload(true);
+            }
+        };
+
+        document.addEventListener('mouseleave', showJoinNow);
+        return () => {
+            document.removeEventListener('mouseleave', showJoinNow);
+        };
+    }, []);
 
 
     const eventListener = (event) => {
@@ -152,15 +166,16 @@ function ShowQuestionComponent() {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Refresh is not Allowed.
-                        Do You Want to Submit Exam?
+                        Disclaimer
                     </Modal.Title>
                 </Modal.Header>
+                <Modal.Body>
+                    <p style={{textAlign:"center"}}>During The Exam, Page Refresh is not Allowed.</p>
+                </Modal.Body>
                 <Modal.Footer>
                     <Button style={{background: "#0dc181"}} onClick={() => {
                         setIsReload(false);
-                    }}>Yes</Button>
-                    <Button style={{background: "red"}} onClick={() => setIsReload(false)}>No</Button>
+                    }}>Confirm</Button>
                 </Modal.Footer>
             </Modal>
             <div className={style.questionarea}>
@@ -321,8 +336,17 @@ function ShowQuestionComponent() {
                                                         <div className={style.optioncontainer}>
                                                             <div className={style.optionborder}>
                                                                 <input type="radio" id="1" name="fav_language" value="1"
-                                                                       checked={answers["1"]}
-                                                                       onChange={eventListener}/> {" "}
+                                                                       checked={answers[1]}
+                                                                       onChange={(e) => {
+                                                                           setAnswers({
+                                                                               1: true,
+                                                                               2: false,
+                                                                               3: false,
+                                                                               4: false,
+                                                                           })
+                                                                           localStorage.setItem("QuesAnswer", JSON.stringify(1))
+                                                                       }
+                                                                       }/> {" "}
                                                                 <label
                                                                     htmlFor="html">{questions[quesNo].data.option1}</label>
                                                             </div>
@@ -330,8 +354,16 @@ function ShowQuestionComponent() {
                                                         <div className={style.optioncontainer}>
                                                             <div className={style.optionborder}>
                                                                 <input type="radio" id="2" name="fav_language" value="2"
-                                                                       checked={answers["2"]}
-                                                                       onChange={eventListener}/> {" "}
+                                                                       checked={answers[2]}
+                                                                       onChange={(e) => {
+                                                                           setAnswers({
+                                                                               1: false,
+                                                                               2: true,
+                                                                               3: false,
+                                                                               4: false,
+                                                                           })
+                                                                           localStorage.setItem("QuesAnswer", JSON.stringify(2))
+                                                                       }}/> {" "}
                                                                 <label
                                                                     htmlFor="html">{questions[quesNo].data.option2}</label>
                                                             </div>
@@ -339,8 +371,16 @@ function ShowQuestionComponent() {
                                                         <div className={style.optioncontainer}>
                                                             <div className={style.optionborder}>
                                                                 <input type="radio" id="3" name="fav_language" value="3"
-                                                                       checked={answers["3"]}
-                                                                       onChange={eventListener}/> {" "}
+                                                                       checked={answers[3]}
+                                                                       onChange={(e) => {
+                                                                           setAnswers({
+                                                                               1: false,
+                                                                               2: false,
+                                                                               3: true,
+                                                                               4: false,
+                                                                           })
+                                                                           localStorage.setItem("QuesAnswer", JSON.stringify(3))
+                                                                       }}/> {" "}
                                                                 <label
                                                                     htmlFor="html">{questions[quesNo].data.option3}</label>
                                                             </div>
@@ -348,8 +388,16 @@ function ShowQuestionComponent() {
                                                         <div className={style.optioncontainer}>
                                                             <div className={style.optionborder}>
                                                                 <input type="radio" id="4" name="fav_language" value="4"
-                                                                       checked={answers["4"]}
-                                                                       onChange={eventListener}/> {" "}
+                                                                       checked={answers[4]}
+                                                                       onChange={(e) => {
+                                                                           setAnswers({
+                                                                               1: false,
+                                                                               2: false,
+                                                                               3: false,
+                                                                               4: true,
+                                                                           })
+                                                                           localStorage.setItem("QuesAnswer", JSON.stringify(4))
+                                                                       }}/> {" "}
                                                                 <label
                                                                     htmlFor="html">{questions[quesNo].data.option4}</label>
                                                             </div>

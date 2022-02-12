@@ -49,7 +49,6 @@ function CreateExam() {
 
     useEffect(() => {
         dispatch(fetchingIniate());
-
     }, [dispatch]);
 
     const onchangeHandler = (e) => {
@@ -321,11 +320,11 @@ function CreateExam() {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Footer>
-                    <Button style={{background: "#0dc181"}} onClick={() => {
+                    <Button style={{background: "#0096FF"}} onClick={() => {
                         onCreateHandler();
                         setSubmitValidation(false);
                     }}>Yes</Button>
-                    <Button style={{background: "red"}} onClick={() => setSubmitValidation(false)}>No</Button>
+                    <Button style={{background: "#ff5a5a"}} onClick={() => setSubmitValidation(false)}>No</Button>
                 </Modal.Footer>
             </Modal>
 
@@ -353,7 +352,7 @@ function CreateExam() {
                     </p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button style={{background: "#0dc181"}} onClick={() => setSubmitError(false)}>Close</Button>
+                    <Button style={{background: "#0096FF"}} onClick={() => setSubmitError(false)}>Close</Button>
                 </Modal.Footer>
             </Modal>
 
@@ -401,7 +400,7 @@ function CreateExam() {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button style={{background: "#0dc181"}} onClick={() => {
+                    <Button style={{background: "#0096FF"}} onClick={() => {
                         setIsCreator(false);
                     }}>Save</Button>
                     {/*<Button style={{background: "red"}} onClick={() => setIsCreator(false)}>No</Button>*/}
@@ -491,7 +490,7 @@ function CreateExam() {
                                                         id="checkboxNoLabel"
                                                         value={data.id}
                                                         name={index}
-                                                        checked={isChecked[index]}
+                                                        checked={isChecked.index}
                                                         onChange={onchangeHandler}
                                                     />
                                                 </td>

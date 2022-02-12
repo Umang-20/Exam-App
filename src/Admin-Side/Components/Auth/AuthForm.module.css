@@ -52,9 +52,11 @@ form{
   font: inherit;
   color: white;
   font-size: 16px;
+  /*background: linear-gradient(*/
+  /*45deg,#0dc181,#1bdcae);*/
   background: linear-gradient(
-  45deg,#0dc181,#1bdcae);
-  border: 1px solid #0dc181;
+          45deg,#4169E1,#0096FF);
+  border: 1px solid #4169E1;
   border-radius: 4px;
   padding: 0.5rem 2.5rem;
   font-weight: bold;
@@ -62,7 +64,7 @@ form{
 
 .actions button:hover {
   background: white;
-  color: #0dc181;
+  color: #4169E1;
 }
 
 .actions .toggle {
@@ -75,5 +77,5 @@ form{
 
 .actions .toggle:hover {
   background-color: transparent;
-  color: blue;
+  color: #4169E1;
 }

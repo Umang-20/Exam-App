@@ -13,17 +13,17 @@
       color: #fff;
       height: 40px;
       border-radius: 4px;
-      border: 1px solid #0dc181;
+      border: 1px solid #4169E1;
       padding: 0 38px;
       text-transform: capitalize;
       letter-spacing: 0;
       background: linear-gradient(
-  45deg,#0dc181,#1bdcae);
+  45deg,#4169E1,#0096FF);
       outline: none;
     
   }
   #button:hover{
-    color: #1bdcae;
+    color: #0096FF;
     background: #fff;
   }
   #container2{

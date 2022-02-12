@@ -13,7 +13,9 @@
     position: sticky;
     top: -1px;
     z-index: 5;
-    background: linear-gradient(45deg, #0dc181, #1bdcae);
+    /*background: linear-gradient(45deg, #0dc181, #1bdcae);*/
+    background: linear-gradient(
+            45deg,#4169E1,#0096FF);
     color: white;
 }
 
@@ -25,7 +27,9 @@
 }
 
 #dropdown-menu-align-right {
-    background: linear-gradient(45deg, #0dc181, #1bdcae);
+    /*background: linear-gradient(45deg, #0dc181, #1bdcae);*/
+    background: linear-gradient(
+            45deg,#4169E1,#0096FF);
     color: white;
     min-width: 167px;
     border-color: #ced4da;
@@ -102,10 +106,12 @@ button:hover #hover-text {
 }
 
 #all {
-    background: linear-gradient(45deg, #0dc181, #1bdcae);
+    /*background: linear-gradient(45deg, #0dc181, #1bdcae);*/
+    background: linear-gradient(
+            45deg,#4169E1,#0096FF);
     color: white;
     width: 100%;
-    border: #0dc181 solid 1px;
+    border: #4169E1 solid 1px;
     outline-style: none;
     box-shadow: none;
     border-radius: 6px;
@@ -113,5 +119,5 @@ button:hover #hover-text {
 
 #all:hover {
     background: white;
-    color: #0dc181;
+    color: #4169E1;
 }

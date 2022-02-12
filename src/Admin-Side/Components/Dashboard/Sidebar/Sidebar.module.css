@@ -4,9 +4,12 @@
 
 .sidebar{
     background-color: #fff;
-     width: 100%;
+    /*background: linear-gradient(180deg,#ffffff 70%,#d2eaff);*/
+    width: 100%;
      height:calc(100vh - 80px) ;
-     margin: 0; 
+     margin: 0;
+    border-right: 1px solid #e7e7e7;
+    /*border-radius: 5px;*/
     }
    
     .sidebarList{
@@ -30,15 +33,15 @@
      
 }
     .sidebarList .row a:hover {
-      box-shadow: 2px 2px 3px 4px  #777;
+      box-shadow: 1px 1px 2px 2px  #777;
     }
     .sidebarList .row a:hover .icon,
     .sidebarList .row a:hover .title{
-      transform: scale(1.15);
-      -webkit-transform: scale(1.15);
-      -moz-transform: scale(1.15);
-      -ms-transform: scale(1.15);
-      -o-transform: scale(1.15);
+      transform: scale(1.00);
+      -webkit-transform: scale(1.00);
+      -moz-transform: scale(1.00);
+      -ms-transform: scale(1.00);
+      -o-transform: scale(1.00);
 }
     .sidebarList .row.active a{
         background-color: #f2f2f2;

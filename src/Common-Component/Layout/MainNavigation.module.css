@@ -38,7 +38,7 @@
   font: inherit;
   font-size: 16px;
   background: transparent;
-  border: 1.5px solid #0dc181;
+  border: 1.5px solid #4169E1;
   color: #000;
   padding: 0 38px;
   font-weight: bold;
@@ -50,7 +50,7 @@
 }
 .header button:hover {
   background: linear-gradient(
-  45deg,#0dc181,#1bdcae);
+  45deg,#0096FF,#0096FF);
   color: #fff;
 }
 .header img{
@@ -59,6 +59,6 @@
 }
 
 .header a:hover {
-  color: blue;
+  color: #4169E1;
 }
 

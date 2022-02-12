@@ -59,19 +59,21 @@
     margin-bottom:10px ;
 }
 .container2 button{
-    border: none;
     border-radius: 20px;
     width: 220px;
     height: 35px;
-    background-color: #1bdcae;
+    /*background-color: #1bdcae;*/
+    background: linear-gradient(
+            45deg,#4169E1,#0096FF);
+    border: 1px solid #4169E1;
     color: white;
     outline: none;
     cursor: pointer;
 }
-.container2 button:hover{
-    border: 1px solid #1bdcae;
-    color: #1bdcae;
-    background-color: transparent;
+.container2 button :hover{
+    /*color: #ffffff;*/
+    background: white;
+    color: #4169E1;
 }
 .inputbox input{
     border: none;

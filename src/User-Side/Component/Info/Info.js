@@ -8,21 +8,14 @@ function Info() {
     const studentAnswer = useSelector((state) => state.studentAnswer);
     const totalQuestion = studentQuestion.payload.questions.length;
     const allAnswer = studentAnswer.payload.allAnswer;
-    // console.log(allAnswer)
-    // console.log(totalQuestion)
 
     const countMor = allAnswer.filter((element) => element.mor === true);
-    const countAnswered = allAnswer.filter((element)=>(element.answer) && element.mor === false)
-    // console.log(countAnswered)
+    const countAnswered = allAnswer.filter((element) => (element.answer) && element.mor === false)
 
     const countSkipped = allAnswer.length - countAnswered.length - countMor.length
 
-    const clgname = Cookies.get("setClgname")
 
     return <div className={style.info}>
-        <div className={style.text}>
-            <h3>{clgname}</h3>
-        </div>
         <div className={style.clgname}>
 
             <div className={style.details}>
@@ -44,7 +37,6 @@ function Info() {
 
                 </div>
             </div>
-            <button style={{visibility:"hidden"}}>Submit</button>
         </div>
     </div>;
 }

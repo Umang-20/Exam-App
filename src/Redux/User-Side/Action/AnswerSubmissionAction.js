@@ -95,7 +95,7 @@ export const Answer_Submission_Initialization = (questionId, answer, mor, quesNo
     const username = Cookies.get("setUsername")
     const UniqueCode = Cookies.get("setUnicode")
     let questionTime = JSON.parse(localStorage.getItem("RemainingQuesTime"));
-    if (questionTime === 1) questionTime = 0;
+    if ((questionTime === 1) || (questionTime === -1)) questionTime = 0;
     let answerData = {
         questionId: questionId,
         answer: answer,

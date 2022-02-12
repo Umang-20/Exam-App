@@ -55,6 +55,9 @@ function Header() {
 
     return <div className={style.header}>
         <div className={style.logo}>
+            <div className={style.logo}>
+                {name}
+            </div>
             <div className={style.timer}>
                 { StudentAnswer.payload.loading || QuesTime === 0 || QuesTime === -1 || hour === -1 || quesNo === -1 || quesNo === StudentQuestion.payload.questions.length? "00:00:00" :
                     <>
@@ -75,9 +78,6 @@ function Header() {
 
                 }
 
-            </div>
-            <div className={style.logo}>
-                {name}
             </div>
         </div>
     </div>

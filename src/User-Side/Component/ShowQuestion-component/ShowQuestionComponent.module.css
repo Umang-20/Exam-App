@@ -109,11 +109,11 @@
     color: #fff;
 }
  .actions .button2{
-    border: 1.5px solid  #1bdcae;
-    color: #1bdcae;
+    border: 1.5px solid  #0096FF;
+    color: #0096FF;
 }
 .actions .button2:hover{
-    background: #1bdcae;
+    background: #0096FF;
     color: #fff;
 }
 .actions .icon1{

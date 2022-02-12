@@ -3,7 +3,7 @@ body{
   padding: 0;
 }
 .App{
-  background: linear-gradient(180deg,#f9fbff 70%,#d2eaff);
+  /*background: linear-gradient(180deg,#ffffff 70%,#d2eaff);*/
   width: 100vw;
   height: 100vh;
   }

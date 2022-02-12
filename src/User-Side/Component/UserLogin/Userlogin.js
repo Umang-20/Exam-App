@@ -131,7 +131,6 @@ function Userlogin() {
                                            setError("")
                                        }}/>
                             </div>
-
                             <span style={{color: "red"}}>{error}</span>
                             <button type='submit'>Login</button>
                         </form>
