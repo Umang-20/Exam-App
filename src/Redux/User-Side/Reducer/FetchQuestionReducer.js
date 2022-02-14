@@ -1,16 +1,16 @@
 import * as types from "../Types/actionType";
 
 const defaultValue = {
-    payload:{
-        loading:false,
-        error:null,
-        questions:[],
-        time:null,
+    payload: {
+        loading: false,
+        error: null,
+        questions: [],
+        time: null,
     }
 }
 
-const FetchQuestionReducer = (state=defaultValue,action) => {
-    switch (action.type){
+const FetchQuestionReducer = (state = defaultValue, action) => {
+    switch (action.type) {
         case types.FETCH_QUESTION_STARTED:
             return {
                 ...state,
@@ -20,13 +20,31 @@ const FetchQuestionReducer = (state=defaultValue,action) => {
                 }
             }
         case types.FETCH_QUESTION_SUCCESS:
+            let questionsID = [];
+            let questions = [];
+            let time;
+            for (let key in action.payload.allExam) {
+                if (action.payload.allExam[key].uniqueCode === action.payload.code) {
+                    questionsID = [...action.payload.allExam[key].selectedQues]
+                    time = action.payload.allExam[key].time;
+                }
+            }
+            for (let key in action.payload.questions) {
+                let questionTime = parseInt(action.payload.questions[key].time);
+                questionsID.forEach((element) => {
+                    if (element === key) {
+                        questions.push({data: action.payload.questions[key], id: element, time: questionTime})
+                    }
+                })
+            }
+
             return {
                 ...state,
                 payload: {
                     ...state.payload,
-                    time:action.payload.time,
-                    questions: action.payload.questions,
-                    loading: action.payload.loading
+                    time: time,
+                    questions: questions,
+                    loading: action.payload.loading,
                 }
             }
         case types.FETCH_QUESTION_FAIL:

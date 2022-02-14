@@ -26,14 +26,14 @@ export const fetchingInitiate = () => {
         dispatch(Data_Fetching_Started());
         try {
             const {data} = await axios.get("https://auth-test-f6dd6-default-rtdb.firebaseio.com/viewexam.json")
-            let viewData = [];
-            for (let key in data) {
-                viewData.push({
-                    id: key,
-                    ...data[key],
-                });
-            }
-            dispatch(Data_Fetching_Success(viewData));
+            // let viewData = [];
+            // for (let key in data) {
+            //     viewData.push({
+            //         id: key,
+            //         ...data[key],
+            //     });
+            // }
+            dispatch(Data_Fetching_Success(data));
         } catch (e) {
             dispatch(Data_Fetching_Fail(e.message));
 

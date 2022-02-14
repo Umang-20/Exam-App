@@ -1,17 +1,17 @@
 import * as types from "../Types/actionType";
 
 const defaultValue = {
-    payload:{
-        loading:false,
-        exam_ques:[],
-        name:null,
-        username:null,
-        error:null,
+    payload: {
+        loading: false,
+        exam_ques: [],
+        name: null,
+        username: null,
+        error: null,
     }
 }
 
-const SubmitResultReducer = (state = defaultValue,action) =>{
-    switch (action.type){
+const SubmitResultReducer = (state = defaultValue, action) => {
+    switch (action.type) {
         case types.RESULT_SUBMISSION_STARTED:
             return {
                 ...state,
@@ -21,7 +21,7 @@ const SubmitResultReducer = (state = defaultValue,action) =>{
                 }
             }
         case types.RESULT_SUBMISSION_SUCCESS:
-            localStorage.setItem("Result",JSON.stringify("yes"));
+            localStorage.setItem("Result", JSON.stringify("yes"));
             return {
                 ...state,
                 payload: {

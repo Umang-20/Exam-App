@@ -69,7 +69,7 @@ function ShowQuestionComponent({quesNo, unicode}) {
         if ((studentAnswer.payload.quesNo === quesNo)) {
             setMor(studentAnswer.payload.mor);
             if (studentAnswer.payload.answer !== "undefined") {
-                setAnswers({[studentAnswer.payload.answer]: true});
+                setAnswers({...answers,[studentAnswer.payload.answer]: true});
                 if (studentAnswer.payload.answer !== undefined) {
                     localStorage.setItem("QuesAnswer", studentAnswer.payload.answer)
                 } else {

@@ -21,7 +21,7 @@ const LoginReducer = (state = defaultValue, action) => {
             Cookies.set('setUnicode', action.payload.details.code);
             Cookies.set("setUsername", action.payload.details.username);
             Cookies.set('setClgname', action.payload.details.clgname);
-            localStorage.setItem("Student",JSON.stringify(action.payload.details));
+            localStorage.setItem("Student", JSON.stringify(action.payload.details));
             return {
                 ...state, payload: {
                     ...state.payload,
@@ -42,7 +42,7 @@ const LoginReducer = (state = defaultValue, action) => {
             localStorage.removeItem("QuesId");
             localStorage.removeItem("QuesNo");
             localStorage.removeItem("Result");
-            return{
+            return {
                 ...state,
                 payload: {
                     studentRedirect: "/student-login",

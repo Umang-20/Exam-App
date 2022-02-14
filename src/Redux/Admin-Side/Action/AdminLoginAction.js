@@ -29,10 +29,13 @@ const loginStart = () => {
     }
 }
 
-const loginSuccess = (user) => {
+const loginSuccess = (user,user1) => {
     return {
         type: types.LOGIN_SUCCESS,
-        payload: user
+        payload: {
+            user,
+            user1,
+        }
     }
 }
 
@@ -120,28 +123,29 @@ export const loginInitiate = (email, password) => {
         returnSecureToken: true
     }
     return async function (dispatch) {
-        const adminData = []
+        // const adminData = []
         dispatch(loginStart());
         try {
             const user = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAh_KBa1xNr-AGIYJEt7RsK1S9M9HZZomk', userdata)
             const user1 = await axios.get('https://auth-test-f6dd6-default-rtdb.firebaseio.com/Admin.json')
-            for (let key in user1.data) {
-                adminData.push(user1.data[key].uid)
-            }
-            const isAdmin = adminData.find(element => element === user.data.localId)
-            if (isAdmin) {
-                dispatch(loginSuccess({
-                    data: user.data,
-                    admin: true,
-                    redirect: '/dashboard'
-                }))
-            } else {
-                dispatch(loginSuccess({
-                    data: user.data,
-                    admin: false,
-                    redirect: '/user-login'
-                }))
-            }
+            dispatch(loginSuccess(user,user1));
+            // for (let key in user1.data) {
+            //     adminData.push(user1.data[key].uid)
+            // }
+            // const isAdmin = adminData.find(element => element === user.data.localId)
+            // if (isAdmin) {
+            //     dispatch(loginSuccess({
+            //         data: user.data,
+            //         admin: true,
+            //         redirect: '/dashboard'
+            //     }))
+            // } else {
+            //     dispatch(loginSuccess({
+            //         data: user.data,
+            //         admin: false,
+            //         redirect: '/user-login'
+            //     }))
+            // }
         } catch (e) {
             dispatch(loginFail(e.response.data.error.message));
         }

@@ -46,14 +46,14 @@ export const viewFetchingInitiate = () => {
         dispatch(viewFetching())
         try {
             const {data} = await axios.get("https://auth-test-f6dd6-default-rtdb.firebaseio.com/viewexam.json")
-            const viewData = []
-            for (let key in data) {
-                viewData.push({
-                    id: key,
-                    ...data[key]
-                });
-            }
-            dispatch(viewFetched(viewData))
+            // const viewData = []
+            // for (let key in data) {
+            //     viewData.push({
+            //         id: key,
+            //         ...data[key]
+            //     });
+            // }
+            dispatch(viewFetched(data))
         } catch (e) {
             dispatch(viewFetchingFail(e.message))
         }

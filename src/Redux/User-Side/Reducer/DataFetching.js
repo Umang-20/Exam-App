@@ -1,29 +1,36 @@
 import * as types from '../Types/actionType'
 
-const initialState={
-    loading:false,
-    data:[],
-    error:null
+const initialState = {
+    loading: false,
+    data: [],
+    error: null
 }
 
-const dataReducer=(state=initialState,action)=>{
-    switch(action.type){
+const dataReducer = (state = initialState, action) => {
+    switch (action.type) {
         case types.FETCHING_DATA:
-            return{
+            return {
                 ...state,
-                loading:true
+                loading: true
             }
         case types.DATA_FETCHED:
-            return{
+            let viewData = [];
+            for (let key in action.payload) {
+                viewData.push({
+                    id: key,
+                    ...action.payload[key],
+                });
+            }
+            return {
                 ...state,
-                data:action.payload,
-                loading:false
+                data: viewData,
+                loading: false
             }
         case types.FETCHING_FAILED:
-            return{
+            return {
                 ...state,
-                loading:false,
-                error:action.payload
+                loading: false,
+                error: action.payload
             }
 
         default:

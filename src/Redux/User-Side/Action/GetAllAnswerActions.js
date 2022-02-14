@@ -35,17 +35,17 @@ const GetAllAnswerActions = () => {
     const username = Cookies.get("setUsername")
     const UniqueCode = Cookies.get("setUnicode")
     return async function (dispach) {
-        let allData = [];
+        // let allData = [];
         dispach(GetALlAnswer_Started())
         try {
             const {data} = await axios.get(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`)
-            for (let key in data) {
-                if (data[key].answer === "undefined") {
-                    data[key].answer = "";
-                }
-                allData.push(data[key]);
-            }
-            dispach(GetAllAnswer_Success(allData));
+            // for (let key in data) {
+            //     if (data[key].answer === "undefined") {
+            //         data[key].answer = "";
+            //     }
+            //     allData.push(data[key]);
+            // }
+            dispach(GetAllAnswer_Success(data));
         } catch (e) {
             dispach(GetAllAnswer_Fail(e.message));
         }
