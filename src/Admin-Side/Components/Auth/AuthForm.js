@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import classes from "./AuthForm.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import {registerInitiate, Reset_Error} from "../../../Redux/Admin-Side/Action/actions";
+import {registerInitiate, Reset_Error} from "../../../Redux/Admin-Side/Action/AdminLoginAction";
 import Spinner from "../../../Common-Component/Spinner/Spinner";
 
 const AuthForm = () => {

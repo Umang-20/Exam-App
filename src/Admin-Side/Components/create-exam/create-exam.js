@@ -10,9 +10,9 @@ import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
 import {Clear} from "@material-ui/icons";
 import {useSelector, useDispatch} from "react-redux";
-import {fetchingIniate} from "../../../Redux/Admin-Side/Action/create-examAction";
-import {updatingIniate} from "../../../Redux/Admin-Side/Action/create-examAction";
-import {deleteInitiate} from "../../../Redux/Admin-Side/Action/create-examAction";
+import {fetchingInitiate} from "../../../Redux/Admin-Side/Action/CreateExamAction";
+import {updatingInitiate} from "../../../Redux/Admin-Side/Action/CreateExamAction";
+import {deleteInitiate} from "../../../Redux/Admin-Side/Action/CreateExamAction";
 import Loader from "../../../Common-Component/Loader/Loader";
 
 function CreateExam() {
@@ -48,7 +48,7 @@ function CreateExam() {
 
 
     useEffect(() => {
-        dispatch(fetchingIniate());
+        dispatch(fetchingInitiate());
     }, [dispatch]);
 
     const onchangeHandler = (e) => {
@@ -96,7 +96,6 @@ function CreateExam() {
         const currentTime = d.getTime();
         const {time, uniqueCode, selectedQues} = form;
         const finalData = {time, uniqueCode, selectedQues, year, day, month, currentTime, creator};
-        console.log(finalData);
         await axios
             .post("https://auth-test-f6dd6-default-rtdb.firebaseio.com/viewexam.json", finalData)
         setForm({
@@ -107,7 +106,7 @@ function CreateExam() {
         setIsChecked({});
     };
     const saveClickHandler = () => {
-        dispatch(updatingIniate(id, editForm))
+        dispatch(updatingInitiate(id, editForm))
         setModalShow(false)
     }
     const popUpclick = () => {

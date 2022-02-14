@@ -2,7 +2,7 @@ import classes from './ProfileForm.module.css';
 import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import {useDispatch, useSelector} from "react-redux";
-import {Reset_Error, Reset_Password_Initialize} from "../../../Redux/Admin-Side/Action/actions";
+import {Reset_Error, Reset_Password_Initialize} from "../../../Redux/Admin-Side/Action/AdminLoginAction";
 import Loader from "../../../Common-Component/Loader/Loader";
 
 const ProfileForm = () => {

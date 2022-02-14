@@ -1,4 +1,4 @@
-import * as types from '../Types/actionTypes'
+import * as types from '../Types/actionType'
 
 const initialState={
     loading:false,
@@ -8,7 +8,7 @@ const initialState={
 
 const viewExamReducer=(state=initialState,action)=>{
     switch(action.type){
-        case types.START_DELEING:
+        case types.START_DELETING:
             return{
                 ...state,
                 loadind:true

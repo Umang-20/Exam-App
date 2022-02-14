@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './Info.module.css'
 import {useSelector} from "react-redux";
-import Cookies from "js-cookie";
 
 function Info() {
     const studentQuestion = useSelector((state) => state.studentQuestion);

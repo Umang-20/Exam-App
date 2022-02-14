@@ -1,4 +1,4 @@
-import * as types from '../Types/actionTypes'
+import * as types from '../Types/actionType'
 
 const initialState={
     loading:false,
@@ -10,7 +10,7 @@ const dataReducer=(state=initialState,action)=>{
     switch(action.type){
         case types.FETCHING_DATA:
         case types.START_UPDATE:
-        case types.VIEW_START_DELEING:
+        case types.VIEW_START_DELETING:
             return{
                 ...state,
                 loading:true
@@ -25,7 +25,7 @@ const dataReducer=(state=initialState,action)=>{
                 ...state,
                 loading:false
             }
-        case types.DATA_FEACHED:
+        case types.DATA_FETCHED:
         return{
             ...state,
             loading:false,

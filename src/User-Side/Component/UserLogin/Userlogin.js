@@ -34,7 +34,7 @@ function Userlogin() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchingInitiate())
-    }, [])
+    }, [dispatch])
 
 
     useEffect(() => {

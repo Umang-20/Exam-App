@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Container, Table, Modal, Card, Row, Col} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {resultFetchingIniate} from "../../../Redux/Admin-Side/Action/resultAction";
-import {fetchingIniate} from "../../../Redux/Admin-Side/Action/create-examAction";
+import {resultFetchingInitiate} from "../../../Redux/Admin-Side/Action/ResultAction";
+import {fetchingInitiate} from "../../../Redux/Admin-Side/Action/CreateExamAction";
 import {RemoveRedEye} from "@material-ui/icons";
 import Circularbar from "../circularprogressbar/circularbar";
 import "./result.css";
@@ -33,8 +33,8 @@ function Results() {
     });
     const [eligible, setEligible] = useState("Not Eligible");
     useEffect(() => {
-        dispatch(resultFetchingIniate());
-        dispatch(fetchingIniate());
+        dispatch(resultFetchingInitiate());
+        dispatch(fetchingInitiate());
     }, [dispatch]);
     if (loading) {
         return <div

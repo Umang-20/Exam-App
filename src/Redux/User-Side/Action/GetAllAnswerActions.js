@@ -2,8 +2,7 @@ import * as types from "../Types/actionType";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-
-const GetALlAnswer_Started = () =>{
+const GetALlAnswer_Started = () => {
     return {
         type: types.GETALLANSWER_START,
         payload: {
@@ -17,17 +16,17 @@ const GetAllAnswer_Success = (data) => {
         type: types.GETALLANSWER_SUCCESS,
         payload: {
             allAnswer: data,
-            loading:false,
+            loading: false,
         }
     }
 }
 
-const GetAllAnswer_Fail = (error) =>{
+const GetAllAnswer_Fail = (error) => {
     return {
         type: types.GETALLANSWER_FAIL,
         payload: {
             error,
-            loading:false,
+            loading: false,
         }
     }
 }
@@ -38,17 +37,18 @@ const GetAllAnswerActions = () => {
     return async function (dispach) {
         let allData = [];
         dispach(GetALlAnswer_Started())
-        await axios.get(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
+        try {
+            const {data} = await axios.get(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`)
             for (let key in data) {
-                if(data[key].answer === "undefined"){
-                    data[key].answer="";
+                if (data[key].answer === "undefined") {
+                    data[key].answer = "";
                 }
                 allData.push(data[key]);
             }
             dispach(GetAllAnswer_Success(allData));
-        }).catch((e)=>{
+        } catch (e) {
             dispach(GetAllAnswer_Fail(e.message));
-        })
+        }
     }
 }
 

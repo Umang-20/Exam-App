@@ -99,6 +99,7 @@
     background: transparent;
     padding: 10px 20px;
     border-radius: 6px;
+    margin: 5px;
 }
 .actions .button1{
     border: 1.5px solid  #f9bf01;

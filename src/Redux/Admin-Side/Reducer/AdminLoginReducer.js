@@ -1,4 +1,4 @@
-import * as types from "../Types/actionTypes";
+import * as types from "../Types/actionType";
 import Cookies from "js-cookie";
 const initialState = {
   loading: false,

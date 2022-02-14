@@ -23,10 +23,12 @@ const ResultPage = () => {
     useEffect(() => {
         dispach(Fetch_Question_Initialization(unicode));
         dispach(Result_Submission_Initialization(0));
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispach]);
 
     useEffect(() => {
         getResult();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [studentQuestion, studentResult])
 
 
@@ -34,7 +36,7 @@ const ResultPage = () => {
         let tMarks = 0;
         let sMarks = 0;
         resultQuestion.forEach((element) => {
-            questions.find((element2) => {
+            questions.forEach((element2) => {
                 if (element2.id === element.ques_id) {
                     if (parseInt(element2.data.correctAnswer) === element.selected_op) {
                         sMarks = sMarks + parseInt(element2.data.weightage);

@@ -36,7 +36,7 @@ const Student_LogOut_Initialize = () => {
             await axios.delete("https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer.json");
             setTimeout(()=>{
                 dispach(Student_LogOut_Success())
-            },600)
+            },500)
         }catch (error) {
             dispach(Student_LogOut_Fail(error.message))
         }

@@ -42,24 +42,24 @@ const Result_Submission_Initialization = (flag) => {
     return async function (dispach) {
         let resultArray = [];
         dispach(Result_Submission_Started());
-        await axios.get(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`).then(({data}) => {
-            console.log(data)
+        try {
+            const {data} = await axios.get(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`)
             for (let key in data) {
                 resultArray.push({ques_id: data[key].questionId, selected_op: parseInt(data[key].answer)})
             }
-            dispach(Result_Submission_Success(resultArray, username, email));
-        }).catch((e) => {
-            dispach(Result_Submission_Fail(e.message))
-        })
-        if (flag === 1) {
-            const resultData = {
-                name: username,
-                exam_ques: resultArray,
-                email: email,
-                date: date,
-                clgname: clgname,
+            if (flag === 1) {
+                const resultData = {
+                    name: username,
+                    exam_ques: resultArray,
+                    email: email,
+                    date: date,
+                    clgname: clgname,
+                }
+                await axios.post('https://auth-test-f6dd6-default-rtdb.firebaseio.com/results1.json', resultData);
             }
-            await axios.post('https://auth-test-f6dd6-default-rtdb.firebaseio.com/results1.json', resultData);
+            dispach(Result_Submission_Success(resultArray, username, email));
+        } catch (e) {
+            dispach(Result_Submission_Fail(e.message))
         }
     }
 }

@@ -3,11 +3,11 @@ import {Table, Container, Button, Modal} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useSelector, useDispatch} from "react-redux";
-import {viewfetchingIniate} from "../../../Redux/Admin-Side/Action/view-examAction";
+import {viewFetchingInitiate} from "../../../Redux/Admin-Side/Action/ViewExamAction";
 import {DeleteOutline} from "@material-ui/icons";
 import {RemoveRedEye} from "@material-ui/icons";
-import {deleteview} from "../../../Redux/Admin-Side/Action/view-examAction";
-import {fetchingIniate} from "../../../Redux/Admin-Side/Action/create-examAction";
+import {deleteView} from "../../../Redux/Admin-Side/Action/ViewExamAction";
+import {fetchingInitiate} from "../../../Redux/Admin-Side/Action/CreateExamAction";
 import Loader from "../../../Common-Component/Loader/Loader";
 
 function ViewExam() {
@@ -22,8 +22,8 @@ function ViewExam() {
     const [id, setId] = useState("");
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(viewfetchingIniate());
-        dispatch(fetchingIniate());
+        dispatch(viewFetchingInitiate());
+        dispatch(fetchingInitiate());
     }, [dispatch]);
 
 
@@ -42,6 +42,7 @@ function ViewExam() {
             }
             setselectedQue(list)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [viewData, quesId]);
 
     const viewHandle = (id) => {
@@ -50,9 +51,9 @@ function ViewExam() {
     };
 
     const popUpclick = () => {
-        dispatch(deleteview(id));
+        dispatch(deleteView(id));
         setModalShow(false);
-        // dispatch(viewfetchingIniate());
+        // dispatch(viewFetchingInitiate());
     };
 
     const deleteHandle = (id) => {

@@ -3,25 +3,19 @@ import style from "./ShowQuestionComponent.module.css";
 import {useSelector, useDispatch} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleRight, faAngleLeft} from "@fortawesome/free-solid-svg-icons";
-import Cookies from "js-cookie";
 import Fetch_Question_Initialization from "../../../Redux/User-Side/Action/FetchQuestion";
-import {useParams} from "react-router-dom";
-import {
-    Answer_Submission_Initialization,
-    Get_Student_Answer, Redirect
-} from "../../../Redux/User-Side/Action/AnswerSubmissionAction";
+import {Answer_Submission_Initialization, Redirect} from "../../../Redux/User-Side/Action/AnswerSubmissionAction";
 import {useHistory} from "react-router";
 import Loader from "../../../Common-Component/Loader/Loader";
 import {Button, Modal} from "react-bootstrap";
 import SubmitResultAction from "../../../Redux/User-Side/Action/SubmitResultAction";
+import Get_Student_Answer from "../../../Redux/User-Side/Action/GetStudentAnswerAction";
 
 
-function ShowQuestionComponent() {
+function ShowQuestionComponent({quesNo, unicode}) {
     const dispatch = useDispatch()
     const studentQuestion = useSelector((state) => state.studentQuestion);
     const studentAnswer = useSelector((state) => state.studentAnswer);
-    const unicode = Cookies.get("setUnicode");
-    const quesNo = parseInt(useParams().id) - 1;
     const [answers, setAnswers] = useState({
         1: false,
         2: false,
@@ -36,7 +30,8 @@ function ShowQuestionComponent() {
 
     useEffect(() => {
         dispatch(Fetch_Question_Initialization(unicode));
-    }, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch])
 
     useEffect(() => {
         if (questions[quesNo]) {
@@ -45,7 +40,7 @@ function ShowQuestionComponent() {
             localStorage.setItem("QuesNo", JSON.stringify(quesNo));
             localStorage.setItem("QuesAnswer", "");
         }
-    }, [quesNo, questions])
+    }, [quesNo, questions, dispatch])
 
     useEffect(() => {
         setInterval(() => {
@@ -68,7 +63,7 @@ function ShowQuestionComponent() {
                 }
             }
         }, 1000)
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if ((studentAnswer.payload.quesNo === quesNo)) {
@@ -109,7 +104,7 @@ function ShowQuestionComponent() {
             setIsReload(false);
             dispatch(SubmitResultAction());
         }
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         const showJoinNow = (event) => {
@@ -123,6 +118,7 @@ function ShowQuestionComponent() {
         return () => {
             document.removeEventListener('mouseleave', showJoinNow);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
@@ -159,7 +155,7 @@ function ShowQuestionComponent() {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p style={{textAlign:"center"}}>During The Exam, Page Refresh is not Allowed.</p>
+                    <p style={{textAlign: "center"}}>During The Exam, Page Refresh is not Allowed.</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button style={{background: "#0dc181"}} onClick={() => {
@@ -169,32 +165,33 @@ function ShowQuestionComponent() {
             </Modal>
             <div className={style.questionarea}>
                 {
-                    ((studentAnswer.payload.loading) || (studentQuestion.payload.loading)) ?
-                        <div style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            width: "100wh",
-                            height: "40vh"
-                        }}><Loader/></div> :
-                        quesNo === studentQuestion.payload.questions.length ?
-                            <>
-                                <div className={style.questionOver}>
-                                    <div><h3>All Questions are Over</h3></div>
+                    quesNo === studentQuestion.payload.questions.length ?
+                        <>
+                            <div className={style.questionOver}>
+                                <div><h3>All Questions are Over</h3></div>
+                            </div>
+                            <div className={style.actionbar}>
+                                <div className={style.actions}>
+                                    <button className={style.button1} onClick={() => {
+                                        dispatch(Redirect(`/exam/${quesNo}`));
+                                    }
+                                    }>
+                                        <FontAwesomeIcon className={style.icon1} icon={faAngleLeft}
+                                        />
+                                        Previous
+                                    </button>
                                 </div>
-                                <div className={style.actionbar}>
-                                    <div className={style.actions}>
-                                        <button className={style.button1} onClick={() => {
-                                            dispatch(Redirect(`/exam/${quesNo}`));
-                                        }
-                                        }>
-                                            <FontAwesomeIcon className={style.icon1} icon={faAngleLeft}
-                                            />
-                                            Previous
-                                        </button>
-                                    </div>
-                                </div>
-                            </>
+                            </div>
+                        </>
+                        :
+                        ((studentAnswer.payload.loading) || (studentQuestion.payload.loading)) ?
+                            <div style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                width: "100wh",
+                                height: "40vh"
+                            }}><Loader/></div>
                             :
                             quesNo === -1 ?
                                 <>
@@ -288,7 +285,6 @@ function ShowQuestionComponent() {
                                                                     </div>
                                                                     :
                                                                     <div>
-                                                                        {/*<Link to={`/exam/${quesNo}`}>*/}
                                                                         <button className={style.button1}
                                                                                 onClick={() => {
                                                                                     dispatch(Redirect(`/exam/${quesNo}`));
@@ -299,12 +295,10 @@ function ShowQuestionComponent() {
                                                                             />
                                                                             Previous
                                                                         </button>
-                                                                        {/*</Link>*/}
                                                                     </div>
                                                             }
 
                                                             <div>
-                                                                {/*<Link to={`/exam/${quesNo + 2}`}>*/}
                                                                 <button className={style.button2} onClick={() => {
                                                                     dispatch(Redirect(`/exam/${quesNo + 2}`));
                                                                 }
@@ -313,7 +307,6 @@ function ShowQuestionComponent() {
                                                                     <FontAwesomeIcon className={style.icon2}
                                                                                      icon={faAngleRight}/>
                                                                 </button>
-                                                                {/*</Link>*/}
                                                             </div>
 
                                                         </div>
@@ -414,7 +407,6 @@ function ShowQuestionComponent() {
                                                                     </div>
                                                                     :
                                                                     <div>
-                                                                        {/*<Link to={`/exam/${quesNo}`}>*/}
                                                                         <button className={style.button1}
                                                                                 onClick={() => {
                                                                                     dispatch(Answer_Submission_Initialization(questions[quesNo].id, localStorage.getItem("QuesAnswer"), mor, quesNo, quesNo));
@@ -425,19 +417,16 @@ function ShowQuestionComponent() {
                                                                             />
                                                                             Previous
                                                                         </button>
-                                                                        {/*</Link>*/}
                                                                     </div>
                                                             }
 
                                                             <div>
-                                                                {/*<Link to={`/exam/${quesNo + 2}`}>*/}
                                                                 <button className={style.button2}
                                                                         onClick={answerSubmission}>
                                                                     Next
                                                                     <FontAwesomeIcon className={style.icon2}
                                                                                      icon={faAngleRight}/>
                                                                 </button>
-                                                                {/*</Link>*/}
                                                             </div>
 
                                                         </div>

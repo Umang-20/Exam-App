@@ -1,16 +1,12 @@
 import React, {useState, useEffect, useRef} from 'react';
 import style from './Header.module.css'
-import Cookies from "js-cookie";
-import {useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 
-function Header() {
+function Header({quesNo,name}) {
     const [hour, sethours] = useState(-1);
     const [minute, setminutes] = useState(-1);
     let [second, setseconds] = useState(-1);
     const [time, setTime] = useState(3000);
-    const name = Cookies.get("setUsername")
-    const quesNo = parseInt(useParams().id) - 1;
     const StudentAnswer = useSelector((state) => state.studentAnswer)
     const StudentQuestion = useSelector((state) => state.studentQuestion)
     const QuesTime = JSON.parse(localStorage.getItem('QuesTime'));
@@ -18,6 +14,7 @@ function Header() {
 
     useEffect(() => {
         setTime(JSON.parse(localStorage.getItem('QuesTime')));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [localStorage.getItem('QuesTime'), quesNo]);
 
     useEffect(() => {

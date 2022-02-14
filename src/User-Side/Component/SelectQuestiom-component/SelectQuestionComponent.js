@@ -1,10 +1,9 @@
 import React from 'react';
 import style from './SelectQuestionComponent.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
 import {Answer_Submission_Initialization, Redirect} from "../../../Redux/User-Side/Action/AnswerSubmissionAction";
 
-function SelectQuestionComponent() {
+function SelectQuestionComponent({quesNo}) {
 
     const studentQuestion = useSelector((state) => state.studentQuestion);
     const studentAnswer = useSelector((state) => state.studentAnswer);
@@ -13,12 +12,11 @@ function SelectQuestionComponent() {
     const QuestionTime = JSON.parse(localStorage.getItem('QuesTime'));
 
     const dispach = useDispatch();
-    const quesNo = parseInt(useParams().id) - 1;
     let showMor = [];
     let showAnswered = [];
     let showSkipped = [];
 
-    allAnswer.filter((element) => {
+    allAnswer.forEach((element) => {
         if (element.mor === true) {
             showMor.push(element.quesNo);
         } else if ((element.answer) && element.mor === false) {
