@@ -53,7 +53,6 @@ function CreateExam() {
 
     const onchangeHandler = (e) => {
         const {name, checked, value} = e.target;
-        console.log(isChecked)
 
         setIsChecked((preValue) => {
             return {
@@ -80,36 +79,32 @@ function CreateExam() {
     };
 
     const toSubmitValidation = () => {
-        if ((creator.name === "") || (creator.email === "")) {
-            setIsCreator(true);
-        } else if ((form.selectedQues.length >= 5) && (form.time !== "")) {
-            setSubmitValidation(true);
-        } else {
+        if ((form.selectedQues.length <= 5) || (form.time === "")) {
             setSubmitError(true);
+        } else if ((creator.name === "") || (creator.email === "")) {
+            setIsCreator(true);
+        } else {
+            setSubmitValidation(true);
         }
     }
 
     const onCreateHandler = async () => {
-        if ((form.selectedQues.length >= 5) && (form.time !== "")) {
-            const d = new Date();
-            const month = d.getMonth() + 1;
-            const day = d.getDate();
-            const year = d.getFullYear();
-            const currentTime = d.getTime();
-            const {time, uniqueCode, selectedQues} = form;
-            const finalData = {time, uniqueCode, selectedQues, year, day, month, currentTime, creator};
-            console.log(finalData);
-            await axios
-                .post("https://auth-test-f6dd6-default-rtdb.firebaseio.com/viewexam.json", finalData)
-            setForm({
-                time: "",
-                uniqueCode: Math.random().toString(36).substr(2, 7),
-                selectedQues: [],
-            });
-            setIsChecked({});
-        } else {
-            alert("Invalid Input");
-        }
+        const d = new Date();
+        const month = d.getMonth() + 1;
+        const day = d.getDate();
+        const year = d.getFullYear();
+        const currentTime = d.getTime();
+        const {time, uniqueCode, selectedQues} = form;
+        const finalData = {time, uniqueCode, selectedQues, year, day, month, currentTime, creator};
+        console.log(finalData);
+        await axios
+            .post("https://auth-test-f6dd6-default-rtdb.firebaseio.com/viewexam.json", finalData)
+        setForm({
+            time: "",
+            uniqueCode: Math.random().toString(36).substr(2, 7),
+            selectedQues: [],
+        });
+        setIsChecked({});
     };
     const saveClickHandler = () => {
         dispatch(updatingIniate(id, editForm))

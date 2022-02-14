@@ -107,7 +107,7 @@ function ShowQuestionComponent() {
         }
         window.onload = function () {
             setIsReload(false);
-            // dispatch(SubmitResultAction());
+            dispatch(SubmitResultAction());
         }
     }, []);
 

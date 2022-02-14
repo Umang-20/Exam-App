@@ -36,12 +36,14 @@ const ResultPage = () => {
         resultQuestion.forEach((element) => {
             questions.find((element2) => {
                 if (element2.id === element.ques_id) {
-                    tMarks = tMarks + parseInt(element2.data.weightage);
                     if (parseInt(element2.data.correctAnswer) === element.selected_op) {
                         sMarks = sMarks + parseInt(element2.data.weightage);
                     }
                 }
             })
+        })
+        questions.forEach((element)=>{
+            tMarks = tMarks + parseInt(element.data.weightage);
         })
         setTotalMarks(tMarks);
         setScoredMarks(sMarks);

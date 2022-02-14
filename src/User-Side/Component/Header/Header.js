@@ -60,22 +60,23 @@ function Header() {
                 {name}
             </div>
             <div className={style.timer}>
-                {StudentAnswer.payload.loading || QuesTime === 0 || QuesTime === -1 || RemainingQuesTime === -1 || hour === -1 || quesNo === -1 || quesNo === StudentQuestion.payload.questions.length ? "00:00:00" :
-                    <>
-                        {hour > 9 ?
-                            hour :
-                            '0' + hour}
-                        :
-                        {minute > 9 ?
-                            minute
+                {StudentAnswer.payload.loading || QuesTime === 0 || QuesTime === -1 || hour === -1 || quesNo === -1 || quesNo === StudentQuestion.payload.questions.length ? "00:00:00" :
+                    RemainingQuesTime === -1 ? "--:--:--" :
+                        <>
+                            {hour > 9 ?
+                                hour :
+                                '0' + hour}
                             :
-                            '0' + minute}
-                        :
-                        {second > 9 ?
-                            second
+                            {minute > 9 ?
+                                minute
+                                :
+                                '0' + minute}
                             :
-                            '0' + second}
-                    </>
+                            {second > 9 ?
+                                second
+                                :
+                                '0' + second}
+                        </>
 
                 }
 
