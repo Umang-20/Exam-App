@@ -2,9 +2,10 @@ import * as types from "../Types/actionType";
 import Cookies from "js-cookie";
 
 const defaultValue = {
-    payload: {
-        details: {}, loading: false, error: null, studentRedirect: "",
-    }
+    details: {},
+    loading: false,
+    error: null,
+    studentRedirect: "",
 }
 
 const LoginReducer = (state = defaultValue, action) => {
@@ -12,9 +13,8 @@ const LoginReducer = (state = defaultValue, action) => {
         case types.STUDENT_LOGIN_STARTED:
         case types.STUDENT_LOGOUT_STARTED:
             return {
-                ...state, payload: {
-                    ...state.payload, loading: action.payload.loading,
-                }
+                ...state,
+                loading: action.payload.loading,
             }
         case types.STUDENT_LOGIN_SUCCESS:
             Cookies.set("setEmail", action.payload.details.email);
@@ -23,12 +23,10 @@ const LoginReducer = (state = defaultValue, action) => {
             Cookies.set('setClgname', action.payload.details.clgname);
             localStorage.setItem("Student", JSON.stringify(action.payload.details));
             return {
-                ...state, payload: {
-                    ...state.payload,
-                    details: action.payload.details,
-                    loading: action.payload.loading,
-                    studentRedirect: "/exam/0",
-                }
+                ...state,
+                details: action.payload.details,
+                loading: action.payload.loading,
+                studentRedirect: "/exam/0",
             }
         case types.STUDENT_LOGOUT_SUCCESS:
             Cookies.remove("setEmail");
@@ -44,17 +42,15 @@ const LoginReducer = (state = defaultValue, action) => {
             localStorage.removeItem("Result");
             return {
                 ...state,
-                payload: {
-                    studentRedirect: "/student-login",
-                    loading: action.payload.loading,
-                }
+                studentRedirect: "/student-login",
+                loading: action.payload.loading,
             }
         case types.STUDENT_LOGIN_FAIL:
         case types.STUDENT_LOGOUT_FAIL:
             return {
-                ...state, payload: {
-                    ...state.payload, loading: action.payload.loading, error: action.payload.error,
-                }
+                ...state,
+                loading: action.payload.loading,
+                error: action.payload.error,
             }
         default:
             return state;

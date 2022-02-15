@@ -85,17 +85,17 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
 
     //Student Redirect
     useEffect(() => {
-        if (student.payload.studentRedirect && studentLogin) {
-            history.push(student.payload.studentRedirect);
+        if (student.studentRedirect && studentLogin) {
+            history.push(student.studentRedirect);
         }
-    }, [student.payload.studentRedirect, studentLogin, history])
+    }, [student.studentRedirect, studentLogin, history])
 
     //ExamPage Redirect
     useEffect(() => {
-        if (studentAnswer.payload.isredirect) {
-            history.push(studentAnswer.payload.isredirect);
+        if (studentAnswer.isredirect) {
+            history.push(studentAnswer.isredirect);
         }
-    }, [studentAnswer.payload.isredirect, history])
+    }, [studentAnswer.isredirect, history])
 
     return (
         <>

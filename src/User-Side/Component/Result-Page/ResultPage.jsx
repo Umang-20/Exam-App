@@ -16,8 +16,8 @@ const ResultPage = () => {
     const email = Cookies.get("setEmail");
     const clgname = Cookies.get("setClgname");
     const username = Cookies.get("setUsername");
-    const questions = studentQuestion.payload.questions;
-    const resultQuestion = studentResult.payload.exam_ques;
+    const questions = studentQuestion.questions;
+    const resultQuestion = studentResult.exam_ques;
     const dispach = useDispatch();
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const ResultPage = () => {
     return (
         <>
             {
-                ((totalMarks === -1 && scoredMarks === -1) || (student.payload.loading)) ? <div style={{
+                ((totalMarks === -1 && scoredMarks === -1) || (student.loading)) ? <div style={{
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",

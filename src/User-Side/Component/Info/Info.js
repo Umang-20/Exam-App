@@ -5,8 +5,8 @@ import {useSelector} from "react-redux";
 function Info() {
     const studentQuestion = useSelector((state) => state.studentQuestion);
     const studentAnswer = useSelector((state) => state.studentAnswer);
-    const totalQuestion = studentQuestion.payload.questions.length;
-    const allAnswer = studentAnswer.payload.allAnswer;
+    const totalQuestion = studentQuestion.questions.length;
+    const allAnswer = studentAnswer.allAnswer;
 
     const countMor = allAnswer.filter((element) => element.mor === true);
     const countAnswered = allAnswer.filter((element) => (element.answer) && element.mor === false)

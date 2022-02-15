@@ -29,12 +29,12 @@ const loginStart = () => {
     }
 }
 
-const loginSuccess = (user,user1) => {
+const loginSuccess = (user, user1) => {
     return {
         type: types.LOGIN_SUCCESS,
         payload: {
             user,
-            user1,
+            adminUser: user1,
         }
     }
 }
@@ -103,9 +103,7 @@ export const registerInitiate = (email, password, isAdmin) => {
         try {
             const user = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAh_KBa1xNr-AGIYJEt7RsK1S9M9HZZomk', data)
             if (isAdmin) {
-                await axios.post('https://auth-test-f6dd6-default-rtdb.firebaseio.com/Admin.json', {
-                    uid: user.data.localId
-                })
+                await axios.post('https://auth-test-f6dd6-default-rtdb.firebaseio.com/Admin.json', {uid: user.data.localId})
             }
             dispatch(registerSuccess())
         } catch (e) {
@@ -123,29 +121,11 @@ export const loginInitiate = (email, password) => {
         returnSecureToken: true
     }
     return async function (dispatch) {
-        // const adminData = []
         dispatch(loginStart());
         try {
             const user = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAh_KBa1xNr-AGIYJEt7RsK1S9M9HZZomk', userdata)
             const user1 = await axios.get('https://auth-test-f6dd6-default-rtdb.firebaseio.com/Admin.json')
-            dispatch(loginSuccess(user,user1));
-            // for (let key in user1.data) {
-            //     adminData.push(user1.data[key].uid)
-            // }
-            // const isAdmin = adminData.find(element => element === user.data.localId)
-            // if (isAdmin) {
-            //     dispatch(loginSuccess({
-            //         data: user.data,
-            //         admin: true,
-            //         redirect: '/dashboard'
-            //     }))
-            // } else {
-            //     dispatch(loginSuccess({
-            //         data: user.data,
-            //         admin: false,
-            //         redirect: '/user-login'
-            //     }))
-            // }
+            dispatch(loginSuccess(user, user1));
         } catch (e) {
             dispatch(loginFail(e.response.data.error.message));
         }
@@ -162,9 +142,8 @@ export const Reset_Password_Initialize = (authid, password) => {
         dispach(resetPasswordStart());
         try {
             const user = await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAh_KBa1xNr-AGIYJEt7RsK1S9M9HZZomk", userdata)
-                dispach(resetPasswordSuccess({data: user.data}));
-        }
-        catch (e) {
+            dispach(resetPasswordSuccess({data: user.data}));
+        } catch (e) {
             dispach(resetPasswordFail(e.response.data.error.message))
         }
     }
@@ -178,8 +157,7 @@ export const logoutInitiate = () => {
             setTimeout(() => {
                 dispatch(logoutSuccess());
             }, 600)
-        }
-        catch (e) {
+        } catch (e) {
             dispatch(logoutFail(e.message))
         }
     }

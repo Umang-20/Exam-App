@@ -7,8 +7,8 @@ function SelectQuestionComponent({quesNo}) {
 
     const studentQuestion = useSelector((state) => state.studentQuestion);
     const studentAnswer = useSelector((state) => state.studentAnswer);
-    const allAnswer = studentAnswer.payload.allAnswer;
-    const questions = studentQuestion.payload.questions;
+    const allAnswer = studentAnswer.allAnswer;
+    const questions = studentQuestion.questions;
     const QuestionTime = JSON.parse(localStorage.getItem('QuesTime'));
 
     const dispach = useDispatch();

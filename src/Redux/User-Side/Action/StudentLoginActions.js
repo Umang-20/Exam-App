@@ -10,7 +10,7 @@ const Student_Login_Started = () => {
     }
 }
 
-const Student_Login_Success = (details, time, questions) => {
+const Student_Login_Success = (details) => {
     return {
         type: types.STUDENT_LOGIN_SUCCESS,
         payload: {

@@ -57,7 +57,7 @@ function Header({quesNo,name}) {
                 {name}
             </div>
             <div className={style.timer}>
-                {StudentAnswer.payload.loading || QuesTime === 0 || QuesTime === -1 || hour === -1 || quesNo === -1 || quesNo === StudentQuestion.payload.questions.length ? "00:00:00" :
+                {StudentAnswer.loading || QuesTime === 0 || QuesTime === -1 || hour === -1 || quesNo === -1 || quesNo === StudentQuestion.questions.length ? "00:00:00" :
                     RemainingQuesTime === -1 ? "--:--:--" :
                         <>
                             {hour > 9 ?

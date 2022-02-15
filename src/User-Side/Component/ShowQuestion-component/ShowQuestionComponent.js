@@ -24,7 +24,7 @@ function ShowQuestionComponent({quesNo, unicode}) {
     });
     const [mor, setMor] = useState(false);
     const [isReload, setIsReload] = useState(false);
-    const questions = studentQuestion.payload.questions;
+    const questions = studentQuestion.questions;
     const history = useHistory();
     const QuestionTime = JSON.parse(localStorage.getItem('QuesTime'));
 
@@ -40,7 +40,8 @@ function ShowQuestionComponent({quesNo, unicode}) {
             localStorage.setItem("QuesNo", JSON.stringify(quesNo));
             localStorage.setItem("QuesAnswer", "");
         }
-    }, [quesNo, questions, dispatch])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [quesNo, questions])
 
     useEffect(() => {
         setInterval(() => {
@@ -66,12 +67,12 @@ function ShowQuestionComponent({quesNo, unicode}) {
     }, [dispatch]);
 
     useEffect(() => {
-        if ((studentAnswer.payload.quesNo === quesNo)) {
-            setMor(studentAnswer.payload.mor);
-            if (studentAnswer.payload.answer !== "undefined") {
-                setAnswers({...answers,[studentAnswer.payload.answer]: true});
-                if (studentAnswer.payload.answer !== undefined) {
-                    localStorage.setItem("QuesAnswer", studentAnswer.payload.answer)
+        if ((studentAnswer.quesNo === quesNo)) {
+            setMor(studentAnswer.mor);
+            if (studentAnswer.answer !== "undefined") {
+                setAnswers({...answers, [studentAnswer.answer]: true});
+                if (studentAnswer.answer !== undefined) {
+                    localStorage.setItem("QuesAnswer", studentAnswer.answer)
                 } else {
                     localStorage.setItem("QuesAnswer", "");
                 }
@@ -85,6 +86,7 @@ function ShowQuestionComponent({quesNo, unicode}) {
                 4: false,
             });
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [studentAnswer, quesNo])
 
     useEffect(() => {
@@ -102,7 +104,7 @@ function ShowQuestionComponent({quesNo, unicode}) {
         }
         window.onload = function () {
             setIsReload(false);
-            dispatch(SubmitResultAction());
+            // dispatch(SubmitResultAction());
         }
     }, [dispatch]);
 
@@ -165,7 +167,7 @@ function ShowQuestionComponent({quesNo, unicode}) {
             </Modal>
             <div className={style.questionarea}>
                 {
-                    quesNo === studentQuestion.payload.questions.length ?
+                    quesNo === studentQuestion.questions.length ?
                         <>
                             <div className={style.questionOver}>
                                 <div><h3>All Questions are Over</h3></div>
@@ -184,7 +186,7 @@ function ShowQuestionComponent({quesNo, unicode}) {
                             </div>
                         </>
                         :
-                        ((studentAnswer.payload.loading) || (studentQuestion.payload.loading)) ?
+                        ((studentAnswer.loading) || (studentQuestion.loading)) ?
                             <div style={{
                                 display: "flex",
                                 justifyContent: "center",

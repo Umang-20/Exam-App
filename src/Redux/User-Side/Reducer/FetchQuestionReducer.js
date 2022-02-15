@@ -1,12 +1,10 @@
 import * as types from "../Types/actionType";
 
 const defaultValue = {
-    payload: {
-        loading: false,
-        error: null,
-        questions: [],
-        time: null,
-    }
+    loading: false,
+    error: null,
+    questions: [],
+    time: null,
 }
 
 const FetchQuestionReducer = (state = defaultValue, action) => {
@@ -14,10 +12,7 @@ const FetchQuestionReducer = (state = defaultValue, action) => {
         case types.FETCH_QUESTION_STARTED:
             return {
                 ...state,
-                payload: {
-                    ...state.payload,
-                    loading: action.payload.loading,
-                }
+                loading: action.payload.loading,
             }
         case types.FETCH_QUESTION_SUCCESS:
             let questionsID = [];
@@ -40,21 +35,15 @@ const FetchQuestionReducer = (state = defaultValue, action) => {
 
             return {
                 ...state,
-                payload: {
-                    ...state.payload,
-                    time: time,
-                    questions: questions,
-                    loading: action.payload.loading,
-                }
+                time: time,
+                questions: questions,
+                loading: action.payload.loading,
             }
         case types.FETCH_QUESTION_FAIL:
             return {
                 ...state,
-                payload: {
-                    ...state.payload,
-                    loading: action.payload.loading,
-                    error: action.payload.error,
-                }
+                loading: action.payload.loading,
+                error: action.payload.error,
             }
         default:
             return state;

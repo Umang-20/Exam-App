@@ -66,13 +66,6 @@ export const fetchingInitiate = () => {
         dispatch(dataFetching());
         try {
             const {data} = await axios.get("https://auth-test-f6dd6-default-rtdb.firebaseio.com/questions.json");
-            // let viewData = [];
-            // for (let key in data) {
-            //     viewData.push({
-            //         id: key,
-            //         ...data[key],
-            //     });
-            // }
             dispatch(dataFetched(data));
         } catch (e) {
             dispatch(fetchingFail(e.message));
