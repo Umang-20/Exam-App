@@ -8,27 +8,28 @@ const defaultValue = {
 }
 
 const FetchQuestionReducer = (state = defaultValue, action) => {
+    const {payload} = action;
     switch (action.type) {
         case types.FETCH_QUESTION_STARTED:
             return {
                 ...state,
-                loading: action.payload.loading,
+                loading: payload.loading,
             }
         case types.FETCH_QUESTION_SUCCESS:
             let questionsID = [];
             let questions = [];
             let time;
-            for (let key in action.payload.allExam) {
-                if (action.payload.allExam[key].uniqueCode === action.payload.code) {
-                    questionsID = [...action.payload.allExam[key].selectedQues]
-                    time = action.payload.allExam[key].time;
+            for (let key in payload.allExam) {
+                if (payload.allExam[key].uniqueCode === payload.code) {
+                    questionsID = [...payload.allExam[key].selectedQues]
+                    time = payload.allExam[key].time;
                 }
             }
-            for (let key in action.payload.questions) {
-                let questionTime = parseInt(action.payload.questions[key].time);
+            for (let key in payload.questions) {
+                let questionTime = parseInt(payload.questions[key].time);
                 questionsID.forEach((element) => {
                     if (element === key) {
-                        questions.push({data: action.payload.questions[key], id: element, time: questionTime})
+                        questions.push({data: payload.questions[key], id: element, time: questionTime})
                     }
                 })
             }
@@ -37,13 +38,13 @@ const FetchQuestionReducer = (state = defaultValue, action) => {
                 ...state,
                 time: time,
                 questions: questions,
-                loading: action.payload.loading,
+                loading: payload.loading,
             }
         case types.FETCH_QUESTION_FAIL:
             return {
                 ...state,
-                loading: action.payload.loading,
-                error: action.payload.error,
+                loading: payload.loading,
+                error: payload.error,
             }
         default:
             return state;

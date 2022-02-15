@@ -11,6 +11,7 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
+    const {payload} = action;
     switch (action.type) {
         case types.REGISTER_START:
         case types.LOGIN_START:
@@ -22,26 +23,28 @@ const userReducer = (state = initialState, action) => {
             };
 
         case types.LOGIN_SUCCESS:
-            Cookies.set("settoken", action.payload.user.data.idToken);
-            Cookies.set("setemail", action.payload.user.data.email);
-            localStorage.setItem("settoken", action.payload.user.data.idToken);
-            localStorage.setItem("setemail", action.payload.user.data.email);
+            const {user} = payload;
+            const {adminUser} = payload;
+            Cookies.set("settoken", user.data.idToken);
+            Cookies.set("setemail", user.data.email);
+            localStorage.setItem("settoken", user.data.idToken);
+            localStorage.setItem("setemail", user.data.email);
             let adminData = [];
             let data;
             let admin;
             let redirect;
-            for (let key in action.payload.adminUser.data) {
-                adminData.push(action.payload.adminUser.data[key].uid)
+            for (let key in adminUser.data) {
+                adminData.push(adminUser.data[key].uid)
             }
-            const isAdmin = adminData.find(element => element === action.payload.user.data.localId)
+            const isAdmin = adminData.find(element => element === user.data.localId)
             if (isAdmin) {
                     Cookies.set('isAdmin', true)
-                    data = action.payload.user.data;
+                    data = user.data;
                     admin = true;
                     redirect = '/dashboard';
             } else {
                     Cookies.set('isAdmin', false)
-                    data = action.payload.user.data;
+                    data = user.data;
                     admin = false;
                     redirect = '/student-login';
             }
@@ -67,7 +70,7 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: action.payload,
+                error: payload,
             };
 
         case types.LOGIN_FAIL:
@@ -75,7 +78,7 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: action.payload,
+                error: payload,
             };
         case types.LOGOUT_SUCCESS:
             Cookies.remove("settoken");
@@ -97,7 +100,7 @@ const userReducer = (state = initialState, action) => {
             }
         case types.RESET_PASSWORD_SUCCESS:
             Cookies.remove("settoken");
-            Cookies.set("settoken", action.payload.data.idToken);
+            Cookies.set("settoken", payload.data.idToken);
             return {
                 ...state,
                 loading: false,

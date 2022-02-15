@@ -6,6 +6,7 @@ const initialState = {
     error: null
 }
 const resultReducer = (state = initialState, action) => {
+    const {payload} = action;
     switch (action.type) {
         case types.RESULT_FETCHING:
             return {
@@ -14,10 +15,10 @@ const resultReducer = (state = initialState, action) => {
             }
         case types.RESULT_FETCHED:
             let viewData = [];
-            for (let key in action.payload) {
+            for (let key in payload) {
                 viewData.push({
                     id: key,
-                    ...action.payload[key],
+                    ...payload[key],
                 });
             }
             return {

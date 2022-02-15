@@ -9,23 +9,24 @@ const defaultValue = {
 }
 
 const LoginReducer = (state = defaultValue, action) => {
+    const {payload} = action;
     switch (action.type) {
         case types.STUDENT_LOGIN_STARTED:
         case types.STUDENT_LOGOUT_STARTED:
             return {
                 ...state,
-                loading: action.payload.loading,
+                loading: payload.loading,
             }
         case types.STUDENT_LOGIN_SUCCESS:
-            Cookies.set("setEmail", action.payload.details.email);
-            Cookies.set('setUnicode', action.payload.details.code);
-            Cookies.set("setUsername", action.payload.details.username);
-            Cookies.set('setClgname', action.payload.details.clgname);
-            localStorage.setItem("Student", JSON.stringify(action.payload.details));
+            Cookies.set("setEmail", payload.details.email);
+            Cookies.set('setUnicode', payload.details.code);
+            Cookies.set("setUsername", payload.details.username);
+            Cookies.set('setClgname', payload.details.clgname);
+            localStorage.setItem("Student", JSON.stringify(payload.details));
             return {
                 ...state,
-                details: action.payload.details,
-                loading: action.payload.loading,
+                details: payload.details,
+                loading: payload.loading,
                 studentRedirect: "/exam/0",
             }
         case types.STUDENT_LOGOUT_SUCCESS:
@@ -43,14 +44,14 @@ const LoginReducer = (state = defaultValue, action) => {
             return {
                 ...state,
                 studentRedirect: "/student-login",
-                loading: action.payload.loading,
+                loading: payload.loading,
             }
         case types.STUDENT_LOGIN_FAIL:
         case types.STUDENT_LOGOUT_FAIL:
             return {
                 ...state,
-                loading: action.payload.loading,
-                error: action.payload.error,
+                loading: payload.loading,
+                error: payload.error,
             }
         default:
             return state;

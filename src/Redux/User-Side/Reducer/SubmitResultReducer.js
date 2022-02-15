@@ -9,26 +9,27 @@ const defaultValue = {
 }
 
 const SubmitResultReducer = (state = defaultValue, action) => {
+    const {payload} = action;
     switch (action.type) {
         case types.RESULT_SUBMISSION_STARTED:
             return {
                 ...state,
-                loading: action.payload.loading,
+                loading: payload.loading,
             }
         case types.RESULT_SUBMISSION_SUCCESS:
             localStorage.setItem("Result", JSON.stringify("yes"));
             return {
                 ...state,
-                loading: action.payload.loading,
-                exam_ques: action.payload.data,
-                name: action.payload.name,
-                email: action.payload.email,
+                loading: payload.loading,
+                exam_ques: payload.data,
+                name: payload.name,
+                email: payload.email,
             }
         case types.RESULT_SUBMISSION_FAIL:
             return {
                 ...state,
-                loading: action.payload.loading,
-                error: action.payload.error,
+                loading: payload.loading,
+                error: payload.error,
             }
         default:
             return state;

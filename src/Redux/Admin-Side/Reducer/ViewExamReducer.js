@@ -7,6 +7,7 @@ const initialState = {
 }
 
 const viewExamReducer = (state = initialState, action) => {
+    const {payload} = action;
     switch (action.type) {
         case types.START_DELETING:
             return {
@@ -25,10 +26,10 @@ const viewExamReducer = (state = initialState, action) => {
             }
         case types.VIEW_EXAM_FETCHED:
             const viewData = []
-            for (let key in action.payload) {
+            for (let key in payload) {
                 viewData.push({
                     id: key,
-                    ...action.payload[key]
+                    ...payload[key]
                 });
             }
             return {
@@ -41,7 +42,7 @@ const viewExamReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                error: payload
             }
 
         default:
