@@ -38,7 +38,7 @@ const GetAllAnswerActions = () => {
     return async function (dispach) {
         dispach(GetALlAnswer_Started())
         try {
-            const {data} = await getRequest(StudentAnswer(username,UniqueCode));
+            const {data} = await getRequest(StudentAnswer(username, UniqueCode));
             dispach(GetAllAnswer_Success(data));
         } catch (e) {
             dispach(GetAllAnswer_Fail(e.message));

@@ -37,7 +37,9 @@ const Layout = (props) => {
                     isAdmin ?
                         <Sidebar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu}>
                             <main>{props.children}</main>
-                        </Sidebar> : <main>{props.children}</main>
+                        </Sidebar>
+                        :
+                        <main>{props.children}</main>
             }
         </>
     );

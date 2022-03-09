@@ -75,7 +75,10 @@ const resetPasswordStart = () => {
 const resetPasswordSuccess = (user) => {
     return {
         type: types.RESET_PASSWORD_SUCCESS,
-        payload: user,
+        payload: {
+            user,
+            error: "Reset Password Success",
+        }
     }
 }
 
@@ -85,7 +88,6 @@ const resetPasswordFail = (error) => {
         payload: error
     }
 }
-
 
 
 export const Reset_Error = () => {

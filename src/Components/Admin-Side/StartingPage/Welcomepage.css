@@ -1,14 +1,15 @@
-*{
+* {
     margin: 0;
     padding: 0;
     text-decoration: none;
     box-sizing: border-box;
 }
 
-section{
+section {
     padding: 100px 0;
-    
+
 }
+
 .home {
     display: flex;
     justify-content: center;
@@ -17,40 +18,46 @@ section{
     color: #111;
     min-height: 500px;
     min-width: fit-content;
-    
+
 }
-.home .max-width{
-    margin: 70px auto ;
+
+.home .max-width {
+    margin: 70px auto;
     position: relative;
-    
- }
- .home .home-content{
+
+}
+
+.home .home-content {
     text-align: center;
     margin: 0;
-    
- }
- .home .home-content img{
-     height: 400px;
-     width: 400px;
-     
- }
- .home .home-content h2{
+
+}
+
+.home .home-content img {
+    height: 400px;
+    width: 400px;
+
+}
+
+.home .home-content h2 {
     font-size: 50px;
- }
- .home .home-content .text-1{
-     color: #111;
-     font-size: 35px;
-     position: absolute;
-     text-align: center;
-     left:100px;
-     top: 100px;
- }
- .home .home-content .text-2{
+}
+
+.home .home-content .text-1 {
     color: #111;
     font-size: 35px;
     position: absolute;
     text-align: center;
-    left:40px;
+    left: 100px;
+    top: 100px;
+}
+
+.home .home-content .text-2 {
+    color: #111;
+    font-size: 35px;
+    position: absolute;
+    text-align: center;
+    left: 40px;
     top: 250px;
 }
  

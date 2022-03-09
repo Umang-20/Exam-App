@@ -42,8 +42,8 @@
     align-items: center;
     justify-content: space-evenly;
     margin-left: 20px;
-    flex-wrap: wrap;
 }
+
 .detail {
     display: flex;
     align-items: center;
@@ -73,5 +73,10 @@
 @media (max-width: 750px) {
     .clgname {
         width: 100%;
+    }
+
+    .details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 }

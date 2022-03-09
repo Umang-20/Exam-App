@@ -21,9 +21,9 @@ function Login() {
         dispatch(Reset_Error());
     }, [dispatch]);
 
-    useEffect(()=>{
+    useEffect(() => {
         setErrorMsg(error);
-    },[error,loading]);
+    }, [error, loading]);
 
     const switchAuthModeHandler = () => {
         setErrorMsg('')
@@ -38,7 +38,7 @@ function Login() {
     return (
         <>
             {
-                loading?<Spinner/>: <section className={classes.auth}>
+                loading ? <Spinner/> : <section className={classes.auth}>
                     <h1>Login</h1>
 
                     <form onSubmit={submitHandler}>

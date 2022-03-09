@@ -78,7 +78,7 @@ export const updatingInitiate = (id, data) => {
     return async function (dispatch) {
         dispatch(dataUpdating());
         try {
-            await putRequest(Questions,id,data)
+            await putRequest(Questions, id, data)
             dispatch(dataUpdated());
             dispatch(fetchingInitiate());
         } catch (e) {
@@ -91,7 +91,7 @@ export const deleteInitiate = (id) => {
     return async function (dispatch) {
         dispatch(deletingStart())
         try {
-            await deleteRequest(Questions,id)
+            await deleteRequest(Questions, id)
             dispatch(deleted())
             dispatch(fetchingInitiate())
         } catch (e) {

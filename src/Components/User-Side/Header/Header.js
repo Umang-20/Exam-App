@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import style from './Header.module.css'
 import {useSelector} from "react-redux";
 
-function Header({quesNo,name}) {
+function Header({quesNo, name}) {
     const [hour, sethours] = useState(-1);
     const [minute, setminutes] = useState(-1);
     let [second, setseconds] = useState(-1);
@@ -15,7 +15,7 @@ function Header({quesNo,name}) {
     useEffect(() => {
         setTime(JSON.parse(localStorage.getItem('QuesTime')));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [localStorage.getItem('QuesTime'),quesNo]);
+    }, [localStorage.getItem('QuesTime'), quesNo]);
 
     useEffect(() => {
         localStorage.setItem("RemainingQuesTime", JSON.stringify(-1))

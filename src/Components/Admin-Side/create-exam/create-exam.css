@@ -13,7 +13,6 @@
     position: sticky;
     top: -1px;
     z-index: 5;
-    /*background: linear-gradient(45deg, #0dc181, #1bdcae);*/
     background: linear-gradient(
             45deg, #4169E1, #0096FF);
     color: white;
@@ -40,7 +39,6 @@
 }
 
 #dropdown-menu-align-right {
-    /*background: linear-gradient(45deg, #0dc181, #1bdcae);*/
     background: linear-gradient(
             45deg, #4169E1, #0096FF);
     color: white;
@@ -59,7 +57,6 @@
     overflow-x: auto;
     height: 500px;
     width: 95%;
-    /*min-width: 1000px;*/
     margin: 0;
     padding: 0;
 }
@@ -81,8 +78,6 @@ button #hover-text {
     text-align: center;
     border-radius: 6px;
     padding: 2px 0;
-
-    /* Position the tooltip */
     position: absolute;
     top: -10px;
     right: 50px;
@@ -119,7 +114,6 @@ button:hover #hover-text {
 }
 
 #all {
-    /*background: linear-gradient(45deg, #0dc181, #1bdcae);*/
     background: linear-gradient(
             45deg, #4169E1, #0096FF);
     color: white;
@@ -137,14 +131,15 @@ button:hover #hover-text {
 
 @media (max-width: 750px) {
     #row {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 
     .col {
         margin-bottom: 10px;
+        width: 190px;
     }
+
     .fulltable {
         margin-top: 80px;
     }

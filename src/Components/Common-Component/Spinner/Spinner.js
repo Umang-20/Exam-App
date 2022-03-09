@@ -4,8 +4,10 @@ import './Spinner.css'
 function Spinner() {
     return (
 
-<div className="lds-circle"><div></div></div>
-        
+        <div className="lds-circle">
+            <div></div>
+        </div>
+
     )
 }
 

@@ -1,48 +1,45 @@
 .form {
-  width: 95%;
-  max-width: 25rem;
-  margin: 2rem auto;
-  
+    width: 95%;
+    max-width: 25rem;
+    margin: 2rem auto;
+
 }
 
 .control {
-  margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
-
 
 
 .control input {
-  font: inherit;
-  background-color: transparent;
-  color: #38015c;
-  border-radius: 4px;
-  border: 1px solid grey;
-  width: 100%;
-  text-align: left;
-  padding: 4px 0 4px 12px ;
+    font: inherit;
+    background-color: transparent;
+    color: #38015c;
+    border-radius: 4px;
+    border: 1px solid grey;
+    width: 100%;
+    text-align: left;
+    padding: 4px 0 4px 12px;
 }
 
 .action {
-  margin-top: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 .action button {
-  cursor: pointer;
-  font: inherit;
-  color: white;
-  font-size: 16px;
-  /*background: linear-gradient(*/
-  /*45deg,#0dc181,#1bdcae);*/
-  background: linear-gradient(
-          45deg,#4169E1,#0096FF);
-  border: 1px solid #4169E1;
-  border-radius: 4px;
-  padding: 0.5rem 2.5rem;
-  font-weight: bold;
-  padding: 7px 20px;
+    cursor: pointer;
+    font: inherit;
+    color: white;
+    font-size: 16px;
+    background: linear-gradient(
+            45deg, #4169E1, #0096FF);
+    border: 1px solid #4169E1;
+    border-radius: 4px;
+    padding: 0.5rem 2.5rem;
+    font-weight: bold;
+    padding: 7px 20px;
 }
 
 .action button:hover {
-  background: white;
-  color: #4169E1;
+    background: white;
+    color: #4169E1;
 }

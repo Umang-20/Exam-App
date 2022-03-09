@@ -38,15 +38,15 @@ const userReducer = (state = initialState, action) => {
             }
             const isAdmin = adminData.find(element => element === user.data.localId)
             if (isAdmin) {
-                    Cookies.set('isAdmin', true)
-                    data = user.data;
-                    admin = true;
-                    redirect = '/dashboard';
+                Cookies.set('isAdmin', true)
+                data = user.data;
+                admin = true;
+                redirect = '/dashboard';
             } else {
-                    Cookies.set('isAdmin', false)
-                    data = user.data;
-                    admin = false;
-                    redirect = '/student-login';
+                Cookies.set('isAdmin', false)
+                data = user.data;
+                admin = false;
+                redirect = '/student-login';
             }
             return {
                 ...state,
@@ -100,10 +100,11 @@ const userReducer = (state = initialState, action) => {
             }
         case types.RESET_PASSWORD_SUCCESS:
             Cookies.remove("settoken");
-            Cookies.set("settoken", payload.data.idToken);
+            Cookies.set("settoken", payload.user.data.idToken);
             return {
                 ...state,
                 loading: false,
+                error: payload.error,
             };
         default:
             return state;

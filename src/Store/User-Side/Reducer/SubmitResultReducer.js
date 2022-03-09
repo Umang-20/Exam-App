@@ -19,7 +19,7 @@ const SubmitResultReducer = (state = defaultValue, action) => {
             }
         case types.RESULT_SUBMISSION_SUCCESS:
             localStorage.setItem("Result", JSON.stringify("yes"));
-            Cookies.set("Result","yes");
+            Cookies.set("Result", "yes");
             return {
                 ...state,
                 loading: payload.loading,

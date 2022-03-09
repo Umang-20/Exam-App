@@ -2,8 +2,6 @@ import * as types from "../Types/actionType";
 import axios from "axios";
 import Cookies from "js-cookie";
 import {postRequest} from "../../../api/request";
-// import {Results} from "../../../api/queries";
-// import {Redirect} from "./AnswerSubmissionAction";
 
 const Result_Submission_Started = () => {
     return {
@@ -58,10 +56,9 @@ const Result_Submission_Initialization = (flag) => {
                     date: date,
                     clgname: clgname,
                 }
-                await postRequest("result1",resultData);
+                await postRequest("result1", resultData);
             }
             dispach(Result_Submission_Success(resultArray, username, email));
-            // dispach(Redirect("/studentresult"));
         } catch (e) {
             dispach(Result_Submission_Fail(e.message))
         }

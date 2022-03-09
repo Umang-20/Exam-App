@@ -13,7 +13,7 @@ const Get_Answer_Started = () => {
     }
 }
 
-const Get_Answer_Submission = (data,quesNo,quesTime) => {
+const Get_Answer_Submission = (data, quesNo, quesTime) => {
     return {
         type: types.GET_ANSWER_SUBMISSION,
         payload: {
@@ -41,8 +41,8 @@ const Get_Student_Answer = (quesNo, quesTime) => {
     return async function (dispach) {
         dispach(Get_Answer_Started());
         try {
-            const {data} = await getRequest(StudentAnswer(username,UniqueCode));
-            dispach(Get_Answer_Submission(data,quesNo,quesTime))
+            const {data} = await getRequest(StudentAnswer(username, UniqueCode));
+            dispach(Get_Answer_Submission(data, quesNo, quesTime))
             dispach(GetAllAnswerActions());
         } catch (e) {
             dispach(Get_Answer_Fail(e.message));

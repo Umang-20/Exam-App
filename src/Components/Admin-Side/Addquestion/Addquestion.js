@@ -29,7 +29,6 @@ function Addquestion() {
     const [showError, setShowError] = useState(false);
     const [submitValidation, setSubmitValidation] = useState(false);
     const submitHandler = async () => {
-        // e.preventDefault();
         await fetch(
             "https://auth-test-f6dd6-default-rtdb.firebaseio.com/questions.json",
             {

@@ -21,15 +21,15 @@ function Dashboard() {
     }, [dispach]);
 
     return <>
-            <Progressbar/>
-            <Header name={name} quesNo={quesNo}/>
-            <div className="restBody">
-                <Info/>
-                <div className="bodyPart">
-                    <SelectQuestion quesNo={quesNo}/>
-                    <ShowQuestion unicode={unicode} quesNo={quesNo}/>
-                </div>
+        <Progressbar/>
+        <Header name={name} quesNo={quesNo}/>
+        <div className="restBody">
+            <Info/>
+            <div className="bodyPart">
+                <SelectQuestion quesNo={quesNo}/>
+                <ShowQuestion unicode={unicode} quesNo={quesNo}/>
             </div>
+        </div>
     </>
 }
 

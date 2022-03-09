@@ -58,7 +58,7 @@ export const deleteView = (id) => {
     return async function (dispatch) {
         dispatch(deletingStart())
         try {
-            await deleteRequest(ViewExam,id)
+            await deleteRequest(ViewExam, id)
             dispatch(deleted())
             dispatch(viewFetchingInitiate())
         } catch (e) {

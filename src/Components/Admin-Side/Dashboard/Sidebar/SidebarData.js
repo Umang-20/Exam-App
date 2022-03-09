@@ -4,26 +4,26 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import CreateIcon from '@material-ui/icons/Create';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
-export const SidebarData=[
+export const SidebarData = [
     {
         title: 'Add Questions',
-        icon: <AddIcon />,
+        icon: <AddIcon/>,
         link: '/home'
-    }, 
+    },
     {
         title: 'Create Exam',
-        icon: <CreateIcon />,
+        icon: <CreateIcon/>,
         link: '/create-exam'
     },
     {
         title: 'View Exam',
-        icon: < VisibilityIcon />,
+        icon: < VisibilityIcon/>,
         link: '/view-exam'
     },
     {
         title: 'Score',
-        icon: < AssessmentIcon />,
+        icon: < AssessmentIcon/>,
         link: '/results'
     }
-    
+
 ]

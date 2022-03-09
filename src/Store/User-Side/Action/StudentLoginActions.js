@@ -24,7 +24,7 @@ const Student_Login_Fail = (error) => {
     return {
         type: types.STUDENT_LOGIN_FAIL,
         payload: {
-            loading:false,
+            loading: false,
             error,
         }
     }
@@ -33,10 +33,10 @@ const Student_Login_Fail = (error) => {
 const Student_Login_Initialize = (details) => {
     return async function (dispach) {
         dispach(Student_Login_Started());
-        try{
+        try {
             dispach(Student_Login_Success(details))
             dispach(Fetch_Question_Initialization(details.code))
-        }catch (error) {
+        } catch (error) {
             dispach(Student_Login_Fail(error.message))
         }
     }

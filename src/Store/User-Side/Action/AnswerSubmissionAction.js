@@ -61,18 +61,18 @@ export const Answer_Submission_Initialization = (questionId, answer, mor, quesNo
         dispach(Answer_Submission_Started());
         let updateKey = 0;
         try {
-            const {data} = await getRequest(StudentAnswer(username,UniqueCode));
+            const {data} = await getRequest(StudentAnswer(username, UniqueCode));
             for (let key in data) {
                 if (data[key].questionId === questionId) {
                     updateKey = key;
                 }
             }
             if (updateKey === 0) {
-                await postRequest(StudentAnswer(username,UniqueCode),answerData)
+                await postRequest(StudentAnswer(username, UniqueCode), answerData)
                 dispach(Answer_Submission_Success(questionId, answer, mor, quesNo, questionTime))
                 dispach(Redirect(`/exam/${redirect}`));
             } else {
-                await putRequest(StudentAnswer(username,UniqueCode),updateKey,answerData)
+                await putRequest(StudentAnswer(username, UniqueCode), updateKey, answerData)
 
                 dispach(Answer_Submission_Success(questionId, answer, mor, quesNo, questionTime))
                 dispach(Redirect(`/exam/${redirect}`));

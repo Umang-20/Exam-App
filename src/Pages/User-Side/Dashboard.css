@@ -1,18 +1,12 @@
-*{
+* {
     margin: 0%;
     padding: 0%;
 }
 
-.bodyPart{
+.bodyPart {
     margin-top: 20px;
     display: flex;
     justify-content: space-evenly;
     height: 77vh;
     width: 100vw;
-}
-
-@media (max-width: 600px) {
-    .bodyPart{
-        height: auto;
-    }
 }

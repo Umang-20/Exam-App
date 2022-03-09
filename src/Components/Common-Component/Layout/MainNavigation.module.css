@@ -1,4 +1,4 @@
-.mainHeader{
+.mainHeader {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +16,8 @@
     background-color: #fff;
     margin: 0;
 }
-.burgerButton{
+
+.burgerButton {
     position: absolute;
     left: 10px;
 }
@@ -79,8 +80,15 @@
 @media (max-width: 600px) {
     .header {
         flex-direction: column;
+        height: 9rem;
     }
+
     .header img {
         height: 90px;
     }
+
+    .burgerButton {
+        top: 110px;
+    }
+
 }

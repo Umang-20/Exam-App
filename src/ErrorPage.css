@@ -1,11 +1,13 @@
-#sidebarpropsfooter{
-justify-content: flex-start;
+#sidebarpropsfooter {
+    justify-content: flex-start;
 }
-#sidebarpropsbutton{
+
+#sidebarpropsbutton {
     background: transparent;
-    color:#0dc181; ;
+    color: #0dc181;;
     border: 1.5px solid #0dc181;
 }
-#sidebarpropsbutton:hover{
+
+#sidebarpropsbutton:hover {
     background: #f6fefb;
 }

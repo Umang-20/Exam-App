@@ -53,7 +53,6 @@ function ViewExam() {
     const popUpclick = () => {
         dispatch(deleteView(id));
         setModalShow(false);
-        // dispatch(viewFetchingInitiate());
     };
 
     const deleteHandle = (id) => {

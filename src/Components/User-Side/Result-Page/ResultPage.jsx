@@ -44,7 +44,7 @@ const ResultPage = () => {
                 }
             })
         })
-        questions.forEach((element)=>{
+        questions.forEach((element) => {
             tMarks = tMarks + parseInt(element.data.weightage);
         })
         setTotalMarks(tMarks);

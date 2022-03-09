@@ -1,4 +1,4 @@
-.selectquestionheader{
+.selectquestionheader {
     height: 10%;
     width: 100%;
     color: #adadad;
@@ -8,28 +8,33 @@
     padding: 5px 25px;
     box-sizing: border-box;
 }
-.selectquestionheader label{
+
+.selectquestionheader label {
     font-size: 20px;
 }
-.underline{
+
+.underline {
     width: 100%;
     height: 0.1%;
     background-color: #cfcfcf;
 }
-.buttoncontainer{
+
+.buttoncontainer {
     width: 100%;
     height: 89.9%;
     box-sizing: border-box;
-    padding: 25px ;
+    padding: 25px;
     overflow-y: auto;
     overflow-x: hidden;
 }
-.buttoncontainer .allbuttons{
+
+.buttoncontainer .allbuttons {
     display: flex;
     flex-wrap: wrap;
-   justify-content: flex-start;
+    justify-content: flex-start;
 }
-.allbuttons .buttons{
+
+.allbuttons .buttons {
     background: transparent;
     height: 40px;
     width: 20%;
@@ -39,9 +44,9 @@
     padding-bottom: 5px;
     margin-bottom: 15px;
 }
-.buttons button{
-    background: 
-    #f2f2f2;
+
+.buttons button {
+    background: #f2f2f2;
     color: #000;
     border-radius: 50%;
     height: 35px;
@@ -49,8 +54,9 @@
     cursor: pointer;
     border: none;
 }
-.selectButtons button{
-    background:lightskyblue;
+
+.selectButtons button {
+    background: lightskyblue;
     color: #000;
     border-radius: 50%;
     height: 35px;
@@ -58,6 +64,7 @@
     cursor: pointer;
     border: none;
 }
-.buttons button:hover{
+
+.buttons button:hover {
     background-color: #e6e6e6;
 }

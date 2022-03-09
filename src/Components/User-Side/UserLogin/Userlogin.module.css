@@ -1,28 +1,11 @@
-.background{
-    /* background: url('./software-developer-gf20b9ebf7_19202.jpg'); */
+.background {
     display: flex;
     align-items: center;
     justify-content: center;
-    /*background-color:rgba(0,0,0,0.02) ;*/
     background-color: white;
-    /*height: 91vh;*/
-    /*width: 99vw;*/
 }
 
-.logincard{
-    /*position: absolute;*/
-    /*height: 500px;*/
-    /*width: 700px;*/
-    /*top:20%;*/
-    /*left:30%;*/
-    /*!* padding: 15px 0; *!*/
-    /*box-sizing: border-box;*/
-    /*border-radius: 6px;*/
-    /*background-color: #fff;*/
-    /*!* border: 1px solid #000e38; *!*/
-    /*box-shadow: 2px 2px 5px #777;*/
-    /*display: flex;*/
-    /*flex-wrap: wrap;*/
+.logincard {
     margin: 15rem auto;
     width: 95%;
     max-width: 25rem;
@@ -31,70 +14,76 @@
     padding: 1rem;
     text-align: center;
 }
-.logincard .container1{
+
+.logincard .container1 {
     height: 100%;
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.container1 img{
+
+.container1 img {
     height: 300px;
     width: 300px;
 }
-.logincard .container2{
+
+.logincard .container2 {
     height: 100%;
-    /*width: 50%;*/
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.container2 .form{
+
+.container2 .form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /*overflow: hidden;*/
 }
-.container2 .inputbox{
+
+.container2 .inputbox {
     width: 220px;
     height: 35px;
     background-color: #dce7fa;
-    border-radius:10px ;
+    border-radius: 10px;
     padding-left: 20px;
     display: flex;
     align-items: center;
-    margin-bottom:10px ;
+    margin-bottom: 10px;
 }
-.container2 button{
+
+.container2 button {
     border-radius: 10px;
     width: 220px;
     height: 35px;
-    /*background-color: #1bdcae;*/
     background: linear-gradient(
-            45deg,#4169E1,#0096FF);
+            45deg, #4169E1, #0096FF);
     border: 1px solid #4169E1;
     color: white;
     outline: none;
     cursor: pointer;
     margin-top: 15px;
 }
-.container2 button :hover{
-    /*color: #ffffff;*/
+
+.container2 button :hover {
     background: white;
     color: #4169E1;
 }
-.inputbox input{
+
+.inputbox input {
     border: none;
     outline: none;
     background: transparent;
     padding: 5px 10px;
 }
-::placeholder{
+
+::placeholder {
     color: #a6a6a6;
 }
+
 .container2 input::-webkit-inner-spin-button {
-  appearance: none;
- 
+    appearance: none;
+
 }

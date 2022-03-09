@@ -9,8 +9,8 @@ const Sidebar = ({isMenuOpen, toggleMenu, children}) => {
     return (
         <>
             <div className="row" style={{margin: '0px'}}>
-                <div className={`d-xl-flex ${isMenuOpen ? 'd-none' : ""}`} style={{padding: '0px', width: "15.5%"}}>
-
+                <div className={`d-xl-flex ${isMenuOpen ? 'd-none' : ""}`}
+                     style={isMenuOpen ? {padding: '0px', width: "15.5%"} : {padding: '0px', width: "0%"}}>
                     <div className={`${style.sidebar} ${isMenuOpen ? "" : style.menuOpen}`}>
                         <ul className={style.sidebarList}>
                             {SidebarData.map((val, key) => {
@@ -19,15 +19,8 @@ const Sidebar = ({isMenuOpen, toggleMenu, children}) => {
                                         <li key={key} className={style.row}>
                                             <Link to={`/dashboard${val.link}`} onClick={toggleMenu}>
                                                 <div className={style.icon}
-                                                     // onClick={() => {
-                                                     //     dispach(Redirect(`/dashboard${val.link}`));
-                                                     // }}
                                                 >{val.icon}</div>
                                                 <div className={style.title}
-                                                     // onClick={() => {
-                                                     //     dispach(Redirect(`/dashboard${val.link}`));
-                                                     // }
-                                                    // }
                                                 >{val.title}</div>
                                             </Link>
                                         </li>
@@ -35,14 +28,8 @@ const Sidebar = ({isMenuOpen, toggleMenu, children}) => {
                                         <li key={key} className={style.row}>
                                             <Link to={`/dashboard${val.link}`}>
                                                 <div className={style.icon}
-                                                     // onClick={() => {
-                                                     //     dispach(Redirect(`/dashboard${val.link}`));
-                                                     // }}
                                                 >{val.icon}</div>
                                                 <div className={style.title}
-                                                     // onClick={() => {
-                                                     //     dispach(Redirect(`/dashboard${val.link}`));
-                                                     // }}
                                                 >{val.title}</div>
                                             </Link>
                                         </li>
