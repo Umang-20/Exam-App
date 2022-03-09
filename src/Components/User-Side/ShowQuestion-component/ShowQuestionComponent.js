@@ -60,7 +60,7 @@ function ShowQuestionComponent({quesNo, unicode}) {
                     )
                     setMor(false);
                     clearInterval(0);
-                    return;
+
                 }
             }
         }, 1000)
@@ -104,7 +104,7 @@ function ShowQuestionComponent({quesNo, unicode}) {
         }
         window.onload = function () {
             setIsReload(false);
-            dispatch(SubmitResultAction());
+            // dispatch(SubmitResultAction());
         }
     }, [dispatch]);
 
