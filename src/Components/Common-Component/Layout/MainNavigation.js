@@ -2,7 +2,7 @@ import {Link, useLocation} from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
-import {logoutInitiate} from "../../../Store/Admin-Side/Action/AdminLoginAction";
+import {logoutInitiate, Reset_Redirect} from "../../../Store/Admin-Side/Action/AdminLoginAction";
 import {useEffect, useState} from "react";
 import Cookies from "js-cookie";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -82,6 +82,10 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLogin, isredirect, history]);
+
+    useEffect(()=>{
+        dispatch(Reset_Redirect());
+    },[dispatch])
 
     //Student Redirect
     useEffect(() => {

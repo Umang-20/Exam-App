@@ -1,7 +1,6 @@
 import {
     Table, Container, DropdownButton, Dropdown, Col, Row, Button, Modal, Form, FormGroup, FormControl
 } from "react-bootstrap";
-import axios from "axios";
 import "./create-exam.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useEffect, useState} from "react";
@@ -14,6 +13,8 @@ import {fetchingInitiate} from "../../../Store/Admin-Side/Action/CreateExamActio
 import {updatingInitiate} from "../../../Store/Admin-Side/Action/CreateExamAction";
 import {deleteInitiate} from "../../../Store/Admin-Side/Action/CreateExamAction";
 import Loader from "../../Common-Component/Loader/Loader";
+import {postRequest} from "../../../api/request";
+import {ViewExam} from "../../../api/queries";
 
 function CreateExam() {
     const questions = useSelector((state) => state.data.data);
@@ -96,8 +97,7 @@ function CreateExam() {
         const currentTime = d.getTime();
         const {time, uniqueCode, selectedQues} = form;
         const finalData = {time, uniqueCode, selectedQues, year, day, month, currentTime, creator};
-        await axios
-            .post("https://auth-test-f6dd6-default-rtdb.firebaseio.com/viewexam.json", finalData)
+        await postRequest(ViewExam, finalData)
         setForm({
             time: "",
             uniqueCode: Math.random().toString(36).substr(2, 7),
@@ -109,7 +109,7 @@ function CreateExam() {
         dispatch(updatingInitiate(id, editForm))
         setModalShow(false)
     }
-    const popUpclick = () => {
+    const popUpClick = () => {
         dispatch(deleteInitiate(id));
         setModalShow2(false);
 
@@ -130,7 +130,7 @@ function CreateExam() {
             </Modal.Header>
 
             <Modal.Footer>
-                <Button variant="danger" onClick={popUpclick}>
+                <Button variant="danger" onClick={popUpClick}>
                     Delete
                 </Button>
                 <Button variant="success" onClick={() => setModalShow2(false)}>
@@ -161,7 +161,7 @@ function CreateExam() {
 
     return (
 
-        <div className="fulltable">
+        <div className="fullTable">
             <MyVerticallyCenteredModal
                 show={modalShow2}
                 backdrop={true}
@@ -397,8 +397,10 @@ function CreateExam() {
                 <Modal.Footer>
                     <Button style={{background: "#0096FF"}} onClick={() => {
                         setIsCreator(false);
+                        if((form.selectedQues.length >= 5) && (form.time !== "")){
+                            setSubmitValidation(true);
+                        }
                     }}>Save</Button>
-                    {/*<Button style={{background: "red"}} onClick={() => setIsCreator(false)}>No</Button>*/}
                 </Modal.Footer>
             </Modal>
 

@@ -98,6 +98,11 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 error: "",
             }
+        case types.RESET_REDIRECT:
+            return {
+                ...state,
+                isredirect: "",
+            }
         case types.RESET_PASSWORD_SUCCESS:
             Cookies.remove("settoken");
             Cookies.set("settoken", payload.user.data.idToken);

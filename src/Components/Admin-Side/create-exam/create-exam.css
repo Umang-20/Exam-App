@@ -1,4 +1,4 @@
-.fulltable {
+.fullTable {
     margin-top: 50px;
     text-align: center;
     background-color: transparent;
@@ -140,7 +140,7 @@ button:hover #hover-text {
         width: 190px;
     }
 
-    .fulltable {
+    .fullTable {
         margin-top: 80px;
     }
 }

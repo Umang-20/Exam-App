@@ -1,5 +1,4 @@
 import * as types from '../Types/actionType'
-import {auth} from '../../../firebase'
 import {Admin} from "../../../api/queries";
 import {getRequest, loginRequest, passwordResetRequest, postRequest, registorRequest} from "../../../api/request";
 
@@ -96,6 +95,12 @@ export const Reset_Error = () => {
     }
 }
 
+export const Reset_Redirect = () => {
+    return {
+        type: types.RESET_REDIRECT,
+    }
+}
+
 export const registerInitiate = (email, password, isAdmin) => {
     const data = {
         email: email,
@@ -158,7 +163,6 @@ export const logoutInitiate = () => {
     return async function (dispatch) {
         dispatch(logoutStart())
         try {
-            await auth.signOut();
             setTimeout(() => {
                 dispatch(logoutSuccess());
             }, 600)

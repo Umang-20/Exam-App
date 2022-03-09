@@ -1,7 +1,7 @@
 import * as types from "../Types/actionType";
-import axios from "axios";
 import Cookies from "js-cookie";
-import {postRequest} from "../../../api/request";
+import {getRequest, postRequest} from "../../../api/request";
+import {StudentAnswer} from "../../../api/queries";
 
 const Result_Submission_Started = () => {
     return {
@@ -44,7 +44,7 @@ const Result_Submission_Initialization = (flag) => {
         let resultArray = [];
         dispach(Result_Submission_Started());
         try {
-            const {data} = await axios.get(`https://auth-test-f6dd6-default-rtdb.firebaseio.com/StudentAnswer/${username}/${UniqueCode}.json`)
+            const {data} = await getRequest(StudentAnswer(username, UniqueCode));
             for (let key in data) {
                 resultArray.push({ques_id: data[key].questionId, selected_op: parseInt(data[key].answer)})
             }
