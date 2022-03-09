@@ -105,11 +105,6 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
             };
-        case types.REDIRECT:
-            return {
-                ...state,
-                isredirect: payload.path,
-            };
         default:
             return state;
     }

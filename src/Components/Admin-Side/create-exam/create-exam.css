@@ -15,24 +15,22 @@
     z-index: 5;
     /*background: linear-gradient(45deg, #0dc181, #1bdcae);*/
     background: linear-gradient(
-            45deg,#4169E1,#0096FF);
+            45deg, #4169E1, #0096FF);
     color: white;
 }
 
-#container1::-webkit-scrollbar-track
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+#container1::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #F5F5F5;
 }
 
-#container1::-webkit-scrollbar
-{
+#container1::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
     background-color: #F5F5F5;
 }
 
-#container1::-webkit-scrollbar-thumb
-{
+#container1::-webkit-scrollbar-thumb {
     background-color: #000000;
 }
 
@@ -44,7 +42,7 @@
 #dropdown-menu-align-right {
     /*background: linear-gradient(45deg, #0dc181, #1bdcae);*/
     background: linear-gradient(
-            45deg,#4169E1,#0096FF);
+            45deg, #4169E1, #0096FF);
     color: white;
     min-width: 167px;
     border-color: #ced4da;
@@ -123,7 +121,7 @@ button:hover #hover-text {
 #all {
     /*background: linear-gradient(45deg, #0dc181, #1bdcae);*/
     background: linear-gradient(
-            45deg,#4169E1,#0096FF);
+            45deg, #4169E1, #0096FF);
     color: white;
     width: 100%;
     border: #4169E1 solid 1px;
@@ -135,4 +133,19 @@ button:hover #hover-text {
 #all:hover {
     background: white;
     color: #4169E1;
+}
+
+@media (max-width: 750px) {
+    #row {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .col {
+        margin-bottom: 10px;
+    }
+    .fulltable {
+        margin-top: 80px;
+    }
 }

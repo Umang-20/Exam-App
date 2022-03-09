@@ -86,14 +86,6 @@ const resetPasswordFail = (error) => {
     }
 }
 
-export const Redirect = (path) => {
-    return {
-        type: types.REDIRECT,
-        payload: {
-            path,
-        }
-    }
-}
 
 
 export const Reset_Error = () => {
@@ -167,7 +159,6 @@ export const logoutInitiate = () => {
             await auth.signOut();
             setTimeout(() => {
                 dispatch(logoutSuccess());
-                dispatch(Redirect(""))
             }, 600)
         } catch (e) {
             dispatch(logoutFail(e.message))

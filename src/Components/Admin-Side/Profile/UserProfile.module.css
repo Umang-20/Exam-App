@@ -6,3 +6,9 @@
 .profile h1 {
   font-size: 4rem;
 }
+
+@media (max-width: 600px) {
+  .profile {
+    margin: 0px;
+  }
+}

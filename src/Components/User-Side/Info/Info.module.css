@@ -1,61 +1,77 @@
 .info {
-  height: 10%;
-  width: 100%;
-  display: flex;
-  align-items: center;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
     justify-content: center;
-  color: #adadad;
+    color: #adadad;
     margin-top: 20px;
 }
+
 .text {
-  width: 20%;
-  padding-left: 20px;
+    width: 20%;
+    padding-left: 20px;
 }
+
 .clgname {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
 }
+
 .clgname button {
-  padding: 10px 38px;
-  background: linear-gradient(45deg, #0dc181, #1bdcae);
-  border: 1px solid #0dc181;
-  color: white;
-  outline: none;
-  box-shadow: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
+    padding: 10px 38px;
+    background: linear-gradient(45deg, #0dc181, #1bdcae);
+    border: 1px solid #0dc181;
+    color: white;
+    outline: none;
+    box-shadow: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
 }
-.clgname button:hover{
+
+.clgname button:hover {
     background: white;
-    color:#1bdcae ;
+    color: #1bdcae;
 }
+
 .details {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: 20px;
+    flex-wrap: wrap;
 }
 .detail {
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
 }
-.detail .question{
+
+.detail .question {
     margin-left: 5px;
     color: #cfcfcf;
 }
-.detail .answer{
+
+.detail .answer {
     margin-left: 5px;
     color: #2dc200;
 }
-.detail .mark{
+
+.detail .mark {
     margin-left: 5px;
     color: #f1b101;
 }
-.detail .skipped{
+
+.detail .skipped {
     margin-left: 5px;
     color: #d90202;
+}
+
+@media (max-width: 750px) {
+    .clgname {
+        width: 100%;
+    }
 }

@@ -1,9 +1,10 @@
-.showquestion{
+.showquestion {
     width: 70%;
     height: 100%;
-    
+
 }
-.selectbox{  
+
+.selectbox {
     height: 70%;
     width: 98%;
     background-color: #fff;
@@ -14,6 +15,13 @@
     -moz-border-radius: 15px;
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
-    padding:15px;
+    padding: 15px;
     box-sizing: border-box;
+}
+
+@media (max-width: 750px) {
+    .showquestion {
+        width: 95%;
+        overflow: hidden;
+    }
 }

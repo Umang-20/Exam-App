@@ -1,6 +1,5 @@
 import * as types from "../Types/actionType";
 import {deleteRequest} from "../../../api/request";
-import {Redirect} from "./AnswerSubmissionAction";
 
 const Student_LogOut_Started = () => {
     return {
@@ -37,7 +36,6 @@ const Student_LogOut_Initialize = () => {
             await deleteRequest("StudentAnswer", "");
             setTimeout(() => {
                 dispach(Student_LogOut_Success())
-                dispach(Redirect(""))
             }, 500)
         } catch (error) {
             dispach(Student_LogOut_Fail(error.message))

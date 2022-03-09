@@ -64,6 +64,7 @@
 #container3::-webkit-scrollbar
 {
   width: 6px;
+  height: 6px;
   background-color: #F5F5F5;
 }
 

@@ -10,3 +10,9 @@
     height: 77vh;
     width: 100vw;
 }
+
+@media (max-width: 600px) {
+    .bodyPart{
+        height: auto;
+    }
+}

@@ -104,7 +104,7 @@ function ShowQuestionComponent({quesNo, unicode}) {
         }
         window.onload = function () {
             setIsReload(false);
-            // dispatch(SubmitResultAction());
+            dispatch(SubmitResultAction());
         }
     }, [dispatch]);
 

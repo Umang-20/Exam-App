@@ -99,13 +99,14 @@ const MainNavigation = ({isMenuOpen, toggleMenu}) => {
 
     return (
         <>
-            <div style={{display: "flex", alignItems: "center", marginLeft: "15px"}}>
-                {
-                    showMenu && isLogin ?
-                        isMenuOpen ? <MenuIcon onClick={toggleMenu}/> : <Clear onClick={toggleMenu}/> : ""
-                }
+            <div className={classes.mainHeader}>
+                <div className={classes.burgerButton}>
+                    {
+                        showMenu && isLogin ?
+                            isMenuOpen ? <MenuIcon onClick={toggleMenu}/> : <Clear onClick={toggleMenu}/> : ""
+                    }
+                </div>
                 <header className={classes.header}>
-
                     <Link to="/">
                         <img
                             alt="Logo"

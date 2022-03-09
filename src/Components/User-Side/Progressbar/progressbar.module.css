@@ -9,3 +9,8 @@
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
 }
+@media (max-width: 600px) {
+    .progressbar{
+        margin-top: 65px;
+    }
+}
